@@ -29,14 +29,8 @@ class MainActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             val email = binding.Username.text.toString()
             val password = binding.password.text.toString()
+            loginUser(email, password)
 
-            if (!isValidEmail(email)) {
-                showToast("Inserisci un email valida")
-            }
-            else {
-                // Effettua il login dell'utente
-                loginUser(email, password)
-            }
         }
     }
 
@@ -68,10 +62,6 @@ class MainActivity : AppCompatActivity() {
                 showToast("Errore di connessione. Riprova.")
             }
         })
-    }
-
-    private fun isValidEmail(email: String): Boolean {
-        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     private fun showToast(message: String) {
