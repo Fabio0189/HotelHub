@@ -2,18 +2,14 @@ package com.esrcitazione.hotelhub
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.esrcitazione.hotelhub.databinding.ActivityRegistrazioneBinding //importa la classe binding
 import java.util.regex.Pattern
 
 class activity_registrazione : AppCompatActivity() {
 
-    private lateinit var etEmail: EditText
-    private lateinit var etPassword: EditText
-    private lateinit var etConfirmPassword: EditText
-    private lateinit var btnRegister: Button
+    private lateinit var binding: ActivityRegistrazioneBinding //dichiara un'istanza della classe binding
 
     private val specialCharacters = "!\"#\$%&'()*+,-./:;"
 
@@ -22,17 +18,13 @@ class activity_registrazione : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registrazione)
+        binding = ActivityRegistrazioneBinding.inflate(layoutInflater) //inizializza l'istanza della classe binding
+        setContentView(binding.root) //usa l'oggetto root della classe binding per impostare il layout
 
-        etEmail = findViewById(R.id.etEmail)
-        etPassword = findViewById(R.id.etPassword)
-        etConfirmPassword = findViewById(R.id.etConfirmPassword)
-        btnRegister = findViewById(R.id.btnRegister)
-
-        btnRegister.setOnClickListener {
-            val email = etEmail.text.toString()
-            val password = etPassword.text.toString()
-            val confirmPassword = etConfirmPassword.text.toString()
+        binding.btnRegister.setOnClickListener {
+            val email = binding.etEmail.text.toString() //usa la classe binding per accedere a etEmail
+            val password = binding.etPassword.text.toString() //usa la classe binding per accedere a etPassword
+            val confirmPassword = binding.etConfirmPassword.text.toString() //usa la classe binding per accedere a etConfirmPassword
 
             if (!isValidEmail(email)) {
                 showToast("Inserisci un email valida")
