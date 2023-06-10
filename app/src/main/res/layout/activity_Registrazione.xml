@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
+        android:textSize="20dp"
         android:drawableLeft="@drawable/baseline_person_24"
         />
 
@@ -31,6 +32,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="Password"
+        android:textSize="20dp"
         android:drawableLeft="@drawable/baseline_info_24" />
 
     <EditText
@@ -40,6 +42,7 @@
         android:inputType="textPassword"
         android:hint="Conferma Password"
         android:drawableLeft="@drawable/baseline_info_24"
+        android:textSize="20dp"
         />
 
     <Button
@@ -48,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Registrati"
+        android:textSize="20dp"
 
         />
 

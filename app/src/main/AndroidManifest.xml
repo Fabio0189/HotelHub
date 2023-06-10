@@ -12,7 +12,7 @@
         android:theme="@style/Theme.HotelHub"
         tools:targetApi="31">
         <activity
-            android:name=".activity_registration"
+            android:name=".RegistrationActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
