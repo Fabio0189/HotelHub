@@ -6,6 +6,7 @@ import android.text.TextUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.esrcitazione.hotelhub.databinding.ActivityRegistrazioneBinding
+import com.google.gson.JsonArray
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,13 +52,13 @@ class activity_registrazione : AppCompatActivity() {
         }
     }
     private fun checkIfEmailExists(email: String, password: String) {
-        val selectQuery = "SELECT * FROM utente WHERE email = '$email'"
+        val selectQuery = "SELECT * FROM ospite WHERE email = '$email'"
 
         ClientNetwork.retrofit.select(selectQuery).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    val resultSet = response.body()?.get("resultSet")
-                    if (resultSet != null && !resultSet.isJsonNull && resultSet.asJsonArray.size() > 0) {
+                    val resultSet = response.body()?.get("queryset") as JsonArray
+                    if (resultSet.asJsonArray.size() > 0) {
                         showToast("Esiste già un utente con questa email. Per favore usa un'altra email.")
                     } else {
                         // Se l'email non esiste nel database, registra il nuovo utente
@@ -75,7 +76,7 @@ class activity_registrazione : AppCompatActivity() {
     }
 
     private fun registerUser(email: String, password: String) {
-        val insertQuery = "INSERT INTO utente (email, password) VALUES ('$email', '$password')"
+        val insertQuery = "INSERT INTO ospite (email, password) VALUES ('$email', '$password')"
 
         ClientNetwork.retrofit.insert(insertQuery).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
