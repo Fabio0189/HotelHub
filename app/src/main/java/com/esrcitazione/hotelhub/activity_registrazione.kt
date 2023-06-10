@@ -29,7 +29,7 @@ class activity_registrazione : AppCompatActivity() {
 
         // Aggiungi questo listener per il CheckBox
         binding.cbShowPassword.setOnCheckedChangeListener { _, isChecked ->
-            val method = if (isChecked) InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD else InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            val method = if (isChecked) InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD else InputType.TYPE_MASK_VARIATION or InputType.TYPE_TEXT_VARIATION_PASSWORD
             binding.etPassword.inputType = method
             binding.etConfirmPassword.inputType = method
         }
