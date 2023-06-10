@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.esrcitazione.hotelhub.databinding.ActivityRegistrazioneBinding //importa la classe binding
+import com.esrcitazione.hotelhub.databinding.ActivityRegistrazioneBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import com.google.gson.JsonObject
 import java.util.regex.Pattern
 
 class activity_registrazione : AppCompatActivity() {
 
-    private lateinit var binding: ActivityRegistrazioneBinding //dichiara un'istanza della classe binding
+    private lateinit var binding: ActivityRegistrazioneBinding
 
     private val specialCharacters = "!\"#\$%&'()*+,-./:;"
 
@@ -18,13 +22,13 @@ class activity_registrazione : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegistrazioneBinding.inflate(layoutInflater) //inizializza l'istanza della classe binding
-        setContentView(binding.root) //usa l'oggetto root della classe binding per impostare il layout
+        binding = ActivityRegistrazioneBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.btnRegister.setOnClickListener {
-            val email = binding.etEmail.text.toString() //usa la classe binding per accedere a etEmail
-            val password = binding.etPassword.text.toString() //usa la classe binding per accedere a etPassword
-            val confirmPassword = binding.etConfirmPassword.text.toString() //usa la classe binding per accedere a etConfirmPassword
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            val confirmPassword = binding.etConfirmPassword.text.toString()
 
             if (!isValidEmail(email)) {
                 showToast("Inserisci un email valida")
@@ -33,10 +37,28 @@ class activity_registrazione : AppCompatActivity() {
             } else if (password != confirmPassword) {
                 showToast("La password e la conferma password non corrispondono.")
             } else {
-                // TODO: Qui dovresti creare il nuovo account
-                showToast("Account creato con successo!")
+                // Registra il nuovo utente
+                registerUser(email, password)
             }
         }
+    }
+
+    private fun registerUser(email: String, password: String) {
+        val query = "INSERT INTO users (email, password) VALUES ('$email', '$password')"
+
+        ClientNetwork.retrofit.insert(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    showToast("Registrazione effettuata con successo!")
+                } else {
+                    showToast("Registrazione fallita. Riprova.")
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                showToast("Errore di connessione. Riprova.")
+            }
+        })
     }
 
     private fun isValidEmail(email: String): Boolean {
