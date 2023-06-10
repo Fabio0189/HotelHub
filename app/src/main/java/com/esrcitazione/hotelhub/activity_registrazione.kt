@@ -1,6 +1,7 @@
 package com.esrcitazione.hotelhub
 
 import android.os.Bundle
+import android.text.InputType
 import android.text.TextUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,13 @@ class activity_registrazione : AppCompatActivity() {
         binding = ActivityRegistrazioneBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Aggiungi questo listener per il CheckBox
+        binding.cbShowPassword.setOnCheckedChangeListener { _, isChecked ->
+            val method = if (isChecked) InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD else InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            binding.etPassword.inputType = method
+            binding.etConfirmPassword.inputType = method
+        }
+
         binding.btnRegister.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
@@ -37,16 +45,39 @@ class activity_registrazione : AppCompatActivity() {
             } else if (password != confirmPassword) {
                 showToast("La password e la conferma password non corrispondono.")
             } else {
-                // Registra il nuovo utente
-                registerUser(email, password)
+                // Verifica se l'email esiste già nel database prima di registrare l'utente
+                checkIfEmailExists(email, password)
             }
         }
     }
+    private fun checkIfEmailExists(email: String, password: String) {
+        val selectQuery = "SELECT * FROM utente WHERE email = '$email'"
+
+        ClientNetwork.retrofit.select(selectQuery).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val resultSet = response.body()?.get("resultSet")
+                    if (resultSet != null && !resultSet.isJsonNull && resultSet.asJsonArray.size() > 0) {
+                        showToast("Esiste già un utente con questa email. Per favore usa un'altra email.")
+                    } else {
+                        // Se l'email non esiste nel database, registra il nuovo utente
+                        registerUser(email, password)
+                    }
+                } else {
+                    showToast("Errore durante il controllo dell'email. Riprova.")
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                showToast("Errore di connessione. Riprova.")
+            }
+        })
+    }
 
     private fun registerUser(email: String, password: String) {
-        val query = "INSERT INTO users (email, password) VALUES ('$email', '$password')"
+        val insertQuery = "INSERT INTO utente (email, password) VALUES ('$email', '$password')"
 
-        ClientNetwork.retrofit.insert(query).enqueue(object : Callback<JsonObject> {
+        ClientNetwork.retrofit.insert(insertQuery).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     showToast("Registrazione effettuata con successo!")
