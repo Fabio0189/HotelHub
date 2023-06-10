@@ -3,6 +3,8 @@ package com.esrcitazione.hotelhub
 import android.os.Bundle
 import android.text.InputType
 import android.text.TextUtils
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.esrcitazione.hotelhub.databinding.ActivityRegistrazioneBinding
@@ -29,9 +31,14 @@ class activity_registrazione : AppCompatActivity() {
 
         // Aggiungi questo listener per il CheckBox
         binding.cbShowPassword.setOnCheckedChangeListener { _, isChecked ->
-            val method = if (isChecked) InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD else InputType.TYPE_MASK_VARIATION or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            binding.etPassword.inputType = method
-            binding.etConfirmPassword.inputType = method
+            val method = if (isChecked) {
+                HideReturnsTransformationMethod.getInstance()
+            }
+            else{
+                PasswordTransformationMethod.getInstance()
+            }
+            binding.etPassword.transformationMethod = method
+            binding.etConfirmPassword.transformationMethod = method
         }
 
         binding.btnRegister.setOnClickListener {

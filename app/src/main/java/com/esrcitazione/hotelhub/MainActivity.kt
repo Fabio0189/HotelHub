@@ -32,9 +32,8 @@ class MainActivity : AppCompatActivity() {
 
             if (!isValidEmail(email)) {
                 showToast("Inserisci un email valida")
-            } else if (!isValidPassword(password)) {
-                showToast("La password non è valida.")
-            } else {
+            }
+            else {
                 // Effettua il login dell'utente
                 loginUser(email, password)
             }
@@ -73,10 +72,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun isValidEmail(email: String): Boolean {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-    private fun isValidPassword(password: String): Boolean {
-        // Aggiungi qui il tuo controllo sulla password
     }
 
     private fun showToast(message: String) {
