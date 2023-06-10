@@ -59,4 +59,4 @@ class activity_registrazione : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
-
+titit
