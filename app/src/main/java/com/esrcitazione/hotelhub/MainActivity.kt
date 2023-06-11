@@ -3,6 +3,7 @@ package com.esrcitazione.hotelhub
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.esrcitazione.hotelhub.databinding.ActivityMainBinding
@@ -11,6 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.google.gson.JsonObject
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,7 +61,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                showToast("Errore di connessione. Riprova.")
+                if (t is IOException) {
+                    // Errore di connessione, ad esempio il server non è raggiungibile
+                    showToast("Errore di connessione al database. Riprova.")
+                } else {
+                    // Altro tipo di errore
+                    showToast("Errore durante il login. Riprova.")
+                }
             }
         })
     }
