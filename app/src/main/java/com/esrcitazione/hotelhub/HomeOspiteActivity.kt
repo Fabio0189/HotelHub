@@ -100,6 +100,7 @@ class HomeOspiteActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (isExitConfirmationVisible) {
             // Se la conferma di uscita è già visibile, chiudi l'applicazione
