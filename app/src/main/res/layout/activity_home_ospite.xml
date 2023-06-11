@@ -42,58 +42,14 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/datePickerButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Seleziona date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layouToolbar" />
-
-        <TextView
-            android:id="@+id/roomTypeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/datePickerButton" />
-
-        <TextView
-            android:id="@+id/totalCostTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/roomTypeTextView" />
-
-        <EditText
-            android:id="@+id/cardNumberEditText"
+        <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Numero della carta"
-            android:inputType="number"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/totalCostTextView" />
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/layouToolbar"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <EditText
-            android:id="@+id/cvvEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="CVV"
-            android:inputType="number"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardNumberEditText" />
-
-        <Button
-            android:id="@+id/paymentButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Effettua pagamento"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cvvEditText" />
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -107,4 +63,3 @@
         app:itemIconTint="@color/black"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
-
