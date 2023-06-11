@@ -18,33 +18,30 @@
             android:layout_columnWeight="1"
             android:layout_margin="8dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
                 android:padding="8dp">
 
-                <FrameLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ristorante"
+                    android:scaleType="centerCrop"/>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon2"
-                        android:scaleType="centerCrop"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ristorante"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:gravity="bottom|start"
+                    android:layout_gravity="start|bottom"
+                    android:textStyle="bold"/>
 
-                    <TextView
-                        android:textColor="@color/white"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:gravity="center"/>
+            </FrameLayout>
 
-                </FrameLayout>
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <!-- Seconda immagine -->
@@ -56,34 +53,30 @@
             android:layout_columnWeight="1"
             android:layout_margin="8dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="8dp">
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="8dp"
+                android:layout_gravity="center">
 
-                <FrameLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/loungebar"
+                    android:scaleType="centerCrop"/>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon2"
-                        android:scaleType="centerCrop"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LoungeBar"
+                    android:textColor="@color/white"
+                    android:gravity="bottom|start"
+                    android:textSize="20dp"
+                    android:layout_gravity="start|bottom"
+                    android:textStyle="bold"/>
 
-                    <TextView
+            </FrameLayout>
 
-                        android:layout_width="match_parent"
-                        android:textColor="@color/white"
-                        android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:gravity="center"/>
-
-                </FrameLayout>
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <!-- Terza immagine -->
@@ -95,33 +88,31 @@
             android:layout_columnWeight="1"
             android:layout_margin="8dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="8dp">
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                >
 
-                <FrameLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/sauna"
+                    android:scaleType="centerCrop"/>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon2"
-                        android:scaleType="centerCrop"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sauna"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:gravity="bottom|start"
+                    android:layout_gravity="start|bottom"
+                    android:textStyle="bold"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:textColor="@color/white"
-                        android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:gravity="center"/>
+            </FrameLayout>
 
-                </FrameLayout>
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <!-- Quarta immagine -->
@@ -133,33 +124,30 @@
             android:layout_columnWeight="1"
             android:layout_margin="8dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="8dp">
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="8dp"
+                android:layout_gravity="center">
 
-                <FrameLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/piscina"
+                    android:scaleType="centerCrop"/>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon2"
-                        android:scaleType="centerCrop"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Piscina"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:gravity="bottom|start"
+                    android:layout_gravity="start|bottom"
+                    android:textStyle="bold"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:textColor="@color/white"
-                        android:gravity="center"/>
+            </FrameLayout>
 
-                </FrameLayout>
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <!-- Quinta immagine -->
@@ -171,33 +159,30 @@
             android:layout_columnWeight="1"
             android:layout_margin="8dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="8dp">
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="8dp"
+                android:layout_gravity="center">
 
-                <FrameLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/dogcare"
+                    android:scaleType="centerCrop"/>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon2"
-                        android:scaleType="centerCrop"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dog Care"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:gravity="bottom|start"
+                    android:layout_gravity="start|bottom"
+                    android:textStyle="bold"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:text="TextView"
-                        android:gravity="center"/>
+            </FrameLayout>
 
-                </FrameLayout>
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <!-- Sesta immagine -->
@@ -209,33 +194,30 @@
             android:layout_columnWeight="1"
             android:layout_margin="8dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="8dp">
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="8dp"
+                android:layout_gravity="center">
 
-                <FrameLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/biliardo"
+                    android:scaleType="centerCrop"/>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon2"
-                        android:scaleType="centerCrop"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Area Relax"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:gravity="bottom|start"
+                    android:layout_gravity="start|bottom"
+                    android:textStyle="bold"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:textColor="@color/white"
-                        android:gravity="center"/>
+            </FrameLayout>
 
-                </FrameLayout>
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <!-- Settima immagine -->
@@ -247,33 +229,30 @@
             android:layout_columnWeight="1"
             android:layout_margin="8dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="8dp">
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="8dp"
+                android:layout_gravity="center">
 
-                <FrameLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/lavanderia"
+                    android:scaleType="centerCrop"/>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon2"
-                        android:scaleType="centerCrop"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lavanderia"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:gravity="bottom|start"
+                    android:layout_gravity="start|bottom"
+                    android:textStyle="bold"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:textColor="@color/white"
-                        android:gravity="center"/>
+            </FrameLayout>
 
-                </FrameLayout>
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <!-- Ottava immagine -->
@@ -285,34 +264,32 @@
             android:layout_columnWeight="1"
             android:layout_margin="8dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:padding="8dp">
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="8dp"
+                android:layout_gravity="center">
 
-                <FrameLayout
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/libreria"
+                    android:scaleType="centerCrop"/>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/icon2"
-                        android:scaleType="centerCrop"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Libreria"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:gravity="bottom|start"
+                    android:layout_gravity="start|bottom"
+                    android:textStyle="bold"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="TextView"
-                        android:textColor="@color/white"
-                        android:gravity="center"/>
+            </FrameLayout>
 
-                </FrameLayout>
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
     </GridLayout>
+
 </ScrollView>
