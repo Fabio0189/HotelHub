@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">HotelHub</string>
     <string name="title_activity_home_ospite">HomeOspiteActivity</string>
+    <string name="Profilo">Profilo</string>
+    <string name="lingua">Lingua</string>
 </resources>
