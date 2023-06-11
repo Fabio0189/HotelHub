@@ -1,13 +1,14 @@
 package com.esrcitazione.hotelhub
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
-import com.esrcitazione.hotelhub.databinding.ActivityHomeOspiteBinding
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import android.widget.Toast
+import com.esrcitazione.hotelhub.databinding.ActivityHomeOspiteBinding
+import com.google.android.material.datepicker.MaterialDatePicker
 
 class HomeOspiteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeOspiteBinding
@@ -41,6 +42,62 @@ class HomeOspiteActivity : AppCompatActivity() {
 
         // Apri il fragment Home all'avvio dell'activity
         openFragment(HomeFragment())
+
+        setupDatePicker()
+    }
+
+    private fun setupDatePicker() {
+        val datePickerBuilder = MaterialDatePicker.Builder.dateRangePicker()
+        val datePicker = datePickerBuilder.build()
+
+        binding.datePickerButton.setOnClickListener {
+            datePicker.show(supportFragmentManager, "DATE_PICKER")
+        }
+
+        datePicker.addOnPositiveButtonClickListener {
+            // Qui puoi effettuare la tua query al database per controllare la disponibilità delle camere
+            // e visualizzare i risultati all'utente.
+            // Ricorda che il MaterialDatePicker restituisce le date in millisecondi dall'epoca Unix.
+        }
+    }
+
+    // Verifica la validità dei dettagli della carta di credito
+    private fun validateCardDetails(cardNumber: String, cvv: String): Boolean {
+        if (cardNumber.length != 16) {
+            showToast("Inserisci un numero di carta valido.")
+            return false
+        }
+
+        if (cvv.length != 3) {
+            showToast("Inserisci un CVV valido.")
+            return false
+        }
+
+        // Potresti aggiungere ulteriori controlli qui, se necessario
+
+        return true
+    }
+
+    // Calcola il costo totale della prenotazione
+    private fun calculateTotalCost(nights: Int, roomType: String): Double {
+        val roomCost = when (roomType) {
+            "single" -> 50
+            "double" -> 100
+            "family" -> 200
+            else -> 0
+        }
+        return (nights * roomCost).toDouble()
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        val fragmentManager: FragmentManager = supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frameLayout, fragment)
+        fragmentTransaction.commit()
     }
 
     override fun onBackPressed() {
@@ -56,12 +113,5 @@ class HomeOspiteActivity : AppCompatActivity() {
                 isExitConfirmationVisible = false
             }, 2000)
         }
-    }
-
-    private fun openFragment(fragment: Fragment) {
-        val fragmentManager: FragmentManager = supportFragmentManager
-        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frameLayout, fragment)
-        fragmentTransaction.commit()
     }
 }
