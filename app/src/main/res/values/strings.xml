@@ -3,4 +3,7 @@
     <string name="title_activity_home_ospite">HomeOspiteActivity</string>
     <string name="Profilo">Profilo</string>
     <string name="lingua">Lingua</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hotelhub">HotelHub</string>
 </resources>
