@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val resultSet = response.body()?.get("queryset") as JsonArray
                     if (resultSet.asJsonArray.size() > 0) {
-                        val userType = resultSet.asJsonArray[0].asJsonObject.get("tipo").asBoolean
+                        val userType = resultSet.asJsonArray[0].asJsonObject.get("tipo").asInt == 1
                         if (userType) {
                             // Avvia la Activity "home_ospite"
                             val intent = Intent(this@MainActivity, HomeOspiteActivity::class.java)

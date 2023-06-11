@@ -11,6 +11,8 @@
         android:text="Activity Home"
         android:textColor="@color/black"
         android:gravity="center"
-        android:textSize="30dp"></TextView>
+        android:textSize="30dp">
+
+    </TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
