@@ -18,6 +18,10 @@
             android:name=".HomeOspiteActivity"
             android:exported="false" />
         <activity
+            android:name=".HomeAdminActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".activity_registrazione"
             android:exported="false" />
         <activity

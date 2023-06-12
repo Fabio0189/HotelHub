@@ -11,7 +11,7 @@ import com.esrcitazione.hotelhub.R
 import android.graphics.Color
 
 
-class BookingAdapter(var bookings: List<Booking>) : RecyclerView.Adapter<BookingAdapter.BookingViewHolder>() {
+class BookingAdapter(var bookings:  MutableList<Booking>) : RecyclerView.Adapter<BookingAdapter.BookingViewHolder>() {
 
     val selectedBookings = mutableListOf<Booking>()
 
@@ -58,9 +58,9 @@ class BookingAdapter(var bookings: List<Booking>) : RecyclerView.Adapter<Booking
         private val textCheckOutDate: TextView = itemView.findViewById(R.id.textCheckOutDate)
 
         fun bind(booking: Booking, isSelected: Boolean) {
-            textBookingId.text = booking.id.toString()
-            textUserId.text = booking.userId.toString()
-            textRoomId.text = booking.roomId.toString()
+            textBookingId.text = booking.nome.toString()
+            textUserId.text = booking.cognome.toString()
+            textRoomId.text = booking.numeroStanza.toString()
             textCheckInDate.text = booking.checkInDate
             textCheckOutDate.text = booking.checkOutDate
 

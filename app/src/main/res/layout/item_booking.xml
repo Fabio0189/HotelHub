@@ -6,33 +6,34 @@
 
     <TextView
         android:id="@+id/textBookingId"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textUserId"
-        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textRoomId"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textCheckInDate"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textCheckOutDate"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        android:textSize="20sp" />
 
 </LinearLayout>

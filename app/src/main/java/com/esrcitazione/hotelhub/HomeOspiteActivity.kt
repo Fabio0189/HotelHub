@@ -19,7 +19,7 @@ class HomeOspiteActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.imageMenu.setOnClickListener {
-            binding.drawerLayout.openDrawer(Gravity.LEFT) // Or GravityCompat.START for support libraries
+            binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
 
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
