@@ -18,12 +18,6 @@
             android:orientation="vertical"
             tools:context=".PrenotaFragment">
 
-            <Button
-                android:id="@+id/buttonScegliCamera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Scegli la tua camera" />
-
             <!-- Contenitore per RecyclerViews -->
             <LinearLayout
                 android:id="@+id/layoutRecyclerViews"
@@ -38,6 +32,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp" />
+
+            <TextView
+                android:id="@+id/textViewPrezzo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <!-- Existing layout -->
             <TextView
