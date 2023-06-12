@@ -24,12 +24,14 @@
                 android:layout_height="wrap_content"
                 android:text="Scegli la tua camera" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+            <!-- Contenitore per RecyclerViews -->
+            <LinearLayout
+                android:id="@+id/layoutRecyclerViews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                android:orientation="vertical">
+                <!-- RecyclerViews vengono aggiunti qui nel codice -->
+            </LinearLayout>
 
             <Spinner
                 android:id="@+id/spinnerTipoCamera"

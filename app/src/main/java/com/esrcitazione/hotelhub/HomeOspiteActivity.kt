@@ -35,7 +35,7 @@ class HomeOspiteActivity : AppCompatActivity() {
                     return@setNavigationItemSelectedListener true
                 }
                 R.id.menuPrenotazione -> {
-                    openFragment(PrenotaFragment.newInstance()) // Open Prenota fragment
+                    openFragment(PrenotaFragment()) // Open Prenota fragment
                     binding.drawerLayout.closeDrawers() // Close DrawerLayout after click
                     return@setNavigationItemSelectedListener true
                 }

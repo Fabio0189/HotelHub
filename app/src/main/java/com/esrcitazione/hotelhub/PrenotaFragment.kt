@@ -11,15 +11,16 @@ import com.esrcitazione.hotelhub.databinding.FragmentPrenotaBinding
 import com.esrcitazione.hotelhub.databinding.ItemCameraBinding
 import androidx.recyclerview.widget.RecyclerView
 
+data class Camera(val tipo: String, val immagini: List<Int>)
+
 class PrenotaFragment : Fragment() {
     private lateinit var binding: FragmentPrenotaBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            // To be implemented if needed
-        }
-    }
+    private val camere = listOf(
+        Camera("Camera Singola", listOf(R.drawable.camerasingola1, R.drawable.camerasingola2, R.drawable.camerasingola3, R.drawable.camerasingola4)),
+        Camera("Camera Doppia", listOf(R.drawable.cameradoppia1, R.drawable.cameradoppia2, R.drawable.cameradoppia3, R.drawable.cameradoppia4)),
+        Camera("Camera Familiare", listOf(R.drawable.camerafamiliare1, R.drawable.camerafamiliare2, R.drawable.camerafamiliare3, R.drawable.camerafamiliare4))
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,16 +29,18 @@ class PrenotaFragment : Fragment() {
         binding = FragmentPrenotaBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // Setup RecyclerView
-        val images = listOf(R.drawable.camerasingola1, R.drawable.camerasingola2, R.drawable.camerasingola3, R.drawable.camerasingola4)
-        val adapter = CameraAdapter(images)
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.recyclerView.adapter = adapter
+        camere.forEach { camera ->
+            val recyclerView = RecyclerView(requireContext()).apply {
+                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter = CameraAdapter(camera)
+            }
+            binding.layoutRecyclerViews.addView(recyclerView) //Assumendo che layoutRecyclerViews sia un LinearLayout nel tuo layout
+        }
 
         // Set up click handlers for your buttons
         binding.buttonScegliCamera.setOnClickListener {
-            // Show the RecyclerView and the Spinner here
-            binding.recyclerView.visibility = View.VISIBLE
+            // Show the layoutRecyclerViews and the Spinner here
+            binding.layoutRecyclerViews.visibility = View.VISIBLE
             binding.spinnerTipoCamera.visibility = View.VISIBLE
         }
 
@@ -67,17 +70,12 @@ class PrenotaFragment : Fragment() {
         return view
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = PrenotaFragment()
-    }
-
-    inner class CameraAdapter(private val images: List<Int>) : RecyclerView.Adapter<CameraAdapter.CameraViewHolder>() {
+    inner class CameraAdapter(private val camera: Camera) : RecyclerView.Adapter<CameraAdapter.CameraViewHolder>() {
 
         inner class CameraViewHolder(private val binding: ItemCameraBinding) : RecyclerView.ViewHolder(binding.root) {
             fun bind(image: Int) {
                 binding.cameraImage.setImageResource(image)
-                binding.cameraText.text = "Camera Singola"
+                binding.cameraText.text = camera.tipo
             }
         }
 
@@ -86,10 +84,10 @@ class PrenotaFragment : Fragment() {
             return CameraViewHolder(binding)
         }
 
-        override fun getItemCount(): Int = images.size
+        override fun getItemCount(): Int = camera.immagini.size
 
         override fun onBindViewHolder(holder: CameraViewHolder, position: Int) {
-            holder.bind(images[position])
+            holder.bind(camera.immagini[position])
         }
     }
 }
