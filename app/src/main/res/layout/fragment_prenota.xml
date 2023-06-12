@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".PrenotaFragment">
+
+            <Button
+                android:id="@+id/buttonScegliCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scegli la tua camera" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <Spinner
+                android:id="@+id/spinnerTipoCamera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+
+            <!-- Existing layout -->
+            <TextView
+                android:id="@+id/textViewNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome:"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/editTextNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:hint="Inserisci il tuo nome"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textViewCognome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cognome:"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/editTextCognome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
+                android:hint="Inserisci il tuo cognome"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textViewNumeroCarta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Numero Carta:"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/editTextNumeroCarta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="16"
+                android:minHeight="48dp"
+                android:hint="Inserisci il numero della carta"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textViewCvv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CVV:"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/editTextCvv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberPassword"
+                android:maxLength="3"
+                android:minHeight="48dp"
+                android:hint="Inserisci il CVV"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/buttonFatturazione"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vai alla Fatturazione"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/buttonConferma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Conferma"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

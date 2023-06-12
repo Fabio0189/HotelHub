@@ -7,4 +7,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hotelhub">HotelHub</string>
     <string name="home">Home</string>
+    <string name="prenota">Prenota</string>
 </resources>

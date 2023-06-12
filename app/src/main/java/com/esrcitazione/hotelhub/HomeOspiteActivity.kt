@@ -25,33 +25,38 @@ class HomeOspiteActivity : AppCompatActivity() {
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menuProfile -> {
-                    openFragment(ProfileFragment()) // Apri il fragment Profile
-                    binding.drawerLayout.closeDrawers() // Chiudi il DrawerLayout dopo il clic
+                    openFragment(ProfileFragment()) // Open Profile fragment
+                    binding.drawerLayout.closeDrawers() // Close DrawerLayout after click
                     return@setNavigationItemSelectedListener true
                 }
                 R.id.menuhome -> {
-                    openFragment(HomeFragment()) // Apri il fragment Home
-                    binding.drawerLayout.closeDrawers() // Chiudi il DrawerLayout dopo il clic
+                    openFragment(HomeFragment()) // Open Home fragment
+                    binding.drawerLayout.closeDrawers() // Close DrawerLayout after click
                     return@setNavigationItemSelectedListener true
                 }
-                // Aggiungi altre opzioni del menu qui, se necessario
+                R.id.menuPrenotazione -> {
+                    openFragment(PrenotaFragment.newInstance()) // Open Prenota fragment
+                    binding.drawerLayout.closeDrawers() // Close DrawerLayout after click
+                    return@setNavigationItemSelectedListener true
+                }
+                // Add other menu options here, if needed
                 else -> return@setNavigationItemSelectedListener false
             }
         }
 
-        // Apri il fragment Home all'avvio dell'activity
+        // Open Home fragment on activity start
         openFragment(HomeFragment())
     }
 
     override fun onBackPressed() {
         if (isExitConfirmationVisible) {
-            // Se la conferma di uscita è già visibile, chiudi l'applicazione
+            // If exit confirmation is already visible, close the application
             finish()
         } else {
-            // Altrimenti, mostra la conferma di uscita
+            // Otherwise, show exit confirmation
             isExitConfirmationVisible = true
             Toast.makeText(this, "Per uscire dall'app premi indietro un altra volta", Toast.LENGTH_SHORT).show()
-            // Imposta un timer per nascondere la conferma di uscita dopo 2 secondi
+            // Set a timer to hide exit confirmation after 2 seconds
             binding.drawerLayout.postDelayed({
                 isExitConfirmationVisible = false
             }, 2000)
