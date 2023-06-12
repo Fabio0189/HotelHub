@@ -5,6 +5,6 @@ data class Booking(
     val userId: Int,
     val roomId: Int,
     val checkInDate: String,
-    val checkOutDate: String
-    // Aggiungi altri campi relativi alle prenotazioni se necessario
+    val checkOutDate: String,
+    var isSelected: Boolean = false
 )
