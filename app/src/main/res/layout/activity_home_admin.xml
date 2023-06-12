@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,8 +12,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:paddingEnd="15dp">
 
         <TextView
             android:id="@+id/textTitle"
@@ -31,9 +29,32 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/layouToolbar"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttonLayout"
+        android:layout_below="@id/layouToolbar" />
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/buttonDeleteSelectedBookings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete Selected" />
+
+        <Button
+            android:id="@+id/buttonAnotherAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Another Action"
+            android:layout_marginStart="16dp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textNoBookings"
@@ -41,9 +62,8 @@
         android:layout_height="wrap_content"
         android:text="No bookings found"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/layouToolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_above="@+id/buttonLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

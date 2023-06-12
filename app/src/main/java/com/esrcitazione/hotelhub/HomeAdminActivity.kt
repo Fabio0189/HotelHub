@@ -22,6 +22,21 @@ class HomeAdminActivity : AppCompatActivity() {
 
         setupRecyclerView()
         getBookingsFromDatabase()
+
+        binding.buttonDeleteSelectedBookings.setOnClickListener {
+            for (booking in bookingAdapter.selectedBookings) {
+                // Esegui l'azione desiderata per ogni prenotazione selezionata
+                // Ad esempio, rimuovi la prenotazione dal database
+            }
+
+            // Dopo aver eliminato le prenotazioni, puoi pulire la lista delle prenotazioni selezionate
+            bookingAdapter.selectedBookings.clear()
+
+            // Aggiorna l'aspetto visivo degli elementi selezionati nel RecyclerView
+            bookingAdapter.notifyDataSetChanged()
+        }
+
+
     }
 
     private fun setupRecyclerView() {
@@ -83,4 +98,5 @@ class HomeAdminActivity : AppCompatActivity() {
             binding.textNoBookings.visibility = View.VISIBLE
         }
     }
+
 }

@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loginUser(email: String, password: String) {
-        val selectQuery = "SELECT * FROM utente WHERE email = '$email' AND password = '$password'"
+        val selectQuery = "SELECT * FROM utenti WHERE email = '$email' AND password = '$password'"
 
         ClientNetwork.retrofit.select(selectQuery).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -55,7 +55,8 @@ class MainActivity : AppCompatActivity() {
                             val intent = Intent(this@MainActivity, HomeOspiteActivity::class.java)
                             startActivity(intent)
                         } else {
-                            // Avvia un'altra Activity, a seconda del tipo di utente
+                            val intent = Intent(this@MainActivity, HomeAdminActivity::class.java)
+                            startActivity(intent)
                         }
                     } else {
                         showToast("Nessun utente corrispondente trovato.")
