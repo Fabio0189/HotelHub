@@ -17,7 +17,7 @@
         />
     <item
         android:id="@+id/menuPrenotazione"
-        android:icon="@drawable/baseline_language_24"
+        android:icon="@drawable/baseline_bed_24"
         android:title="@string/prenota"
         />
 
