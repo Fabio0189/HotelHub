@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">HotelHub</string>
+    <string name="title_activity_home_ospite">HomeOspiteActivity</string>
+    <string name="Profilo">Profile</string>
+    <string name="lingua">Language</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hotelhub">HotelHub</string>
+    <string name="home">Home</string>
+    <string name="prenota">Book</string>
+    <!-- Aggiunte nuove stringhe per le immagini -->
+    <string name="ristorante">Restaurant</string>
+    <string name="loungebar">Lounge Bar</string>
+    <string name="sauna">Sauna</string>
+    <string name="piscina">Swimming Pool</string>
+    <string name="dogcare">Dog Care</string>
+    <string name="arearelax">Relax Area</string>
+    <string name="lavanderia">Laundry</string>
+    <string name="libreria">Library</string>
+</resources>
