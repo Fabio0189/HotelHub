@@ -25,19 +25,19 @@ class HomeAdminActivity : AppCompatActivity() {
         setupRecyclerView()
         getBookingsFromDatabase()
 
-        binding.buttonElimina.setOnClickListener {
+        binding.buttonCheckIn.setOnClickListener{
+
             val selectedBookings = ArrayList(bookingAdapter.selectedBookings)
-
             for (booking in selectedBookings) {
-                val query = "DELETE from prenotazioni where prenotazioni.id=" + booking.id
+                val query = "UPDATE prenotazioni SET checkin=true WHERE prenotazioni.id=" + booking.id
 
-                ClientNetwork.retrofit.remove(query).enqueue(object : Callback<JsonObject> {
+                ClientNetwork.retrofit.update(query).enqueue(object : Callback<JsonObject> {
                     override fun onResponse(
                         call: Call<JsonObject>,
                         response: Response<JsonObject>
                     ) {
                         if (response.isSuccessful) {
-                            showToast("Prenotazioni Selezionate Eliminate")
+                            showToast("Chek In confermato")
 
                             // Rimuovi l'elemento dalla lista dopo aver completato la richiesta di eliminazione
                             bookingAdapter.bookings.remove(booking)
@@ -61,6 +61,44 @@ class HomeAdminActivity : AppCompatActivity() {
             // Aggiorna l'aspetto visivo degli elementi selezionati nel RecyclerView
             bookingAdapter.notifyDataSetChanged()
 
+        }
+
+        binding.buttonElimina.setOnClickListener {
+            val selectedBookings = ArrayList(bookingAdapter.selectedBookings)
+
+            for (booking in selectedBookings) {
+                val query = "DELETE from prenotazioni where prenotazioni.id=" + booking.id
+
+                ClientNetwork.retrofit.remove(query).enqueue(object : Callback<JsonObject> {
+                    override fun onResponse(
+                        call: Call<JsonObject>,
+                        response: Response<JsonObject>
+                    ) {
+                        if (response.isSuccessful) {
+                            showToast("Prenotazioni Selezionate Eliminate")
+
+                            // Rimuovi l'elemento dalla lista dopo aver completato la richiesta di eliminazione
+                            bookingAdapter.bookings.remove(booking)
+                            bookingAdapter.selectedBookings.remove(booking)
+                            bookingAdapter.notifyDataSetChanged()
+                        } else {
+                            showToast("Qualcosa è andato Storto")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                        showToast("Qualcosa è andato Storto")
+                    }
+                })
+            }
+
+
+
+            bookingAdapter.selectedBookings.clear()
+
+
+            bookingAdapter.notifyDataSetChanged()
+
 
         }
     }
@@ -74,7 +112,7 @@ class HomeAdminActivity : AppCompatActivity() {
         val query ="SELECT p.id,u.nome, u.cognome, s.numero_stanza, p.data_check_in, p.data_check_out " +
                 "FROM utenti AS u, prenotazioni AS p, stanze AS s " +
                 "WHERE u.id = p.id_utente " +
-                "AND p.id_stanza = s.id"
+                "AND p.id_stanza = s.id AND p.checkin=false"
 
 
         ClientNetwork.retrofit.select(query).enqueue(object : Callback<JsonObject> {
@@ -87,12 +125,12 @@ class HomeAdminActivity : AppCompatActivity() {
                         showBookings(bookings)
                     }// Dobbiamo aggiungere un else forse?
                 }else {
-                    // Gestisci la risposta non riuscita
+                    showToast("Qualcosa è andato Storto")
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                // Gestisci l'errore di comunicazione
+                showToast("Qualcosa è andato Storto")
             }
         })
     }
