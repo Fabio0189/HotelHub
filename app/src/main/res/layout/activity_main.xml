@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
  <TextView
-     android:id="@+id/singin"
+     android:id="@+id/accedi"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:text="Accedi"
@@ -15,8 +15,18 @@
      android:gravity="center"
      android:textColor="@color/black"
      app:layout_constraintTop_toTopOf="parent"
-     android:layout_marginTop="20dp"/>
-
+     android:layout_marginTop="40dp"/>
+ <ImageView
+     android:id="@+id/logo"
+     android:layout_width="100dp"
+     android:layout_height="100dp"
+     android:scaleType="centerInside"
+     android:layout_marginTop="50dp"
+     app:layout_constraintTop_toBottomOf="@id/accedi"
+     app:layout_constraintStart_toEndOf="@id/accedi"
+     app:layout_constraintEnd_toStartOf="@id/Username"
+     app:layout_constraintBottom_toTopOf="@id/Username"
+     android:src="@drawable/icon2" />
  <EditText
      android:id="@+id/Username"
      android:layout_width="match_parent"
@@ -31,7 +41,7 @@
      android:textColor="@color/black"
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toBottomOf="@+id/singin" /> <!-- inputType added -->
+     app:layout_constraintTop_toBottomOf="@+id/logo" /> <!-- inputType added -->
 
  <EditText
      android:id="@+id/password"
@@ -54,12 +64,14 @@
      android:text="Login"
      app:layout_constraintStart_toStartOf="parent"
      app:layout_constraintEnd_toStartOf="@+id/registerButton"
-     app:layout_constraintTop_toBottomOf="@+id/password" />
+     app:layout_constraintTop_toBottomOf="@+id/password"
+     android:layout_marginTop="20dp"/>
 
  <Button
      android:id="@+id/registerButton"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
+     android:layout_marginTop="20dp"
      android:text="Registrati"
      app:layout_constraintStart_toEndOf="@+id/loginButton"
      app:layout_constraintEnd_toEndOf="parent"
@@ -74,5 +86,5 @@
      app:layout_constraintEnd_toEndOf="parent"
      app:layout_constraintStart_toStartOf="parent"
      app:layout_constraintTop_toBottomOf="@+id/password"
-     android:layout_marginVertical="60dp"/>
+     android:layout_marginVertical="90dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
