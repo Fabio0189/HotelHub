@@ -33,7 +33,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ristorante"
+                    android:text="@string/ristorante"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:gravity="bottom|start"
@@ -68,7 +68,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LoungeBar"
+                    android:text="@string/loungebar"
                     android:textColor="@color/white"
                     android:gravity="bottom|start"
                     android:textSize="20dp"
@@ -92,8 +92,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:padding="8dp"
-                android:layout_gravity="center"
-                >
+                android:layout_gravity="center">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -104,10 +103,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sauna"
-                    android:textSize="20dp"
+                    android:text="@string/sauna"
                     android:textColor="@color/white"
                     android:gravity="bottom|start"
+                    android:textSize="20dp"
                     android:layout_gravity="start|bottom"
                     android:textStyle="bold"/>
 
@@ -139,18 +138,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Piscina"
-                    android:textSize="20dp"
+                    android:text="@string/piscina"
                     android:textColor="@color/white"
                     android:gravity="bottom|start"
+                    android:textSize="20dp"
                     android:layout_gravity="start|bottom"
                     android:textStyle="bold"/>
 
             </FrameLayout>
-
         </androidx.cardview.widget.CardView>
 
-        <!-- Quinta immagine -->
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -174,7 +171,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dog Care"
+                    android:text="@string/dogcare"
                     android:textSize="20dp"
                     android:textColor="@color/white"
                     android:gravity="bottom|start"
@@ -209,7 +206,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Area Relax"
+                    android:text="@string/arearelax"
                     android:textSize="20dp"
                     android:textColor="@color/white"
                     android:gravity="bottom|start"
@@ -244,7 +241,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lavanderia"
+                    android:text="@string/lavanderia"
                     android:textSize="20dp"
                     android:textColor="@color/white"
                     android:gravity="bottom|start"
@@ -279,7 +276,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Libreria"
+                    android:text="@string/libreria"
                     android:textSize="20dp"
                     android:textColor="@color/white"
                     android:gravity="bottom|start"

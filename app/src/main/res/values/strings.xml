@@ -8,4 +8,13 @@
     <string name="hotelhub">HotelHub</string>
     <string name="home">Home</string>
     <string name="prenota">Prenota</string>
+    <!-- Aggiunte nuove stringhe per le immagini -->
+    <string name="ristorante">Ristorante</string>
+    <string name="loungebar">Lounge Bar</string>
+    <string name="sauna">Sauna</string>
+    <string name="piscina">Piscina</string>
+    <string name="dogcare">Dog Care</string>
+    <string name="arearelax">Area Relax</string>
+    <string name="lavanderia">Lavanderia</string>
+    <string name="libreria">Libreria</string>
 </resources>

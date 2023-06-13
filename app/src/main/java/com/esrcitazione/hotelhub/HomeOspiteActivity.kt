@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import android.widget.Toast
+import java.util.Locale
 
 class HomeOspiteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeOspiteBinding
@@ -39,7 +40,23 @@ class HomeOspiteActivity : AppCompatActivity() {
                     binding.drawerLayout.closeDrawers() // Close DrawerLayout after click
                     return@setNavigationItemSelectedListener true
                 }
-                // Add other menu options here, if needed
+                R.id.menuLanguage -> {
+                    // Create a new Locale object for the language you want to switch to
+                    val locale = if (Locale.getDefault().language == "en") Locale("it") else Locale("en")
+                    Locale.setDefault(locale)
+
+                    // Create a new configuration object and set its locale
+                    val config = android.content.res.Configuration()
+                    config.setLocale(locale)
+
+                    // Update the configuration of the app context with the new Configuration object
+                    baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+
+                    // Recreate the activity to apply the new language
+                    recreate()
+
+                    return@setNavigationItemSelectedListener true
+                }
                 else -> return@setNavigationItemSelectedListener false
             }
         }
