@@ -1,5 +1,6 @@
 package com.esrcitazione.hotelhub
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
@@ -16,6 +17,14 @@ class HomeOspiteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val currentLanguage = getLanguageFromPreferences()
+        val locale = Locale(currentLanguage)
+        Locale.setDefault(locale)
+        val config = android.content.res.Configuration()
+        config.setLocale(locale)
+        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+
         binding = ActivityHomeOspiteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -41,8 +50,10 @@ class HomeOspiteActivity : AppCompatActivity() {
                     return@setNavigationItemSelectedListener true
                 }
                 R.id.menuLanguage -> {
+                    // Get the current language from preferences
+                    val newLanguage = if (currentLanguage == "en") "it" else "en"
                     // Create a new Locale object for the language you want to switch to
-                    val locale = if (Locale.getDefault().language == "en") Locale("it") else Locale("en")
+                    val locale = Locale(newLanguage)
                     Locale.setDefault(locale)
 
                     // Create a new configuration object and set its locale
@@ -51,6 +62,9 @@ class HomeOspiteActivity : AppCompatActivity() {
 
                     // Update the configuration of the app context with the new Configuration object
                     baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+
+                    // Save the new language to preferences
+                    saveLanguageToPreferences(newLanguage)
 
                     // Recreate the activity to apply the new language
                     recreate()
@@ -85,5 +99,17 @@ class HomeOspiteActivity : AppCompatActivity() {
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frameLayout, fragment)
         fragmentTransaction.commit()
+    }
+
+    private fun saveLanguageToPreferences(language: String) {
+        val preferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.putString("language", language)
+        editor.apply()
+    }
+
+    private fun getLanguageFromPreferences(): String {
+        val preferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        return preferences.getString("language", "en") ?: "en"
     }
 }
