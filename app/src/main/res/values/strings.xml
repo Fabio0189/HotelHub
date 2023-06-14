@@ -18,11 +18,5 @@
     <string name="lavanderia">Lavanderia</string>
     <string name="libreria">Libreria</string>
     <string name="info">Info</string>
-    <string name="logout">Log Out</string>
-    <string name="modifica">Modifica</string>
-    <string name="nome">Nome:</string>
-    <string name="cognome">Cognome:</string>
-    <string name="email">Email:</string>
-    <string name="log_out">Log Out</string>
 
 </resources>
