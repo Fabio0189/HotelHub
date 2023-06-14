@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background=""
+    android:background="@drawable/wave"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ProfileFragment">
@@ -18,7 +18,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="40dp"
             android:src="@drawable/icon2" />
 
         <TextView
@@ -32,7 +32,7 @@
             app:layout_constraintTop_toBottomOf="@id/Icona"
             android:layout_marginTop="20dp"
             android:textStyle="bold"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -43,13 +43,20 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp">
 
-            <TableLayout
+            <LinearLayout
                 android:id="@+id/infoLayout"
                 android:layout_width="match_parent"
-                android:layout_margin="20dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <TableRow>
+                <LinearLayout
+                    android:id="@+id/nomeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end">
+
                     <TextView
                         android:id="@+id/nomeLabel"
                         android:layout_width="wrap_content"
@@ -60,13 +67,22 @@
 
                     <TextView
                         android:id="@+id/nomeValue"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@id/testoProfilo"/>
-                </TableRow>
+                        android:text="Nome utente"
+                        android:gravity="end" />
 
-                <TableRow>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cognomeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end">
+
                     <TextView
                         android:id="@+id/cognomeLabel"
                         android:layout_width="wrap_content"
@@ -77,15 +93,22 @@
 
                     <TextView
                         android:id="@+id/cognomeValue"
-                        android:layout_marginStart="100dp"
-                        android:layout_width="match_parent"
-                        android:text="ciao"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:textSize="24sp"
-                        android:textStyle="bold"/>
-                </TableRow>
+                        android:text="Cognome utente"
+                        android:gravity="end" />
 
-                <TableRow>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/emailLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end">
+
                     <TextView
                         android:id="@+id/emailLabel"
                         android:layout_width="wrap_content"
@@ -96,12 +119,16 @@
 
                     <TextView
                         android:id="@+id/emailValue"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp" />
-                </TableRow>
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        android:text="email@example.com"
+                        android:gravity="end" />
 
-            </TableLayout>
+                </LinearLayout>
+
+            </LinearLayout>
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
