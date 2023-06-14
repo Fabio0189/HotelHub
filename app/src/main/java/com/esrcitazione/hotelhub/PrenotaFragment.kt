@@ -67,27 +67,40 @@ class PrenotaFragment : Fragment() {
                 val prezzoCamera = camere[position].prezzo
                 binding.textViewPrezzo.text = "Prezzo: $prezzoCamera €"
                 binding.textViewPrezzo.visibility = View.VISIBLE
-                updateFatturazioneButtonStatus()
+                binding.buttonFatturazione.isEnabled = isCheckInSelected && isCheckOutSelected
+                if (fatturazionePremuta) {
+                    binding.buttonFatturazione.isEnabled = false
+                    binding.buttonFatturazione.alpha = 0.5f
+                }
             }
         }
 
-        // Campo di testo per la data di check-in
         binding.editTextDataCheckIn.setOnClickListener {
-            showDatePickerDialog(dataCheckIn) { calendar ->
+            showDatePickerDialog(false) { calendar ->
                 dataCheckIn = calendar
                 binding.editTextDataCheckIn.setText(formatDate(calendar))
                 isCheckInSelected = true
-                updateFatturazioneButtonStatus()
+                if (isCheckOutSelected) {
+                    if (dataCheckIn.timeInMillis >= dataCheckOut.timeInMillis) {
+                        isCheckOutSelected = false
+                        binding.editTextDataCheckOut.text.clear()
+                        Toast.makeText(context, "La data di check-in non può essere successiva o uguale alla data di check-out. Si prega di selezionare di nuovo la data di check-out.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                binding.buttonFatturazione.isEnabled = isCheckInSelected && isCheckOutSelected
             }
         }
 
-        // Campo di testo per la data di check-out
         binding.editTextDataCheckOut.setOnClickListener {
-            showDatePickerDialog(dataCheckOut) { calendar ->
-                dataCheckOut = calendar
-                binding.editTextDataCheckOut.setText(formatDate(calendar))
-                isCheckOutSelected = true
-                updateFatturazioneButtonStatus()
+            if (!isCheckInSelected) {
+                Toast.makeText(context, "Si prega di selezionare prima la data di check-in.", Toast.LENGTH_SHORT).show()
+            } else {
+                showDatePickerDialog(true) { calendar ->
+                    dataCheckOut = calendar
+                    binding.editTextDataCheckOut.setText(formatDate(calendar))
+                    isCheckOutSelected = true
+                    binding.buttonFatturazione.isEnabled = isCheckInSelected && isCheckOutSelected
+                }
             }
         }
 
@@ -121,11 +134,6 @@ class PrenotaFragment : Fragment() {
         return view
     }
 
-    private fun updateFatturazioneButtonStatus() {
-        binding.buttonFatturazione.isEnabled = isCheckInSelected && isCheckOutSelected && !fatturazionePremuta
-        binding.buttonFatturazione.alpha = if (binding.buttonFatturazione.isEnabled) 1f else 0.5f
-    }
-
     inner class CameraAdapter(private val camera: Camera) : RecyclerView.Adapter<CameraAdapter.CameraViewHolder>() {
         inner class CameraViewHolder(val binding: ItemCameraBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -142,7 +150,9 @@ class PrenotaFragment : Fragment() {
         }
     }
 
-    private fun showDatePickerDialog(calendar: Calendar, onDateSetListener: (Calendar) -> Unit) {
+    private fun showDatePickerDialog(isCheckOut: Boolean, onDateSetListener: (Calendar) -> Unit) {
+        val calendar = if (isCheckOut) dataCheckOut else dataCheckIn
+
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             { _, year, month, dayOfMonth ->
@@ -153,7 +163,13 @@ class PrenotaFragment : Fragment() {
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
-        datePickerDialog.datePicker.minDate = calendar.timeInMillis
+
+        if (isCheckOut) {
+            datePickerDialog.datePicker.minDate = dataCheckIn.timeInMillis + 86400000  // Aggiungo 24 ore in millisecondi per garantire che la data di check-out sia almeno il giorno successivo al check-in
+        } else {
+            datePickerDialog.datePicker.minDate = System.currentTimeMillis()
+        }
+
         datePickerDialog.show()
     }
 
