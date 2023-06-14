@@ -17,6 +17,11 @@
     <string name="lavanderia">Laundry</string>
     <string name="libreria">Library</string>
     <string name="info">Info</string>
+    <string name="modifica">Modifica</string>
+    <string name="nome">Nome:</string>
+    <string name="cognome">Cognome:</string>
+    <string name="email">Email:</string>
+    <string name="log_out">Log Out</string>
     <string name="support_message">For room reservation and support</string>
 
 </resources>
