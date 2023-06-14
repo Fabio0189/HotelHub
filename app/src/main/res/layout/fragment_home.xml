@@ -23,6 +23,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
+                    android:id="@+id/image1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ristorante"
@@ -62,6 +63,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
+                    android:id="@+id/image2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/loungebar"
@@ -101,6 +103,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
+                    android:id="@+id/image3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/sauna"
@@ -140,6 +143,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
+                    android:id="@+id/image4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/piscina"
@@ -177,6 +181,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
+                    android:id="@+id/image5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/dogcare"
@@ -216,6 +221,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
+                    android:id="@+id/image6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/biliardo"
@@ -255,6 +261,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
+                    android:id="@+id/image7"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/lavanderia"
@@ -294,6 +301,7 @@
                 android:layout_gravity="center">
 
                 <ImageView
+                    android:id="@+id/image8"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/libreria"
