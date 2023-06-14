@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esrcitazione.hotelhub.databinding.FragmentPrenotaBinding
 import com.esrcitazione.hotelhub.databinding.ItemCameraBinding
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 data class Camera(val tipo: String, val immagini: List<Int>, val prezzo: Double)
@@ -105,18 +109,37 @@ class PrenotaFragment : Fragment() {
         }
 
         binding.buttonFatturazione.setOnClickListener {
-            binding.textViewNome.visibility = View.VISIBLE
-            binding.editTextNome.visibility = View.VISIBLE
-            binding.textViewCognome.visibility = View.VISIBLE
-            binding.editTextCognome.visibility = View.VISIBLE
-            binding.textViewNumeroCarta.visibility = View.VISIBLE
-            binding.editTextNumeroCarta.visibility = View.VISIBLE
-            binding.textViewCvv.visibility = View.VISIBLE
-            binding.editTextCvv.visibility = View.VISIBLE
-            binding.buttonConferma.visibility = View.VISIBLE
-            binding.buttonFatturazione.visibility = View.GONE
-            binding.buttonFatturazione.isEnabled = false
-            fatturazionePremuta = true
+            val tipoCamera = binding.spinnerTipoCamera.selectedItemPosition + 1
+            ClientNetwork.retrofit.select("SELECT * FROM prenotazioni WHERE id_stanza IN (SELECT id FROM stanze WHERE capacita = $tipoCamera) AND ((data_check_in <= '${formatDate(dataCheckOut)}' AND data_check_out >= '${formatDate(dataCheckOut)}') OR (data_check_in <= '${formatDate(dataCheckIn)}' AND data_check_out >= '${formatDate(dataCheckIn)}'))")
+                .enqueue(object: Callback<JsonObject> {
+                    override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val result = response.body()!!
+                            if(result.get("rows").asJsonArray.size() > 0) {
+                                Toast.makeText(context, "Questo tipo di camera non è disponibile", Toast.LENGTH_SHORT).show()
+                            } else {
+                                binding.textViewNome.visibility = View.VISIBLE
+                                binding.editTextNome.visibility = View.VISIBLE
+                                binding.textViewCognome.visibility = View.VISIBLE
+                                binding.editTextCognome.visibility = View.VISIBLE
+                                binding.textViewNumeroCarta.visibility = View.VISIBLE
+                                binding.editTextNumeroCarta.visibility = View.VISIBLE
+                                binding.textViewCvv.visibility = View.VISIBLE
+                                binding.editTextCvv.visibility = View.VISIBLE
+                                binding.buttonConferma.visibility = View.VISIBLE
+                                binding.buttonFatturazione.visibility = View.GONE
+                                binding.buttonFatturazione.isEnabled = false
+                                fatturazionePremuta = true
+                            }
+                        } else {
+                            // Gestisci l'errore
+                        }
+                    }
+
+                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                        // Gestisci l'errore
+                    }
+                })
         }
 
         binding.buttonConferma.setOnClickListener {
@@ -126,57 +149,51 @@ class PrenotaFragment : Fragment() {
             val cvv = binding.editTextCvv.text.toString()
             if (nome.isNotBlank() && cognome.isNotBlank() && numeroCarta.length == 16 && cvv.length == 3) {
                 Toast.makeText(context, "Pagamento effettuato", Toast.LENGTH_SHORT).show()
+                //Qui effettua il pagamento e crea la prenotazione nel database
             } else {
-                Toast.makeText(context, "Numero carta o CVV non validi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Inserisci correttamente i dati del pagamento", Toast.LENGTH_SHORT).show()
             }
         }
 
         return view
     }
 
-    inner class CameraAdapter(private val camera: Camera) : RecyclerView.Adapter<CameraAdapter.CameraViewHolder>() {
-        inner class CameraViewHolder(val binding: ItemCameraBinding) : RecyclerView.ViewHolder(binding.root)
+    private fun formatDate(calendar: Calendar): String {
+        val day = calendar.get(Calendar.DAY_OF_MONTH).toString().padStart(2, '0')
+        val month = (calendar.get(Calendar.MONTH) + 1).toString().padStart(2, '0')
+        val year = calendar.get(Calendar.YEAR)
+        return "$year-$month-$day"
+    }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CameraViewHolder {
-            val binding = ItemCameraBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return CameraViewHolder(binding)
+    private fun showDatePickerDialog(minDateSet: Boolean, callback: (Calendar) -> Unit) {
+        val calendar = Calendar.getInstance()
+        if (minDateSet) {
+            calendar.timeInMillis = dataCheckIn.timeInMillis
+            calendar.add(Calendar.DAY_OF_MONTH, 1)
         }
+        val dialog = DatePickerDialog(requireContext(), { _, year, month, dayOfMonth ->
+            val selectedCalendar = Calendar.getInstance().apply {
+                set(Calendar.YEAR, year)
+                set(Calendar.MONTH, month)
+                set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            }
+            callback(selectedCalendar)
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+        dialog.datePicker.minDate = calendar.timeInMillis
+        dialog.show()
+    }
 
-        override fun getItemCount() = camera.immagini.size
+    inner class CameraAdapter(private val camera: Camera) : RecyclerView.Adapter<CameraViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+            CameraViewHolder(ItemCameraBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
         override fun onBindViewHolder(holder: CameraViewHolder, position: Int) {
             holder.binding.cameraImage.setImageResource(camera.immagini[position])
             holder.binding.cameraText.text = "${camera.tipo} ${position + 1}"
         }
+
+        override fun getItemCount() = camera.immagini.size
     }
 
-    private fun showDatePickerDialog(isCheckOut: Boolean, onDateSetListener: (Calendar) -> Unit) {
-        val calendar = if (isCheckOut) dataCheckOut else dataCheckIn
-
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            { _, year, month, dayOfMonth ->
-                calendar.set(year, month, dayOfMonth)
-                onDateSetListener(calendar)
-            },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
-        )
-
-        if (isCheckOut) {
-            datePickerDialog.datePicker.minDate = dataCheckIn.timeInMillis + 86400000  // Aggiungo 24 ore in millisecondi per garantire che la data di check-out sia almeno il giorno successivo al check-in
-        } else {
-            datePickerDialog.datePicker.minDate = System.currentTimeMillis()
-        }
-
-        datePickerDialog.show()
-    }
-
-    private fun formatDate(calendar: Calendar): String {
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-        val month = calendar.get(Calendar.MONTH) + 1
-        val year = calendar.get(Calendar.YEAR)
-        return String.format(Locale.getDefault(), "%02d/%02d/%d", day, month, year)
-    }
+    inner class CameraViewHolder(val binding: ItemCameraBinding) : RecyclerView.ViewHolder(binding.root)
 }
