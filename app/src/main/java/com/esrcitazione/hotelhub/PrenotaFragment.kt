@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.esrcitazione.hotelhub.R
 import com.esrcitazione.hotelhub.databinding.FragmentPrenotaBinding
 import com.esrcitazione.hotelhub.databinding.ItemCameraBinding
 import java.util.*
