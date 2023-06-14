@@ -38,8 +38,11 @@
             android:clickable="true"
             android:drawableLeft="@drawable/baseline_phone_24"
             android:linksClickable="true"
+            android:importantForAccessibility="no"
             android:minHeight="48dp"
-            android:text="  (+39) 3333333333"
+            android:text="(+39) 3333333333"
+            android:gravity="center"
+            android:drawablePadding="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -50,8 +53,11 @@
             android:clickable="true"
             android:drawableLeft="@drawable/baseline_mail_outline_24"
             android:linksClickable="true"
+            android:importantForAccessibility="no"
             android:minHeight="48dp"
-            android:text="  info@hotelhub.it"
+            android:text="info@hotelhub.it"
+            android:gravity="center"
+            android:drawablePadding="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -62,8 +68,11 @@
             android:clickable="true"
             android:drawableLeft="@drawable/baseline_mail_outline_24"
             android:linksClickable="true"
+            android:importantForAccessibility="no"
             android:minHeight="48dp"
-            android:text="  support@hotelhub.it"
+            android:text="support@hotelhub.it"
+            android:gravity="center"
+            android:drawablePadding="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>
