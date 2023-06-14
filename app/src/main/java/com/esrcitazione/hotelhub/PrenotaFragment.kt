@@ -23,6 +23,8 @@ class PrenotaFragment : Fragment() {
     private var fatturazionePremuta = false
     private var dataCheckIn: Calendar = Calendar.getInstance()
     private var dataCheckOut: Calendar = Calendar.getInstance()
+    private var isCheckInSelected = false
+    private var isCheckOutSelected = false
 
     private val camere = listOf(
         Camera("Camera Singola", listOf(R.drawable.camerasingola1, R.drawable.camerasingola2, R.drawable.camerasingola3, R.drawable.camerasingola4), 50.0),
@@ -65,11 +67,7 @@ class PrenotaFragment : Fragment() {
                 val prezzoCamera = camere[position].prezzo
                 binding.textViewPrezzo.text = "Prezzo: $prezzoCamera €"
                 binding.textViewPrezzo.visibility = View.VISIBLE
-
-                if (fatturazionePremuta) {
-                    binding.buttonFatturazione.isEnabled = false
-                    binding.buttonFatturazione.alpha = 0.5f
-                }
+                updateFatturazioneButtonStatus()
             }
         }
 
@@ -78,6 +76,8 @@ class PrenotaFragment : Fragment() {
             showDatePickerDialog(dataCheckIn) { calendar ->
                 dataCheckIn = calendar
                 binding.editTextDataCheckIn.setText(formatDate(calendar))
+                isCheckInSelected = true
+                updateFatturazioneButtonStatus()
             }
         }
 
@@ -86,6 +86,8 @@ class PrenotaFragment : Fragment() {
             showDatePickerDialog(dataCheckOut) { calendar ->
                 dataCheckOut = calendar
                 binding.editTextDataCheckOut.setText(formatDate(calendar))
+                isCheckOutSelected = true
+                updateFatturazioneButtonStatus()
             }
         }
 
@@ -117,6 +119,11 @@ class PrenotaFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun updateFatturazioneButtonStatus() {
+        binding.buttonFatturazione.isEnabled = isCheckInSelected && isCheckOutSelected && !fatturazionePremuta
+        binding.buttonFatturazione.alpha = if (binding.buttonFatturazione.isEnabled) 1f else 0.5f
     }
 
     inner class CameraAdapter(private val camera: Camera) : RecyclerView.Adapter<CameraAdapter.CameraViewHolder>() {
