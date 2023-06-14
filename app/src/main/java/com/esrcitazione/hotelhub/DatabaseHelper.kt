@@ -40,11 +40,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.execSQL(createTableQuery)
     }
 
-    fun insertUser(email: String, password: String, userType: Int) {
+    fun insertUser(email: String, password: String, userType: Int, nome: String, cognome: String) {
         val values = ContentValues().apply {
             put(COLUMN_EMAIL, email)
             put(COLUMN_PASSWORD, password)
             put(COLUMN_TIPO, userType)
+            put(COLUMN_NOME, nome)
+            put(COLUMN_COGNOME, cognome)
         }
 
         val db = writableDatabase
@@ -98,4 +100,55 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         cursor.close()
         return tableExists
     }
+    fun getNomeUtente(): String {
+        val selectQuery = "SELECT $COLUMN_NOME FROM $TABLE_UTENTE WHERE $COLUMN_EMAIL IS NOT NULL"
+        val db = readableDatabase
+        val cursor = db.rawQuery(selectQuery, null)
+        var nomeUtente = ""
+
+        if (cursor.moveToFirst()) {
+            val columnIndex = cursor.getColumnIndex(COLUMN_NOME)
+            if (columnIndex != -1) {
+                nomeUtente = cursor.getString(columnIndex)
+            }
+        }
+
+        cursor.close()
+        return nomeUtente
+    }
+
+    fun getCognomeUtente(): String {
+        val selectQuery = "SELECT $COLUMN_COGNOME FROM $TABLE_UTENTE WHERE $COLUMN_EMAIL IS NOT NULL"
+        val db = readableDatabase
+        val cursor = db.rawQuery(selectQuery, null)
+        var cognomeUtente = ""
+
+        if (cursor.moveToFirst()) {
+            val columnIndex = cursor.getColumnIndex(COLUMN_COGNOME)
+            if (columnIndex != -1) {
+                cognomeUtente = cursor.getString(columnIndex)
+            }
+        }
+
+        cursor.close()
+        return cognomeUtente
+    }
+
+    fun getEmail(): String {
+        val selectQuery = "SELECT $COLUMN_EMAIL FROM $TABLE_UTENTE WHERE $COLUMN_EMAIL IS NOT NULL"
+        val db = readableDatabase
+        val cursor = db.rawQuery(selectQuery, null)
+        var email = ""
+
+        if (cursor.moveToFirst()) {
+            val columnIndex = cursor.getColumnIndex(COLUMN_EMAIL)
+            if (columnIndex != -1) {
+                email = cursor.getString(columnIndex)
+            }
+        }
+
+        cursor.close()
+        return email
+    }
+
 }

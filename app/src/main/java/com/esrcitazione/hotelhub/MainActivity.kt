@@ -1,6 +1,5 @@
 package com.esrcitazione.hotelhub
 
-import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -77,8 +76,10 @@ class MainActivity : AppCompatActivity() {
                     val resultSet = response.body()?.get("queryset") as JsonArray
                     if (resultSet.asJsonArray.size() > 0) {
                         val userType = resultSet.asJsonArray[0].asJsonObject.get("tipo").asInt
+                        val nome = resultSet.asJsonArray[0].asJsonObject.get("nome").asString
+                        val cognome = resultSet.asJsonArray[0].asJsonObject.get("cognome").asString
 
-                        db.insertUser(email, password, userType)
+                        db.insertUser(email, password, userType, nome, cognome)
 
                         if (userType == 1) {
                             val intent = Intent(this@MainActivity, HomeOspiteActivity::class.java)
