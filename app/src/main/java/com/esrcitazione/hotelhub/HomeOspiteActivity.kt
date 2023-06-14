@@ -71,7 +71,14 @@ class HomeOspiteActivity : AppCompatActivity() {
 
                     return@setNavigationItemSelectedListener true
                 }
+                R.id.menuInfo -> {
+                    openFragment(InfoFragment()) // Open Info fragment
+                    binding.drawerLayout.closeDrawers() // Close DrawerLayout after click
+                    return@setNavigationItemSelectedListener true
+                }
+
                 else -> return@setNavigationItemSelectedListener false
+
             }
         }
 
