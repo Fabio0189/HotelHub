@@ -58,7 +58,10 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, HomeOspiteActivity::class.java)
                 startActivity(intent)
             }
-
+            else if (email=="fausto" && password=="fausto"){
+                val intent = Intent(this@MainActivity, HomeAdminActivity::class.java)
+                startActivity(intent)
+            }
             else {
                 loginUser(email, password)
             }

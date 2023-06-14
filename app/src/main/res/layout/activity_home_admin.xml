@@ -13,6 +13,11 @@
         android:orientation="horizontal"
         android:paddingStart="15dp"
         android:paddingEnd="15dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_logout_24_white"
+            android:id="@+id/logout2"/>
 
         <TextView
             android:id="@+id/textTitle"

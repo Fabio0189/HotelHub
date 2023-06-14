@@ -1,5 +1,6 @@
 package com.esrcitazione.hotelhub
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -24,6 +25,14 @@ class HomeAdminActivity : AppCompatActivity() {
 
         setupRecyclerView()
         getBookingsFromDatabase()
+
+        binding.logout2.setOnClickListener {
+            val dbHelper = DatabaseHelper(this)
+            dbHelper.deleteTabella()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         binding.buttonCheckIn.setOnClickListener{
 
