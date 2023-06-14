@@ -20,6 +20,11 @@
         android:icon="@drawable/baseline_bed_24"
         android:title="@string/prenota"
         />
+    <item
+        android:id="@+id/menuInfo"
+        android:icon="@drawable/baseline_info_24"
+        android:title="@string/info" />
+
 
 
 </menu>

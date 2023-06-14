@@ -16,4 +16,6 @@
     <string name="arearelax">Relax Area</string>
     <string name="lavanderia">Laundry</string>
     <string name="libreria">Library</string>
+    <string name="info">Info</string>
+
 </resources>
