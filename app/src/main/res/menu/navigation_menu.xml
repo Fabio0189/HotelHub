@@ -24,6 +24,10 @@
         android:id="@+id/menuInfo"
         android:icon="@drawable/baseline_info_24"
         android:title="@string/info" />
+    <item
+        android:id="@+id/menuLogOut"
+        android:icon="@drawable/baseline_logout_24"
+        android:title="@string/log_out" />
 
 
 

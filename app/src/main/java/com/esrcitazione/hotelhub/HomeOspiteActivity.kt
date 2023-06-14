@@ -1,6 +1,7 @@
 package com.esrcitazione.hotelhub
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
@@ -76,6 +77,19 @@ class HomeOspiteActivity : AppCompatActivity() {
                     binding.drawerLayout.closeDrawers() // Close DrawerLayout after click
                     return@setNavigationItemSelectedListener true
                 }
+                R.id.menuLogOut -> {
+                    // Elimina la tabella del database
+                    val dbHelper = DatabaseHelper(this)
+                    dbHelper.deleteTabella()
+
+                    // Mostra la schermata di accesso
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish() // Chiude l'attuale activity
+                    return@setNavigationItemSelectedListener true
+                }
+
+
 
                 else -> return@setNavigationItemSelectedListener false
 
@@ -119,4 +133,5 @@ class HomeOspiteActivity : AppCompatActivity() {
         val preferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
         return preferences.getString("language", "en") ?: "en"
     }
+
 }

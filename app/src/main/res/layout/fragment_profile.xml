@@ -35,6 +35,7 @@
             android:textColor="@color/white"/>
 
         <RelativeLayout
+            android:id="@+id/relativeInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/testoProfilo"
@@ -61,7 +62,7 @@
                         android:id="@+id/nomeLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nome:"
+                        android:text="@string/nome"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -87,7 +88,7 @@
                         android:id="@+id/cognomeLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cognome:"
+                        android:text="@string/cognome"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -113,7 +114,7 @@
                         android:id="@+id/emailLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Email:"
+                        android:text="@string/email"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -130,6 +131,16 @@
 
             </LinearLayout>
         </RelativeLayout>
+        <Button
+            android:id="@+id/modificadati"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="@string/modifica"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeInfo"
+            android:layout_marginTop="30dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
