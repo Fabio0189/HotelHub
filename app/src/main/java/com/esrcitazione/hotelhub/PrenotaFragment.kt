@@ -1,17 +1,20 @@
 package com.esrcitazione.hotelhub
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.esrcitazione.hotelhub.R
 import com.esrcitazione.hotelhub.databinding.FragmentPrenotaBinding
 import com.esrcitazione.hotelhub.databinding.ItemCameraBinding
-import androidx.recyclerview.widget.RecyclerView
+import java.util.*
 
 data class Camera(val tipo: String, val immagini: List<Int>, val prezzo: Double)
 
@@ -19,6 +22,8 @@ class PrenotaFragment : Fragment() {
     private lateinit var binding: FragmentPrenotaBinding
     private lateinit var cameraSelected: String
     private var fatturazionePremuta = false
+    private var dataCheckIn: Calendar = Calendar.getInstance()
+    private var dataCheckOut: Calendar = Calendar.getInstance()
 
     private val camere = listOf(
         Camera("Camera Singola", listOf(R.drawable.camerasingola1, R.drawable.camerasingola2, R.drawable.camerasingola3, R.drawable.camerasingola4), 50.0),
@@ -69,6 +74,22 @@ class PrenotaFragment : Fragment() {
             }
         }
 
+        // Campo di testo per la data di check-in
+        binding.editTextDataCheckIn.setOnClickListener {
+            showDatePickerDialog(dataCheckIn) { calendar ->
+                dataCheckIn = calendar
+                binding.editTextDataCheckIn.setText(formatDate(calendar))
+            }
+        }
+
+        // Campo di testo per la data di check-out
+        binding.editTextDataCheckOut.setOnClickListener {
+            showDatePickerDialog(dataCheckOut) { calendar ->
+                dataCheckOut = calendar
+                binding.editTextDataCheckOut.setText(formatDate(calendar))
+            }
+        }
+
         binding.buttonFatturazione.setOnClickListener {
             binding.textViewNome.visibility = View.VISIBLE
             binding.editTextNome.visibility = View.VISIBLE
@@ -113,5 +134,27 @@ class PrenotaFragment : Fragment() {
             holder.binding.cameraImage.setImageResource(camera.immagini[position])
             holder.binding.cameraText.text = "${camera.tipo} ${position + 1}"
         }
+    }
+
+    private fun showDatePickerDialog(calendar: Calendar, onDateSetListener: (Calendar) -> Unit) {
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, year, month, dayOfMonth ->
+                calendar.set(year, month, dayOfMonth)
+                onDateSetListener(calendar)
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.datePicker.minDate = calendar.timeInMillis
+        datePickerDialog.show()
+    }
+
+    private fun formatDate(calendar: Calendar): String {
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val year = calendar.get(Calendar.YEAR)
+        return String.format(Locale.getDefault(), "%02d/%02d/%d", day, month, year)
     }
 }
