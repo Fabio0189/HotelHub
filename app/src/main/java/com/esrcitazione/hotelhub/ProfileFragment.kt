@@ -41,6 +41,16 @@ class ProfileFragment : Fragment() {
         // Inizializza il binding utilizzando il metodo corretto
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
+        binding.modificadati.setOnClickListener {
+            val modificaFragment = ModificaFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val transaction = fragmentManager.beginTransaction()
+            transaction.replace(R.id.frameLayout, modificaFragment) // R.id.fragmentContainer è l'ID del contenitore del fragment nel tuo layout
+            transaction.addToBackStack(null) // Aggiungi la transazione alla back stack
+            transaction.commit()
+        }
+
+
         val databaseHelper = DatabaseHelper(requireContext())
         val nomeUtente = databaseHelper.getNomeUtente()
         val cognomeUtente = databaseHelper.getCognomeUtente()

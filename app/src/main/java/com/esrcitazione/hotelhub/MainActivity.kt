@@ -78,8 +78,9 @@ class MainActivity : AppCompatActivity() {
                         val userType = resultSet.asJsonArray[0].asJsonObject.get("tipo").asInt
                         val nome = resultSet.asJsonArray[0].asJsonObject.get("nome").asString
                         val cognome = resultSet.asJsonArray[0].asJsonObject.get("cognome").asString
+                        val Id = resultSet.asJsonArray[0].asJsonObject.get("id").asInt
 
-                        db.insertUser(email, password, userType, nome, cognome)
+                        db.insertUser(Id,email, password, userType, nome, cognome)
 
                         if (userType == 1) {
                             val intent = Intent(this@MainActivity, HomeOspiteActivity::class.java)

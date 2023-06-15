@@ -23,11 +23,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     override fun onCreate(db: SQLiteDatabase) {
         createTableUtente(db)
     }
-
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        // Implementa l'aggiornamento del database se necessario
-    }
 
+    }
     private fun createTableUtente(db: SQLiteDatabase) {
         val createTableQuery = "CREATE TABLE IF NOT EXISTS $TABLE_UTENTE " +
                 "($COLUMN_ID INTEGER PRIMARY KEY, " +
@@ -40,8 +38,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.execSQL(createTableQuery)
     }
 
-    fun insertUser(email: String, password: String, userType: Int, nome: String, cognome: String) {
+    fun insertUser(id:Int,email: String, password: String, userType: Int, nome: String, cognome: String) {
         val values = ContentValues().apply {
+            put(COLUMN_ID,id)
             put(COLUMN_EMAIL, email)
             put(COLUMN_PASSWORD, password)
             put(COLUMN_TIPO, userType)
@@ -149,6 +148,52 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         cursor.close()
         return email
+    }
+    fun getId(): Int {
+        val selectQuery = "SELECT $COLUMN_ID FROM $TABLE_UTENTE WHERE $COLUMN_EMAIL IS NOT NULL"
+        val db = readableDatabase
+        val cursor = db.rawQuery(selectQuery, null)
+        var id = -1
+
+        if (cursor.moveToFirst()) {
+            val columnIndex = cursor.getColumnIndex(COLUMN_ID)
+            if (columnIndex != -1) {
+                id = cursor.getInt(columnIndex)
+            }
+        }
+
+        cursor.close()
+        return id
+    }
+    fun getPassword(): String {
+        val selectQuery = "SELECT $COLUMN_PASSWORD FROM $TABLE_UTENTE WHERE $COLUMN_EMAIL IS NOT NULL"
+        val db = readableDatabase
+        val cursor = db.rawQuery(selectQuery, null)
+        var password = ""
+
+        if (cursor.moveToFirst()) {
+            val columnIndex = cursor.getColumnIndex(COLUMN_PASSWORD)
+            if (columnIndex != -1) {
+                password = cursor.getString(columnIndex)
+            }
+        }
+
+        cursor.close()
+        return password
+    }
+    fun updateUserData(id: Int, nome: String, cognome: String, email: String, password: String,) {
+        val values = ContentValues().apply {
+            put(COLUMN_EMAIL, email)
+            put(COLUMN_PASSWORD, password)
+            put(COLUMN_NOME, nome)
+            put(COLUMN_COGNOME, cognome)
+        }
+
+        val db = writableDatabase
+        val selection = "$COLUMN_ID = ?"
+        val selectionArgs = arrayOf(id.toString())
+        db.update(TABLE_UTENTE, values, selection, selectionArgs)
+        db.close()
     }
 
 }

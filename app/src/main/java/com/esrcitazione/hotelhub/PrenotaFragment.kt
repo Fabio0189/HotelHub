@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esrcitazione.hotelhub.databinding.FragmentPrenotaBinding
 import com.esrcitazione.hotelhub.databinding.ItemCameraBinding
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -110,14 +111,22 @@ class PrenotaFragment : Fragment() {
 
         binding.buttonFatturazione.setOnClickListener {
             val tipoCamera = binding.spinnerTipoCamera.selectedItemPosition + 1
-            ClientNetwork.retrofit.select("SELECT * FROM prenotazioni WHERE id_stanza IN (SELECT id FROM stanze WHERE capacita = $tipoCamera) AND ((data_check_in <= '${formatDate(dataCheckOut)}' AND data_check_out >= '${formatDate(dataCheckOut)}') OR (data_check_in <= '${formatDate(dataCheckIn)}' AND data_check_out >= '${formatDate(dataCheckIn)}'))")
-                .enqueue(object: Callback<JsonObject> {
+            ClientNetwork.retrofit.select("""
+    SELECT COUNT(*) as count FROM stanze
+    WHERE capacita = $tipoCamera
+    AND NOT EXISTS (
+        SELECT *
+        FROM prenotazioni
+        WHERE id_stanza = stanze.id
+        AND (
+            (data_check_in <= '${formatDate(dataCheckOut)}' AND data_check_out >= '${formatDate(dataCheckOut)}')
+            OR (data_check_in <= '${formatDate(dataCheckIn)}' AND data_check_out >= '${formatDate(dataCheckIn)}')
+            OR (data_check_in >= '${formatDate(dataCheckIn)}' AND data_check_out <= '${formatDate(dataCheckOut)}')))
+""").enqueue(object: Callback<JsonObject>  {
                     override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                         if (response.isSuccessful && response.body() != null) {
-                            val result = response.body()!!
-                            if(result.get("rows").asJsonArray.size() > 0) {
-                                Toast.makeText(context, "Questo tipo di camera non è disponibile", Toast.LENGTH_SHORT).show()
-                            } else {
+                            val result = response.body()?.get("queryset") as JsonArray
+                            if(result.asJsonArray.size() > 0) {
                                 binding.textViewNome.visibility = View.VISIBLE
                                 binding.editTextNome.visibility = View.VISIBLE
                                 binding.textViewCognome.visibility = View.VISIBLE
@@ -130,15 +139,19 @@ class PrenotaFragment : Fragment() {
                                 binding.buttonFatturazione.visibility = View.GONE
                                 binding.buttonFatturazione.isEnabled = false
                                 fatturazionePremuta = true
+                            } else {
                             }
                         } else {
-                            // Gestisci l'errore
+
+                            Toast.makeText(context, "Questo tipo di camera non è disponibile per le date selezionate", Toast.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                        // Gestisci l'errore
+
+                        Toast.makeText(context, "ERRORE di connesione", Toast.LENGTH_SHORT).show()
                     }
+
                 })
         }
 
@@ -156,6 +169,27 @@ class PrenotaFragment : Fragment() {
         }
 
         return view
+    }
+    private fun effettuaPrenotazione(tipoCamera: String, dataCheckIn: String, dataCheckOut: String, nome: String, cognome: String, numeroCarta: String, cvv: String) {
+        val insertQuery = "INSERT INTO prenotazioni (tipo_camera, data_check_in, data_check_out, nome, cognome, numero_carta, cvv) " +
+                "VALUES ('$tipoCamera', '$dataCheckIn', '$dataCheckOut', '$nome', '$cognome', '$numeroCarta', '$cvv')"
+
+        ClientNetwork.retrofit.insert(insertQuery).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    showToast("Prenotazione effettuata con successo!")
+                } else {
+                    showToast("Errore durante la prenotazione. Riprova.")
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                showToast("Errore di connessione. Riprova.")
+            }
+        })
+    }
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun formatDate(calendar: Calendar): String {
@@ -194,6 +228,7 @@ class PrenotaFragment : Fragment() {
 
         override fun getItemCount() = camera.immagini.size
     }
+
 
     inner class CameraViewHolder(val binding: ItemCameraBinding) : RecyclerView.ViewHolder(binding.root)
 }
