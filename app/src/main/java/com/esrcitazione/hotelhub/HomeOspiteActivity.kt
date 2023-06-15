@@ -1,5 +1,6 @@
 package com.esrcitazione.hotelhub
 
+import ServizioCameraFragment
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -28,7 +29,7 @@ class HomeOspiteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        db=DatabaseHelper(this)
+        db= DatabaseHelper(this)
 
         val currentLanguage = getLanguageFromPreferences()
         val locale = Locale(currentLanguage)

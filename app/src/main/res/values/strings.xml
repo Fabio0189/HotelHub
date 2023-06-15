@@ -31,6 +31,24 @@
     <string name="registrati">Registrati</string>
     <string name="hai_dimenticato_la_password">Hai dimenticato la password?</string>
     <string name="servizio_camera">Servizio in Camera</string>
+    <string name="sfoglia_con_crema_e_frutti_di_bosco">Sfoglia con Crema e Frutti di Bosco</string>
+    <string name="primi_piatti">Primi Piatti</string>
+    <string name="carbonara">Carbonara</string>
+    <string name="qty">Qtà</string>
+    <string name="amatriciana">Amatriciana</string>
+    <string name="lasagne">Lasagne</string>
+    <string name="secondi_piatti">Secondi Piatti</string>
+    <string name="carpaccio_al_pepe_verde">Carpaccio al Pepe Verde</string>
+    <string name="cotoletta_alla_milanese">Cotoletta alla Milanese</string>
+    <string name="tagliata_di_carne">Tagliata di Carne</string>
+    <string name="contorni">Contorni</string>
+    <string name="insalata_mista">Insalata Mista</string>
+    <string name="patatine_fritte">Patatine Fritte</string>
+    <string name="verdure_grigliate">Verdure Grigliate</string>
+    <string name="dessert">Dessert</string>
+    <string name="tortino_cuore_caldo_al_cioccolato">Tortino Cuore Caldo al Cioccolato</string>
+    <string name="tiramis">Tiramisù</string>
+    <string name="vai_al_resoconto">Vai al resoconto</string>
 
 </resources>
 

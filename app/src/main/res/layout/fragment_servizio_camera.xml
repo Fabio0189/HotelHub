@@ -1,13 +1,351 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ServizioCameraFragment" >
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textViewPrimiPiatti"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="@string/primi_piatti"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBoxCarbonara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/carbonara"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/editTextCarbonara"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/qty"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:paddingStart="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBoxAmatriciana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/amatriciana"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/editTextAmatriciana"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/qty"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:paddingStart="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBoxLasagne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lasagne"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/editTextLasagne"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/qty"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:paddingStart="8dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewSecondiPiatti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/secondi_piatti"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp" />
+
+    <!-- Aggiungi gli altri LinearLayout per i secondi piatti -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBoxCarpaccio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/carpaccio_al_pepe_verde"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/editTextCarpaccio"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/qty"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:paddingStart="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBoxCotoletta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cotoletta_alla_milanese"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/editTextCotoletta"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/qty"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:paddingStart="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBoxTagliata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tagliata_di_carne"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/editTextTagliata"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/qty"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:paddingStart="8dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewContorni"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/contorni"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp" />
+
+    <!-- Aggiungi LinearLayout per i contorni -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBoxInsalata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/insalata_mista"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/editTextInsalata"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/qty"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:paddingStart="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBoxPatatine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/patatine_fritte"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/editTextPatatine"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/qty"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:paddingStart="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBoxVerdure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/verdure_grigliate"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/editTextVerdure"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/qty"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:paddingStart="8dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewDessert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dessert"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp" />
+
+    <!-- Aggiungi LinearLayout per i dessert -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBoxTortino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tortino_cuore_caldo_al_cioccolato"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/editTextTortino"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/qty"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:paddingStart="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkBoxTiramisu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tiramis"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/editTextTiramisu"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/qty"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:paddingStart="8dp" />
+
+    </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+            <CheckBox
+            android:id="@+id/checkBoxSfoglia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sfoglia_con_crema_e_frutti_di_bosco"
+            android:paddingStart="16dp" />
+
+            <EditText
+            android:id="@+id/editTextSfoglia"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/qty"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:paddingStart="8dp" />
+
+    </LinearLayout>
+
+        <Button
+        android:id="@+id/buttonCalcolaTotale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/vai_al_resoconto"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="32dp"
+        android:background="@drawable/button_background"
+        android:textColor="@android:color/white"
+        android:textAllCaps="true"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:padding="16dp" />
+
+        <TextView
+        android:id="@+id/textViewTotale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="16dp" />
+
+    </LinearLayout>
+</ScrollView>

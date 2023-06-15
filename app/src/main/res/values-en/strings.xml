@@ -30,5 +30,24 @@
     <string name="registrati">Sign Up</string>
     <string name="hai_dimenticato_la_password">Forgot Password?</string>
     <string name="servizio_camera">Room Service</string>
+    <string name="sfoglia_con_crema_e_frutti_di_bosco">Pastry with Cream and Forest Fruits</string>
+    <string name="primi_piatti">First Courses</string>
+    <string name="carbonara">Carbonara</string>
+    <string name="qty">Qty</string>
+    <string name="amatriciana">Amatriciana</string>
+    <string name="lasagne">Lasagne</string>
+    <string name="secondi_piatti">Main Courses</string>
+    <string name="carpaccio_al_pepe_verde">Peppered Carpaccio</string>
+    <string name="cotoletta_alla_milanese">Milanese Cutlet</string>
+    <string name="tagliata_di_carne">Sliced Steak</string>
+    <string name="contorni">Side Dishes</string>
+    <string name="insalata_mista">Mixed Salad</string>
+    <string name="patatine_fritte">French Fries</string>
+    <string name="verdure_grigliate">Grilled Vegetables</string>
+    <string name="dessert">Desserts</string>
+    <string name="tortino_cuore_caldo_al_cioccolato">Molten Chocolate Cake</string>
+    <string name="tiramis">Tiramisu</string>
+    <string name="vai_al_resoconto">Go to Summary</string>
+
 
 </resources>
