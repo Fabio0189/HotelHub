@@ -59,7 +59,7 @@ class activity_registrazione : AppCompatActivity() {
         }
     }
     private fun checkIfEmailExists(email: String, password: String) {
-        val selectQuery = "SELECT * FROM utente WHERE email = '$email'"
+        val selectQuery = "SELECT * FROM utenti WHERE email = '$email'"
 
         ClientNetwork.retrofit.select(selectQuery).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -83,7 +83,7 @@ class activity_registrazione : AppCompatActivity() {
     }
 
     private fun registerUser(email: String, password: String) {
-        val insertQuery = "INSERT INTO utente (email, password, tipo) VALUES ('$email', '$password', true)"
+        val insertQuery = "INSERT INTO utenti (email, password, tipo) VALUES ('$email', '$password', true)"
 
         ClientNetwork.retrofit.insert(insertQuery).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {

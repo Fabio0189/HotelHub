@@ -39,7 +39,7 @@ class ModificaFragment : Fragment() {
             val newPassword = binding.editPassword.text.toString().trim()
             val confirmPassword = binding.editPasswordConferma.text.toString().trim()
 
-            val idUtente = db.getId() // Sostituisci con il metodo corretto per ottenere l'ID dell'utente corrente
+            val idUtente = db.getId()
 
             val updatedName = if (newName.isNotEmpty()) newName else db.getNomeUtente()
             val updatedCognome = if (newCognome.isNotEmpty()) newCognome else db.getCognomeUtente()
@@ -73,7 +73,7 @@ class ModificaFragment : Fragment() {
                 "cognome = '$updatedCognome', " +
                 "email = '$updatedEmail', " +
                 "password = '$updatedPassword' " +
-                "WHERE id = $userId"
+                "WHERE id_u = $userId"
 
         ClientNetwork.retrofit.update(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {

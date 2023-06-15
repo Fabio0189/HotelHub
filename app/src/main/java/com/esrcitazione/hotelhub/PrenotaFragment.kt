@@ -2,13 +2,13 @@ package com.esrcitazione.hotelhub
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.esrcitazione.hotelhub.databinding.FragmentPrenotaBinding
@@ -19,9 +19,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import androidx.fragment.app.Fragment
 
-data class Camera(val tipo: String, val immagini: List<Int>, val prezzo: Double)
 
+
+
+private lateinit var db: DatabaseHelper
 class PrenotaFragment : Fragment() {
     private lateinit var binding: FragmentPrenotaBinding
     private lateinit var cameraSelected: String
@@ -30,6 +33,8 @@ class PrenotaFragment : Fragment() {
     private var dataCheckOut: Calendar = Calendar.getInstance()
     private var isCheckInSelected = false
     private var isCheckOutSelected = false
+    private var idStanza: Int = 0
+    data class Camera(val tipo: String, val immagini: List<Int>, val prezzo: Double)
 
     private val camere = listOf(
         Camera("Camera Singola", listOf(R.drawable.camerasingola1, R.drawable.camerasingola2, R.drawable.camerasingola3, R.drawable.camerasingola4), 50.0),
@@ -43,6 +48,8 @@ class PrenotaFragment : Fragment() {
     ): View {
         binding = FragmentPrenotaBinding.inflate(inflater, container, false)
         val view = binding.root
+
+         db = DatabaseHelper(requireContext())
 
         camere.forEach { camera ->
             val recyclerView = RecyclerView(requireContext()).apply {
@@ -112,17 +119,22 @@ class PrenotaFragment : Fragment() {
         binding.buttonFatturazione.setOnClickListener {
             val tipoCamera = binding.spinnerTipoCamera.selectedItemPosition + 1
             ClientNetwork.retrofit.select("""
-    SELECT COUNT(*) as count FROM stanze
-    WHERE capacita = $tipoCamera
-    AND NOT EXISTS (
-        SELECT *
-        FROM prenotazioni
-        WHERE id_stanza = stanze.id
-        AND (
-            (data_check_in <= '${formatDate(dataCheckOut)}' AND data_check_out >= '${formatDate(dataCheckOut)}')
-            OR (data_check_in <= '${formatDate(dataCheckIn)}' AND data_check_out >= '${formatDate(dataCheckIn)}')
-            OR (data_check_in >= '${formatDate(dataCheckIn)}' AND data_check_out <= '${formatDate(dataCheckOut)}')))
-""").enqueue(object: Callback<JsonObject>  {
+                SELECT COUNT(*) AS count, id_s 
+                FROM stanze
+                WHERE capacita = $tipoCamera
+                  AND NOT EXISTS (
+                    SELECT *
+                    FROM prenotazioni
+                    WHERE id_stanza = stanze.id_s
+                      AND (
+                        (data_check_in <= '${formatDate(dataCheckOut)}' AND data_check_out >= '${formatDate(dataCheckOut)}')
+                        OR (data_check_in <= '${formatDate(dataCheckIn)}' AND data_check_out >= '${formatDate(dataCheckIn)}')
+                        OR (data_check_in >= '${formatDate(dataCheckIn)}' AND data_check_out <= '${formatDate(dataCheckOut)}')
+                      )
+                  )
+                GROUP BY id_s
+
+                    """).enqueue(object: Callback<JsonObject>  {
                     override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                         if (response.isSuccessful && response.body() != null) {
                             val result = response.body()?.get("queryset") as JsonArray
@@ -139,6 +151,7 @@ class PrenotaFragment : Fragment() {
                                 binding.buttonFatturazione.visibility = View.GONE
                                 binding.buttonFatturazione.isEnabled = false
                                 fatturazionePremuta = true
+                                idStanza=result.asJsonArray[0].asJsonObject.get("id_s").asInt
                             } else {
                             }
                         } else {
@@ -156,13 +169,16 @@ class PrenotaFragment : Fragment() {
         }
 
         binding.buttonConferma.setOnClickListener {
+            val tipoCamera = binding.spinnerTipoCamera.selectedItemPosition + 1
+            val dataCheckIn = binding.editTextDataCheckIn.text.toString()
+            val dataCheckOut = binding.editTextDataCheckOut.text.toString()
             val nome = binding.editTextNome.text.toString()
             val cognome = binding.editTextCognome.text.toString()
             val numeroCarta = binding.editTextNumeroCarta.text.toString()
             val cvv = binding.editTextCvv.text.toString()
             if (nome.isNotBlank() && cognome.isNotBlank() && numeroCarta.length == 16 && cvv.length == 3) {
-                Toast.makeText(context, "Pagamento effettuato", Toast.LENGTH_SHORT).show()
-                //Qui effettua il pagamento e crea la prenotazione nel database
+                    val idUtente = db.getId()
+                effettuaPrenotazione(idUtente, dataCheckIn, dataCheckOut)
             } else {
                 Toast.makeText(context, "Inserisci correttamente i dati del pagamento", Toast.LENGTH_SHORT).show()
             }
@@ -170,9 +186,12 @@ class PrenotaFragment : Fragment() {
 
         return view
     }
-    private fun effettuaPrenotazione(tipoCamera: String, dataCheckIn: String, dataCheckOut: String, nome: String, cognome: String, numeroCarta: String, cvv: String) {
-        val insertQuery = "INSERT INTO prenotazioni (tipo_camera, data_check_in, data_check_out, nome, cognome, numero_carta, cvv) " +
-                "VALUES ('$tipoCamera', '$dataCheckIn', '$dataCheckOut', '$nome', '$cognome', '$numeroCarta', '$cvv')"
+    private fun effettuaPrenotazione(idUtente: Int, dataCheckIn: String, dataCheckOut: String) {
+        val formattedCheckIn = formatDateForDatabase(dataCheckIn)
+        val formattedCheckOut = formatDateForDatabase(dataCheckOut)
+
+        val insertQuery = "INSERT INTO prenotazioni (id_utente, id_stanza, data_check_in, data_check_out, checkin) " +
+                "VALUES ($idUtente, $idStanza, '$formattedCheckIn', '$formattedCheckOut', 0)"
 
         ClientNetwork.retrofit.insert(insertQuery).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -180,14 +199,18 @@ class PrenotaFragment : Fragment() {
                     showToast("Prenotazione effettuata con successo!")
                 } else {
                     showToast("Errore durante la prenotazione. Riprova.")
+
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 showToast("Errore di connessione. Riprova.")
+
             }
         })
     }
+
+
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
@@ -227,6 +250,14 @@ class PrenotaFragment : Fragment() {
         }
 
         override fun getItemCount() = camera.immagini.size
+    }
+    private fun formatDateForDatabase(date: String): String {
+        val parts = date.split("-")
+        val year = parts[0]
+        val month = parts[1].toInt().toString().padStart(2, '0')
+        val day = parts[2].toInt().toString().padStart(2, '0')
+
+        return "$year-$month-$day"
     }
 
 

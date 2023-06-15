@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                         val userType = resultSet.asJsonArray[0].asJsonObject.get("tipo").asInt
                         val nome = resultSet.asJsonArray[0].asJsonObject.get("nome").asString
                         val cognome = resultSet.asJsonArray[0].asJsonObject.get("cognome").asString
-                        val Id = resultSet.asJsonArray[0].asJsonObject.get("id").asInt
+                        val Id = resultSet.asJsonArray[0].asJsonObject.get("id_u").asInt
 
                         db.insertUser(Id,email, password, userType, nome, cognome)
 

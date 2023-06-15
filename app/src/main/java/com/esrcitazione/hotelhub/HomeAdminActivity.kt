@@ -38,7 +38,7 @@ class HomeAdminActivity : AppCompatActivity() {
 
             val selectedBookings = ArrayList(bookingAdapter.selectedBookings)
             for (booking in selectedBookings) {
-                val query = "UPDATE prenotazioni SET checkin=true WHERE prenotazioni.id=" + booking.id
+                val query = "UPDATE prenotazioni SET checkin=true WHERE prenotazioni.id_p=" + booking.id
 
                 ClientNetwork.retrofit.update(query).enqueue(object : Callback<JsonObject> {
                     override fun onResponse(
@@ -76,7 +76,7 @@ class HomeAdminActivity : AppCompatActivity() {
             val selectedBookings = ArrayList(bookingAdapter.selectedBookings)
 
             for (booking in selectedBookings) {
-                val query = "DELETE from prenotazioni where prenotazioni.id=" + booking.id
+                val query = "DELETE from prenotazioni where prenotazioni.id_p=" + booking.id
 
                 ClientNetwork.retrofit.remove(query).enqueue(object : Callback<JsonObject> {
                     override fun onResponse(
@@ -118,10 +118,10 @@ class HomeAdminActivity : AppCompatActivity() {
     }
 
     private fun getBookingsFromDatabase() {
-        val query ="SELECT p.id,u.nome, u.cognome, s.numero_stanza, p.data_check_in, p.data_check_out " +
+        val query ="SELECT p.id_p,u.nome, u.cognome, s.numero_stanza, p.data_check_in, p.data_check_out " +
                 "FROM utenti AS u, prenotazioni AS p, stanze AS s " +
-                "WHERE u.id = p.id_utente " +
-                "AND p.id_stanza = s.id AND p.checkin=false"
+                "WHERE u.id_u = p.id_utente " +
+                "AND p.id_stanza = s.id_s AND p.checkin=false"
 
 
         ClientNetwork.retrofit.select(query).enqueue(object : Callback<JsonObject> {
@@ -152,7 +152,7 @@ class HomeAdminActivity : AppCompatActivity() {
             for (bookingElement in resultSet) {
                 val bookingObject = bookingElement.asJsonObject
 
-                val id= bookingObject.get("id").asInt
+                val id= bookingObject.get("id_p").asInt
                 val nome = bookingObject.get("nome").asString
                 val cognome = bookingObject.get("cognome").asString
                 val numeroStanza = bookingObject.get("numero_stanza").asInt
