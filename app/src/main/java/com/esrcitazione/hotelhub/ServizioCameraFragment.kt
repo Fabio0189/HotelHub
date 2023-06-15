@@ -6,11 +6,17 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.esrcitazione.hotelhub.ClientNetwork
 import com.esrcitazione.hotelhub.R
 import com.esrcitazione.hotelhub.databinding.FragmentServizioCameraBinding
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ServizioCameraFragment : Fragment() {
     private lateinit var binding: FragmentServizioCameraBinding
+    private lateinit var selectedDishes: HashMap<String, Int> // Mappa per memorizzare i piatti selezionati e le relative quantità
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +30,8 @@ class ServizioCameraFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupMenuItems()
         setupTotalButton()
+        setupConfermaButton()
+        selectedDishes = HashMap()
     }
 
     private fun setupMenuItems() {
@@ -31,76 +39,76 @@ class ServizioCameraFragment : Fragment() {
         binding.checkBoxCarbonara.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextCarbonara.isEnabled = isChecked
             updateTotal()
-            checkIfAtLeastOneCheckBoxSelected()
+            isAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxAmatriciana.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextAmatriciana.isEnabled = isChecked
             updateTotal()
-            checkIfAtLeastOneCheckBoxSelected()
+            isAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxLasagne.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextLasagne.isEnabled = isChecked
             updateTotal()
-            checkIfAtLeastOneCheckBoxSelected()
+            isAtLeastOneCheckBoxSelected()
         }
 
         // Secondi Piatti
         binding.checkBoxCarpaccio.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextCarpaccio.isEnabled = isChecked
             updateTotal()
-            checkIfAtLeastOneCheckBoxSelected()
+            isAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxCotoletta.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextCotoletta.isEnabled = isChecked
             updateTotal()
-            checkIfAtLeastOneCheckBoxSelected()
+            isAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxTagliata.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextTagliata.isEnabled = isChecked
             updateTotal()
-            checkIfAtLeastOneCheckBoxSelected()
+            isAtLeastOneCheckBoxSelected()
         }
 
         // Contorni
         binding.checkBoxInsalata.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextInsalata.isEnabled = isChecked
             updateTotal()
-            checkIfAtLeastOneCheckBoxSelected()
+            isAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxPatatine.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextPatatine.isEnabled = isChecked
             updateTotal()
-            checkIfAtLeastOneCheckBoxSelected()
+            isAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxVerdure.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextVerdure.isEnabled = isChecked
             updateTotal()
-            checkIfAtLeastOneCheckBoxSelected()
+            isAtLeastOneCheckBoxSelected()
         }
 
         // Dessert
         binding.checkBoxTortino.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextTortino.isEnabled = isChecked
             updateTotal()
-            checkIfAtLeastOneCheckBoxSelected()
+            isAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxTiramisu.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextTiramisu.isEnabled = isChecked
             updateTotal()
-            checkIfAtLeastOneCheckBoxSelected()
+            isAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxSfoglia.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextSfoglia.isEnabled = isChecked
             updateTotal()
-            checkIfAtLeastOneCheckBoxSelected()
+            isAtLeastOneCheckBoxSelected()
         }
     }
 
@@ -111,10 +119,20 @@ class ServizioCameraFragment : Fragment() {
             if (isAtLeastOneCheckBoxSelected()) {
                 val total = calculateTotal()
                 binding.textViewTotale.text = total.toString()
+                binding.confermaServizio.isEnabled = true // Abilita il pulsante "Conferma Servizio"
             } else {
                 // Nessuna checkbox selezionata, mostra un messaggio di errore
                 Toast.makeText(requireContext(), "Seleziona almeno una opzione", Toast.LENGTH_SHORT).show()
+                binding.confermaServizio.isEnabled = false // Disabilita il pulsante "Conferma Servizio"
             }
+        }
+    }
+
+    private fun setupConfermaButton() {
+        binding.confermaServizio.isEnabled = false // Disabilita il pulsante "Conferma Servizio"
+
+        binding.confermaServizio.setOnClickListener {
+            inviaDatiAlDatabase()
         }
     }
 
@@ -191,29 +209,49 @@ class ServizioCameraFragment : Fragment() {
 
         return total
     }
-
     private fun isAtLeastOneCheckBoxSelected(): Boolean {
         // Controlla se almeno una checkbox è selezionata
         return binding.checkBoxCarbonara.isChecked ||
                 binding.checkBoxAmatriciana.isChecked ||
                 binding.checkBoxLasagne.isChecked ||
-                // Aggiungi gli altri controlli per le checkbox
-                // Secondi Piatti
                 binding.checkBoxCarpaccio.isChecked ||
                 binding.checkBoxCotoletta.isChecked ||
                 binding.checkBoxTagliata.isChecked ||
-                // Contorni
                 binding.checkBoxInsalata.isChecked ||
                 binding.checkBoxPatatine.isChecked ||
                 binding.checkBoxVerdure.isChecked ||
-                // Dessert
                 binding.checkBoxTortino.isChecked ||
                 binding.checkBoxTiramisu.isChecked ||
                 binding.checkBoxSfoglia.isChecked
     }
 
-    private fun checkIfAtLeastOneCheckBoxSelected() {
-        // Verifica se almeno una checkbox è selezionata
-        binding.buttonCalcolaTotale.isEnabled = isAtLeastOneCheckBoxSelected()
+    private fun inviaDatiAlDatabase() {
+        // Costruisci la stringa dei piatti selezionati con le relative quantità
+        val piattiSelezionati = StringBuilder()
+        for ((piatto, quantita) in selectedDishes) {
+            piattiSelezionati.append("$piatto x$quantita, ")
+        }
+        val piattiStringa = piattiSelezionati.toString().trimEnd(',', ' ')
+
+        // Costruisci la query SQL per l'inserimento dei dati
+        val query = "INSERT INTO servizio_in_camera (piatti) VALUES ('$piattiStringa')"
+
+        // Effettua la richiesta al tuo database tramite Retrofit
+        ClientNetwork.retrofit.insert(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    // I dati sono stati inviati con successo al database
+                    Toast.makeText(requireContext(), "Dati inviati al database", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Si è verificato un errore durante l'invio dei dati al database
+                    Toast.makeText(requireContext(), "Errore durante l'invio dei dati", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                // Gestisci l'errore di rete o del server qui
+                Toast.makeText(requireContext(), "Errore di connessione", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
