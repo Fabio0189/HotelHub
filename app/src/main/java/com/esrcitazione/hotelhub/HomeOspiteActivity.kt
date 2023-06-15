@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import android.widget.Toast
 import android.view.MenuItem
+import com.google.gson.JsonArray
 import java.util.Locale
 import java.time.LocalDate
 import com.google.gson.JsonObject
@@ -150,8 +151,12 @@ class HomeOspiteActivity : AppCompatActivity() {
 
         ClientNetwork.retrofit.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                val haPrenotazioneOdierna = response.isSuccessful && response.body()?.getAsJsonArray("results")?.size() ?: 0 > 0
-                itemServizioCamera.isVisible = haPrenotazioneOdierna
+                if (response.isSuccessful) {
+                    val resultSet = response.body()?.get("queryset") as JsonArray
+                    if (resultSet.asJsonArray.size() > 0) {
+                        itemServizioCamera.isVisible = true
+                    }
+                }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
