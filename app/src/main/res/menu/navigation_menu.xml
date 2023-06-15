@@ -21,6 +21,10 @@
         android:title="@string/prenota"
         />
     <item
+        android:id="@+id/menuServizioCamera"
+        android:icon="@drawable/baseline_room_service_24"
+        android:title="@string/servizio_camera" />
+    <item
         android:id="@+id/menuInfo"
         android:icon="@drawable/baseline_info_24"
         android:title="@string/info" />

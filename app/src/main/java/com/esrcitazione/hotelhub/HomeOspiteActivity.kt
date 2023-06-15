@@ -10,14 +10,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import android.widget.Toast
+import android.view.MenuItem
 import java.util.Locale
+import java.time.LocalDate
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeOspiteActivity : AppCompatActivity() {
+    private lateinit var db: DatabaseHelper
     private lateinit var binding: ActivityHomeOspiteBinding
     private var isExitConfirmationVisible = false
+    private lateinit var itemServizioCamera: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        db=DatabaseHelper(this)
 
         val currentLanguage = getLanguageFromPreferences()
         val locale = Locale(currentLanguage)
@@ -33,82 +43,76 @@ class HomeOspiteActivity : AppCompatActivity() {
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
 
+        itemServizioCamera = binding.navigationView.menu.findItem(R.id.menuServizioCamera)
+        itemServizioCamera.isVisible = false
+
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menuProfile -> {
-                    openFragment(ProfileFragment()) // Open Profile fragment
-                    binding.drawerLayout.closeDrawers() // Close DrawerLayout after click
+                    openFragment(ProfileFragment())
+                    binding.drawerLayout.closeDrawers()
                     return@setNavigationItemSelectedListener true
                 }
                 R.id.menuhome -> {
-                    openFragment(HomeFragment()) // Open Home fragment
-                    binding.drawerLayout.closeDrawers() // Close DrawerLayout after click
+                    openFragment(HomeFragment())
+                    binding.drawerLayout.closeDrawers()
                     return@setNavigationItemSelectedListener true
                 }
                 R.id.menuPrenotazione -> {
-                    openFragment(PrenotaFragment()) // Open Prenota fragment
-                    binding.drawerLayout.closeDrawers() // Close DrawerLayout after click
+                    openFragment(PrenotaFragment())
+                    binding.drawerLayout.closeDrawers()
                     return@setNavigationItemSelectedListener true
                 }
                 R.id.menuLanguage -> {
-                    // Get the current language from preferences
                     val newLanguage = if (currentLanguage == "en") "it" else "en"
-                    // Create a new Locale object for the language you want to switch to
                     val locale = Locale(newLanguage)
                     Locale.setDefault(locale)
 
-                    // Create a new configuration object and set its locale
                     val config = android.content.res.Configuration()
                     config.setLocale(locale)
 
-                    // Update the configuration of the app context with the new Configuration object
                     baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
 
-                    // Save the new language to preferences
                     saveLanguageToPreferences(newLanguage)
 
-                    // Recreate the activity to apply the new language
                     recreate()
 
                     return@setNavigationItemSelectedListener true
                 }
+                R.id.menuServizioCamera -> {
+                    openFragment(ServizioCameraFragment())
+                    binding.drawerLayout.closeDrawers()
+                    return@setNavigationItemSelectedListener true
+                }
                 R.id.menuInfo -> {
-                    openFragment(InfoFragment()) // Open Info fragment
-                    binding.drawerLayout.closeDrawers() // Close DrawerLayout after click
+                    openFragment(InfoFragment())
+                    binding.drawerLayout.closeDrawers()
                     return@setNavigationItemSelectedListener true
                 }
                 R.id.menuLogOut -> {
-                    // Elimina la tabella del database
                     val dbHelper = DatabaseHelper(this)
                     dbHelper.deleteTabella()
 
-                    // Mostra la schermata di accesso
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    finish() // Chiude l'attuale activity
+                    finish()
                     return@setNavigationItemSelectedListener true
                 }
-
-
-
                 else -> return@setNavigationItemSelectedListener false
-
             }
         }
 
-        // Open Home fragment on activity start
+        verificaPrenotazioneOdierna(db.getId())
+
         openFragment(HomeFragment())
     }
 
     override fun onBackPressed() {
         if (isExitConfirmationVisible) {
-            // If exit confirmation is already visible, close the application
             finish()
         } else {
-            // Otherwise, show exit confirmation
             isExitConfirmationVisible = true
             Toast.makeText(this, "Per uscire dall'app premi indietro un altra volta", Toast.LENGTH_SHORT).show()
-            // Set a timer to hide exit confirmation after 2 seconds
             binding.drawerLayout.postDelayed({
                 isExitConfirmationVisible = false
             }, 2000)
@@ -134,4 +138,25 @@ class HomeOspiteActivity : AppCompatActivity() {
         return preferences.getString("language", "en") ?: "en"
     }
 
+    private fun verificaPrenotazioneOdierna(userId: Int) {
+        val oggi = LocalDate.now()
+
+        val query = """
+        SELECT * FROM prenotazioni 
+        WHERE id_utente = $userId 
+        AND data_check_in <= '$oggi' 
+        AND data_check_out >= '$oggi'
+        """
+
+        ClientNetwork.retrofit.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                val haPrenotazioneOdierna = response.isSuccessful && response.body()?.getAsJsonArray("results")?.size() ?: 0 > 0
+                itemServizioCamera.isVisible = haPrenotazioneOdierna
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                // Gestisci l'errore di rete o del server qui
+            }
+        })
+    }
 }

@@ -23,5 +23,12 @@
     <string name="email">Email:</string>
     <string name="log_out">Log Out</string>
     <string name="support_message">For room reservation and support</string>
+    <string name="password">Password</string>
+    <string name="conferma_password">Confirm Password</string>
+    <string name="salva_modifiche">Save Changes</string>
+    <string name="accedi">Sign In</string>
+    <string name="registrati">Sign Up</string>
+    <string name="hai_dimenticato_la_password">Forgot Password?</string>
+    <string name="servizio_camera">Room Service</string>
 
 </resources>
