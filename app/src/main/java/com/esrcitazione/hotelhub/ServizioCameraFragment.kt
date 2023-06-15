@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.esrcitazione.hotelhub.R
 import com.esrcitazione.hotelhub.databinding.FragmentServizioCameraBinding
@@ -30,71 +31,90 @@ class ServizioCameraFragment : Fragment() {
         binding.checkBoxCarbonara.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextCarbonara.isEnabled = isChecked
             updateTotal()
+            checkIfAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxAmatriciana.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextAmatriciana.isEnabled = isChecked
             updateTotal()
+            checkIfAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxLasagne.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextLasagne.isEnabled = isChecked
             updateTotal()
+            checkIfAtLeastOneCheckBoxSelected()
         }
 
         // Secondi Piatti
         binding.checkBoxCarpaccio.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextCarpaccio.isEnabled = isChecked
             updateTotal()
+            checkIfAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxCotoletta.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextCotoletta.isEnabled = isChecked
             updateTotal()
+            checkIfAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxTagliata.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextTagliata.isEnabled = isChecked
             updateTotal()
+            checkIfAtLeastOneCheckBoxSelected()
         }
 
         // Contorni
         binding.checkBoxInsalata.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextInsalata.isEnabled = isChecked
             updateTotal()
+            checkIfAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxPatatine.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextPatatine.isEnabled = isChecked
             updateTotal()
+            checkIfAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxVerdure.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextVerdure.isEnabled = isChecked
             updateTotal()
+            checkIfAtLeastOneCheckBoxSelected()
         }
 
         // Dessert
         binding.checkBoxTortino.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextTortino.isEnabled = isChecked
             updateTotal()
+            checkIfAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxTiramisu.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextTiramisu.isEnabled = isChecked
             updateTotal()
+            checkIfAtLeastOneCheckBoxSelected()
         }
 
         binding.checkBoxSfoglia.setOnCheckedChangeListener { _, isChecked ->
             binding.editTextSfoglia.isEnabled = isChecked
             updateTotal()
+            checkIfAtLeastOneCheckBoxSelected()
         }
     }
 
     private fun setupTotalButton() {
+        binding.buttonCalcolaTotale.isEnabled = false // Disabilita il pulsante all'inizio
+
         binding.buttonCalcolaTotale.setOnClickListener {
-            val total = calculateTotal()
-            binding.textViewTotale.text = total.toString()
+            if (isAtLeastOneCheckBoxSelected()) {
+                val total = calculateTotal()
+                binding.textViewTotale.text = total.toString()
+            } else {
+                // Nessuna checkbox selezionata, mostra un messaggio di errore
+                Toast.makeText(requireContext(), "Seleziona almeno una opzione", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -105,7 +125,6 @@ class ServizioCameraFragment : Fragment() {
 
     private fun calculateTotal(): Int {
         var total = 0
-
         // Primi Piatti
         if (binding.checkBoxCarbonara.isChecked) {
             val quantity = binding.editTextCarbonara.text.toString().toIntOrNull() ?: 0
@@ -171,5 +190,30 @@ class ServizioCameraFragment : Fragment() {
         }
 
         return total
+    }
+
+    private fun isAtLeastOneCheckBoxSelected(): Boolean {
+        // Controlla se almeno una checkbox è selezionata
+        return binding.checkBoxCarbonara.isChecked ||
+                binding.checkBoxAmatriciana.isChecked ||
+                binding.checkBoxLasagne.isChecked ||
+                // Aggiungi gli altri controlli per le checkbox
+                // Secondi Piatti
+                binding.checkBoxCarpaccio.isChecked ||
+                binding.checkBoxCotoletta.isChecked ||
+                binding.checkBoxTagliata.isChecked ||
+                // Contorni
+                binding.checkBoxInsalata.isChecked ||
+                binding.checkBoxPatatine.isChecked ||
+                binding.checkBoxVerdure.isChecked ||
+                // Dessert
+                binding.checkBoxTortino.isChecked ||
+                binding.checkBoxTiramisu.isChecked ||
+                binding.checkBoxSfoglia.isChecked
+    }
+
+    private fun checkIfAtLeastOneCheckBoxSelected() {
+        // Verifica se almeno una checkbox è selezionata
+        binding.buttonCalcolaTotale.isEnabled = isAtLeastOneCheckBoxSelected()
     }
 }
