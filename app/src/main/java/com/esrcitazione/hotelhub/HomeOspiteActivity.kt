@@ -86,6 +86,12 @@ class HomeOspiteActivity : AppCompatActivity() {
                     binding.drawerLayout.closeDrawers()
                     return@setNavigationItemSelectedListener true
                 }
+                R.id.menuPrenotazioniEffettuate -> {
+                    openFragment(PrenotazioniEffettuateFragment())
+                    binding.drawerLayout.closeDrawers()
+                    return@setNavigationItemSelectedListener true
+                }
+
                 R.id.menuInfo -> {
                     openFragment(InfoFragment())
                     binding.drawerLayout.closeDrawers()

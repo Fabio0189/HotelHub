@@ -45,6 +45,9 @@ class activity_registrazione : AppCompatActivity() {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
             val confirmPassword = binding.etConfirmPassword.text.toString()
+            val nome = binding.regNome.text.toString()
+            val cognome = binding.regCognome.text.toString()
+
 
             if (!isValidEmail(email)) {
                 showToast("Inserisci un email valida")
@@ -54,11 +57,11 @@ class activity_registrazione : AppCompatActivity() {
                 showToast("La password e la conferma password non corrispondono.")
             } else {
                 // Verifica se l'email esiste già nel database prima di registrare l'utente
-                checkIfEmailExists(email, password)
+                checkIfEmailExists(nome, cognome, email, password)
             }
         }
     }
-    private fun checkIfEmailExists(email: String, password: String) {
+    private fun checkIfEmailExists(nome: String, cognome: String, email: String, password: String) {
         val selectQuery = "SELECT * FROM utenti WHERE email = '$email'"
 
         ClientNetwork.retrofit.select(selectQuery).enqueue(object : Callback<JsonObject> {
@@ -69,7 +72,7 @@ class activity_registrazione : AppCompatActivity() {
                         showToast("Esiste già un utente con questa email. Per favore usa un'altra email.")
                     } else {
                         // Se l'email non esiste nel database, registra il nuovo utente
-                        registerUser(email, password)
+                        registerUser(nome ,cognome, email, password)
                     }
                 } else {
                     showToast("Errore durante il controllo dell'email. Riprova.")
@@ -82,8 +85,8 @@ class activity_registrazione : AppCompatActivity() {
         })
     }
 
-    private fun registerUser(email: String, password: String) {
-        val insertQuery = "INSERT INTO utenti (email, password, tipo) VALUES ('$email', '$password', true)"
+    private fun registerUser(nome: String, cognome: String,email: String, password: String) {
+        val insertQuery = "INSERT INTO utenti (nome, cognome, email, password, tipo) VALUES ('$nome','$cognome','$email', '$password', true)"
 
         ClientNetwork.retrofit.insert(insertQuery).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {

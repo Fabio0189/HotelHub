@@ -50,6 +50,10 @@
     <string name="tiramis">Tiramisù</string>
     <string name="vai_al_resoconto">Vai al resoconto</string>
     <string name="conferma">Conferma</string>
+    <string name="nuova_password">Nuova Password</string>
+    <string name="prenotazioni_effettuate">Prenotazioni Effettuate</string>
+    <string name="nessuna_prenotazione_effettuata">Nessuna prenotazione effettuata</string>
+    <string name="prenotazioni">Prenotazioni</string>
 
 </resources>
 

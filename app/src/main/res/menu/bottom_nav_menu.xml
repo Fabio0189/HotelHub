@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottomMenuPrenotazioni"
+        android:icon="@drawable/baseline_bed_24"
+        android:title="@string/prenotazioni"/>
+    <item
+        android:id="@+id/bottomMenuServizio"
+        android:icon="@drawable/baseline_room_service_24"
+        android:title="@string/servizio_camera"/>
+   </menu>

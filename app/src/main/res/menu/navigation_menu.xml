@@ -25,6 +25,10 @@
         android:icon="@drawable/baseline_room_service_24"
         android:title="@string/servizio_camera" />
     <item
+        android:id="@+id/menuPrenotazioniEffettuate"
+        android:icon="@drawable/baseline_bedroom_parent_24"
+        android:title="@string/prenotazioni_effettuate" />
+    <item
         android:id="@+id/menuInfo"
         android:icon="@drawable/baseline_info_24"
         android:title="@string/info" />

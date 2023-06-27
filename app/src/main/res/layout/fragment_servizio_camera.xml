@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="30dp" >
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/textViewPrimiPiatti"
@@ -27,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/carbonara"
-            android:paddingStart="16dp" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextCarbonara"
@@ -36,7 +37,7 @@
             android:hint="@string/qty"
             android:inputType="number"
             android:minHeight="48dp"
-            android:paddingStart="8dp" />
+            android:padding="8dp" />
 
     </LinearLayout>
 
@@ -50,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/amatriciana"
-            android:paddingStart="16dp" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextAmatriciana"
@@ -59,7 +60,7 @@
             android:hint="@string/qty"
             android:inputType="number"
             android:minHeight="48dp"
-            android:paddingStart="8dp" />
+            android:padding="8dp" />
 
     </LinearLayout>
 
@@ -73,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lasagne"
-            android:paddingStart="16dp" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextLasagne"
@@ -82,7 +83,7 @@
             android:hint="@string/qty"
             android:inputType="number"
             android:minHeight="48dp"
-            android:paddingStart="8dp" />
+            android:padding="8dp" />
 
     </LinearLayout>
 
@@ -95,7 +96,6 @@
         android:textStyle="bold"
         android:padding="8dp" />
 
-    <!-- Aggiungi gli altri LinearLayout per i secondi piatti -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/carpaccio_al_pepe_verde"
-            android:paddingStart="16dp" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextCarpaccio"
@@ -116,7 +116,7 @@
             android:hint="@string/qty"
             android:inputType="number"
             android:minHeight="48dp"
-            android:paddingStart="8dp" />
+            android:padding="8dp" />
 
     </LinearLayout>
 
@@ -130,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cotoletta_alla_milanese"
-            android:paddingStart="16dp" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextCotoletta"
@@ -139,7 +139,7 @@
             android:hint="@string/qty"
             android:inputType="number"
             android:minHeight="48dp"
-            android:paddingStart="8dp" />
+            android:padding="8dp" />
 
     </LinearLayout>
 
@@ -153,7 +153,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tagliata_di_carne"
-            android:paddingStart="16dp" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextTagliata"
@@ -162,7 +162,7 @@
             android:hint="@string/qty"
             android:inputType="number"
             android:minHeight="48dp"
-            android:paddingStart="8dp" />
+            android:padding="8dp" />
 
     </LinearLayout>
 
@@ -175,7 +175,6 @@
         android:textStyle="bold"
         android:padding="8dp" />
 
-    <!-- Aggiungi LinearLayout per i contorni -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -187,7 +186,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/insalata_mista"
-            android:paddingStart="16dp" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextInsalata"
@@ -196,7 +195,7 @@
             android:hint="@string/qty"
             android:inputType="number"
             android:minHeight="48dp"
-            android:paddingStart="8dp" />
+            android:padding="8dp" />
 
     </LinearLayout>
 
@@ -210,7 +209,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/patatine_fritte"
-            android:paddingStart="16dp" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextPatatine"
@@ -219,7 +218,7 @@
             android:hint="@string/qty"
             android:inputType="number"
             android:minHeight="48dp"
-            android:paddingStart="8dp" />
+            android:padding="8dp" />
 
     </LinearLayout>
 
@@ -233,7 +232,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/verdure_grigliate"
-            android:paddingStart="16dp" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextVerdure"
@@ -242,7 +241,7 @@
             android:hint="@string/qty"
             android:inputType="number"
             android:minHeight="48dp"
-            android:paddingStart="8dp" />
+            android:padding="8dp" />
 
     </LinearLayout>
 
@@ -267,7 +266,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tortino_cuore_caldo_al_cioccolato"
-            android:paddingStart="16dp" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextTortino"
@@ -276,7 +275,7 @@
             android:hint="@string/qty"
             android:inputType="number"
             android:minHeight="48dp"
-            android:paddingStart="8dp" />
+            android:padding="8dp" />
 
     </LinearLayout>
 
@@ -290,7 +289,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tiramis"
-            android:paddingStart="16dp" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/editTextTiramisu"
@@ -299,7 +298,7 @@
             android:hint="@string/qty"
             android:inputType="number"
             android:minHeight="48dp"
-            android:paddingStart="8dp" />
+            android:padding="8dp" />
 
     </LinearLayout>
 
@@ -313,7 +312,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sfoglia_con_crema_e_frutti_di_bosco"
-            android:paddingStart="16dp" />
+            android:padding="16dp" />
 
             <EditText
             android:id="@+id/editTextSfoglia"
@@ -322,39 +321,75 @@
             android:hint="@string/qty"
             android:inputType="number"
             android:minHeight="48dp"
-            android:paddingStart="8dp" />
+            android:padding="8dp" />
 
     </LinearLayout>
 
-        <Button
-        android:id="@+id/buttonCalcolaTotale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/vai_al_resoconto"
-        android:layout_marginTop="16dp"
-        android:textColor="@android:color/white"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:padding="16dp"
-            android:layout_gravity="center_horizontal"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
-        android:id="@+id/textViewTotale"
+            android:id="@+id/textTotale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Prezzo Totale: "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:padding="16dp" />
+
+        <TextView
+            android:id="@+id/textViewTotale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textTotale"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
+            android:text="0€"
+            android:textColor="@color/black"
+            android:padding="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-            android:layout_gravity="center_horizontal"
-        android:textStyle="bold"
-            android:textColor="@color/black"
-        android:padding="16dp" />
-    <Button
-        android:id="@+id/confermaServizio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/conferma"
-        android:layout_gravity="center_horizontal"
-        android:textSize="16sp"/>
+        android:layout_margin="10dp"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/buttonCalcolaTotale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vai_al_resoconto"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/confermaServizio"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <Button
+            android:id="@+id/confermaServizio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/conferma"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/buttonCalcolaTotale"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </LinearLayout>
+
+</LinearLayout>
 </ScrollView>
