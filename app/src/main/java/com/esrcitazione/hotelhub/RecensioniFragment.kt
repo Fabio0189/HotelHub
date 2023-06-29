@@ -97,26 +97,16 @@ class RecensioniFragment : Fragment() {
     }
 
     private fun inserisciRecensione(id: Int, rating: Double, commento: String) {
-        val insertQuery = "INSERT INTO recensioni (id_utente_recensione, punteggio, commento) VALUES ('$id','$rating','$commento')"
-
-        ClientNetwork.retrofit.insert(insertQuery).enqueue(object : Callback<JsonObject> {
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                if (response.isSuccessful) {
-                    showToast("Recensione salvata con successo!")
-
-                    getRecensioniFromDatabase(adapter)
-                    calcolaMediaRecensioni()
-                    calcolaPercentualiRecensioni()
-                } else {
-                    showToast("Recensione non salvata. Riprova.")
-                }
+        recensionePresente(id) { presente ->
+            if (presente) {
+                aggiornaRecensione(id, rating, commento)
+            } else {
+                inserisciNuovaRecensione(id, rating, commento)
             }
-
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                showToast("Errore di connessione. Riprova.")
-            }
-        })
+        }
     }
+
+
 
 
     private fun calcolaMediaRecensioni() {
@@ -235,6 +225,74 @@ class RecensioniFragment : Fragment() {
         })
     }
 
+    private fun recensionePresente(id: Int, callback: (Boolean) -> Unit) {
+        // Esegui la richiesta al server per controllare se esiste una recensione per l'utente specificato
+        val query = "SELECT COUNT(*) AS review_count FROM recensioni WHERE id_utente_recensione = '$id'"
+
+        ClientNetwork.retrofit.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val result = response.body()?.getAsJsonArray("queryset")
+                    if (result != null && result.size() > 0) {
+                        val reviewCount = result[0].asJsonObject["review_count"].asInt
+                        val recensionePresente = reviewCount > 0
+                        callback(recensionePresente)
+                    }
+                } else {
+                    showToast("Errore nel controllo della recensione dell'utente.")
+                    callback(false) // Chiamata fallita, restituisci false
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                showToast("Errore di connessione. Riprova.")
+                callback(false) // Chiamata fallita, restituisci false
+            }
+        })
+    }
+
+    private fun aggiornaRecensione(id: Int, rating: Double, commento: String) {
+        val updateQuery = "UPDATE recensioni SET punteggio = '$rating', commento = '$commento' WHERE id_utente_recensione = '$id'"
+
+        ClientNetwork.retrofit.update(updateQuery).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    showToast("Recensione aggiornata con successo!")
+
+                    getRecensioniFromDatabase(adapter)
+                    calcolaMediaRecensioni()
+                    calcolaPercentualiRecensioni()
+                } else {
+                    showToast("Errore nell'aggiornamento della recensione. Riprova.")
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                showToast("Errore di connessione. Riprova.")
+            }
+        })
+    }
+    private fun inserisciNuovaRecensione(id: Int, rating: Double, commento: String) {
+        val insertQuery = "INSERT INTO recensioni (id_utente_recensione, punteggio, commento) VALUES ('$id', '$rating', '$commento')"
+
+        ClientNetwork.retrofit.insert(insertQuery).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    showToast("Recensione inserita con successo!")
+
+                    getRecensioniFromDatabase(adapter)
+                    calcolaMediaRecensioni()
+                    calcolaPercentualiRecensioni()
+                } else {
+                    showToast("Errore nell'inserimento della recensione. Riprova.")
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                showToast("Errore di connessione. Riprova.")
+            }
+        })
+    }
 
 
 }
