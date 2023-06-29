@@ -11,6 +11,8 @@ import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.esrcitazione.hotelhub.databinding.FragmentRecensioniBinding
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -25,6 +27,8 @@ class RecensioniFragment : Fragment() {
     private var param2: String? = null
     private lateinit var db: DatabaseHelper
     private lateinit var binding: FragmentRecensioniBinding
+    private lateinit var adapter: RecensioniAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +53,17 @@ class RecensioniFragment : Fragment() {
         buttonLeaveReview.setOnClickListener {
             showLeaveReviewPopup()
         }
+// Inizializza la RecyclerView
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recensioni_db)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+// Crea un'istanza dell'adapter e assegnalo alla RecyclerView
+        adapter = RecensioniAdapter(emptyList()) // Passa una lista vuota per ora
+        recyclerView.adapter = adapter
+
+
+// Recupera le recensioni dal database e aggiornale nell'adapter
+        getRecensioniFromDatabase(adapter)
 
         calcolaMediaRecensioni()
         calcolaPercentualiRecensioni()
@@ -69,7 +84,7 @@ class RecensioniFragment : Fragment() {
                 val rating = ratingBar.rating.toDouble()
                 val comment = commentEditText.text.toString()
 
-                inserisciRecesione(id_u, rating, comment)
+                inserisciRecensione(id_u, rating, comment)
 
                 dialog.dismiss()
             }
@@ -81,13 +96,17 @@ class RecensioniFragment : Fragment() {
         alertDialog.show()
     }
 
-    private fun inserisciRecesione(id: Int, rating: Double, commento: String) {
+    private fun inserisciRecensione(id: Int, rating: Double, commento: String) {
         val insertQuery = "INSERT INTO recensioni (id_utente_recensione, punteggio, commento) VALUES ('$id','$rating','$commento')"
 
         ClientNetwork.retrofit.insert(insertQuery).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     showToast("Recensione salvata con successo!")
+
+                    getRecensioniFromDatabase(adapter)
+                    calcolaMediaRecensioni()
+                    calcolaPercentualiRecensioni()
                 } else {
                     showToast("Recensione non salvata. Riprova.")
                 }
@@ -98,6 +117,7 @@ class RecensioniFragment : Fragment() {
             }
         })
     }
+
 
     private fun calcolaMediaRecensioni() {
         val ratingBarAverage = view?.findViewById<RatingBar>(R.id.rating_bar_average)
@@ -177,4 +197,44 @@ class RecensioniFragment : Fragment() {
                 }
             }
     }
+    private fun getRecensioniFromDatabase(adapter: RecensioniAdapter) {
+        val query = "SELECT recensioni.*, utenti.nome, utenti.cognome " +
+                "FROM recensioni, utenti " +
+                "WHERE recensioni.id_utente_recensione = utenti.id_u"
+
+        ClientNetwork.retrofit.select(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val result = response.body()?.getAsJsonArray("queryset")
+                    if (result != null && result.size() > 0) {
+                        val recensioniList = mutableListOf<Recensioni>()
+
+                        for (i in 0 until result.size()) {
+                            val recensioneObject = result[i].asJsonObject
+                            val idUtenteRecensione = recensioneObject["id_utente_recensione"].asInt
+                            val punteggio = recensioneObject["punteggio"].asDouble
+                            val commento = recensioneObject["commento"].asString
+                            val nome = recensioneObject["nome"].asString
+                            val cognome = recensioneObject["cognome"].asString
+
+                            val recensione = Recensioni(idUtenteRecensione, punteggio, commento, nome, cognome)
+                            recensioniList.add(recensione)
+                        }
+
+                        // Aggiorna la lista delle recensioni nell'adapter
+                        adapter.updateRecensioniList(recensioniList)
+                    }
+                } else {
+                    showToast("Errore nel recupero delle recensioni")
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                showToast("Errore di connessione. Riprova.")
+            }
+        })
+    }
+
+
+
 }
