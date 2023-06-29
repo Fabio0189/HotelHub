@@ -13,8 +13,10 @@
         android:id="@+id/textViewNoPrenotazioni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nessun Servizio In Camera Richiesto"
-        android:layout_gravity="center" />
+        android:layout_marginTop="40dp"
+        android:visibility="gone"
+        android:text="@string/nessun_servizio_in_camera_richiesto"
+        android:layout_gravity="center_horizontal" />
 
 
 </FrameLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="40dp"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lascia una recensione"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold" />
+
+    <RatingBar
+        android:layout_margin="20dp"
+        android:id="@+id/dialog_rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:progressTint="@color/giallo"
+        android:contentDescription="Recensione"
+        android:rating="0"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/dialog_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="Inserisci un commento (opzionale)"
+        android:maxLines="5"
+        android:minHeight="48dp" />
+</LinearLayout>

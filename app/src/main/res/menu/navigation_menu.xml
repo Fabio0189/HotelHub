@@ -29,6 +29,11 @@
         android:icon="@drawable/baseline_bedroom_parent_24"
         android:title="@string/prenotazioni_effettuate" />
     <item
+        android:id="@+id/menuRecensioni"
+        android:icon="@drawable/baseline_star_half_24"
+        android:title="@string/recensioni"
+        />
+    <item
         android:id="@+id/menuInfo"
         android:icon="@drawable/baseline_info_24"
         android:title="@string/info" />

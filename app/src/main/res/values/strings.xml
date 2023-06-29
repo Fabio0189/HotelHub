@@ -54,6 +54,9 @@
     <string name="prenotazioni_effettuate">Prenotazioni Effettuate</string>
     <string name="nessuna_prenotazione_effettuata">Nessuna prenotazione effettuata</string>
     <string name="prenotazioni">Prenotazioni</string>
+    <string name="numero_camera">Numero Camera:</string>
+    <string name="nessun_servizio_in_camera_richiesto">Nessun Servizio In Camera Richiesto</string>
+    <string name="recensioni">Recensioni</string>
 
 </resources>
 

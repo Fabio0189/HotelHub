@@ -91,6 +91,11 @@ class HomeOspiteActivity : AppCompatActivity() {
                     binding.drawerLayout.closeDrawers()
                     return@setNavigationItemSelectedListener true
                 }
+                R.id.menuRecensioni -> {
+                    openFragment(RecensioniFragment())
+                    binding.drawerLayout.closeDrawers()
+                    return@setNavigationItemSelectedListener true
+                }
 
                 R.id.menuInfo -> {
                     openFragment(InfoFragment())

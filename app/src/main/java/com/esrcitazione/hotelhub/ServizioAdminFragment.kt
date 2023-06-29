@@ -34,16 +34,13 @@ class ServizioAdminFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        servizioAdapter = ServizioInCameraAdapter(servizioInCameraList)
+        servizioAdapter = ServizioInCameraAdapter(servizioInCameraList, requireContext())
         binding.recyclerViewServizioAdmin.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewServizioAdmin.adapter = servizioAdapter
     }
 
-    private fun fetchServizioPrenotazioni() {
-        // Esegui la tua richiesta Retrofit per ottenere le prenotazioni del servizio in camera dal database online
-        // Assicurati di configurare Retrofit correttamente e avere un'API per ottenere le prenotazioni del servizio in camera
 
-        // Esempio di utilizzo di Retrofit
+    private fun fetchServizioPrenotazioni() {
         val query = "SELECT * FROM servizio_in_camera"
         ClientNetwork.retrofit.select(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {

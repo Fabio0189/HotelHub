@@ -1,12 +1,20 @@
 package com.esrcitazione.hotelhub
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.esrcitazione.hotelhub.databinding.ItemServizioInCameraBinding
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class ServizioInCameraAdapter(private val servizioInCameraList: MutableList<ServizioInCamera>) :
-    RecyclerView.Adapter<ServizioInCameraAdapter.ServizioInCameraViewHolder>() {
+class ServizioInCameraAdapter(
+    private val servizioInCameraList: MutableList<ServizioInCamera>,
+    private val context: Context
+) : RecyclerView.Adapter<ServizioInCameraAdapter.ServizioInCameraViewHolder>() {
 
     inner class ServizioInCameraViewHolder(private val binding: ItemServizioInCameraBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -14,6 +22,9 @@ class ServizioInCameraAdapter(private val servizioInCameraList: MutableList<Serv
         fun bind(servizioInCamera: ServizioInCamera) {
             binding.textViewNumeroCamera.text = servizioInCamera.numeroCamera.toString()
             binding.textViewServizio.text = servizioInCamera.servizio
+            binding.buttonServito.setOnClickListener {
+                removeServizio(servizioInCamera)
+            }
         }
     }
 
@@ -36,5 +47,33 @@ class ServizioInCameraAdapter(private val servizioInCameraList: MutableList<Serv
         servizioInCameraList.clear()
         servizioInCameraList.addAll(data)
         notifyDataSetChanged()
+    }
+
+    private fun removeServizio(servizioInCamera: ServizioInCamera) {
+        val servizioId = servizioInCamera.id
+
+        // Crea la query per rimuovere il servizio dal database
+        val query = "DELETE FROM servizio_in_camera WHERE id_sc = $servizioId"
+
+        // Effettua la chiamata Retrofit per rimuovere il servizio dal database
+        ClientNetwork.retrofit.remove(query).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    // Rimuovi il servizio dall'elenco e aggiorna l'adapter
+                    servizioInCameraList.remove(servizioInCamera)
+                    notifyDataSetChanged()
+                } else {
+                    showToast("Errore durante la rimozione del servizio")
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                showToast("Errore durante la rimozione del servizio")
+            }
+        })
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }

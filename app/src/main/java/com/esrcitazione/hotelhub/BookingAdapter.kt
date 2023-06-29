@@ -4,14 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.esrcitazione.hotelhub.Booking
 import com.esrcitazione.hotelhub.R
-import android.graphics.Color
 
-
-class BookingAdapter(var bookings:  MutableList<Booking>) : RecyclerView.Adapter<BookingAdapter.BookingViewHolder>() {
+class BookingAdapter(var bookings: MutableList<Booking>) : RecyclerView.Adapter<BookingAdapter.BookingViewHolder>() {
 
     val selectedBookings = mutableListOf<Booking>()
 
@@ -40,7 +39,6 @@ class BookingAdapter(var bookings:  MutableList<Booking>) : RecyclerView.Adapter
         return viewHolder
     }
 
-
     override fun onBindViewHolder(holder: BookingViewHolder, position: Int) {
         val booking = bookings[position]
         holder.bind(booking, booking.isSelected)
@@ -51,6 +49,7 @@ class BookingAdapter(var bookings:  MutableList<Booking>) : RecyclerView.Adapter
     }
 
     inner class BookingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val cardView: CardView = itemView.findViewById(R.id.cardView)
         private val textBookingId: TextView = itemView.findViewById(R.id.textBookingId)
         private val textUserId: TextView = itemView.findViewById(R.id.textUserId)
         private val textRoomId: TextView = itemView.findViewById(R.id.textRoomId)
@@ -65,11 +64,10 @@ class BookingAdapter(var bookings:  MutableList<Booking>) : RecyclerView.Adapter
             textCheckOutDate.text = booking.checkOutDate
 
             if (isSelected) {
-                itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.selezionatoWhite))
+                cardView.setCardBackgroundColor(ContextCompat.getColor(itemView.context, R.color.selezionatoWhite))
             } else {
-                itemView.setBackgroundColor(Color.TRANSPARENT)
+                cardView.setCardBackgroundColor(ContextCompat.getColor(itemView.context, android.R.color.white))
             }
         }
-
     }
 }

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Media delle recensioni -->
+        <TextView
+            android:id="@+id/text_average_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="16dp"
+            android:text="Valutazione Media"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- RateView per la media delle recensioni -->
+        <LinearLayout
+            android:id="@+id/linearMedia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_average_rating">
+
+            <TextView
+                android:id="@+id/text_average_rating_value"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="4.0"
+                android:textSize="40sp" />
+
+            <RatingBar
+                android:id="@+id/rating_bar_average"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="Recensioni"
+                android:numStars="5"
+                android:rating="4"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
+                android:stepSize="0.1"
+                android:progressTint="@color/giallo"
+                style="?android:ratingBarStyle"
+                />
+
+
+        </LinearLayout>
+
+        <!-- Barre di recensione per ogni valutazione -->
+        <LinearLayout
+            android:id="@+id/layout_rating_bars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="15dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/linearMedia">
+
+            <!-- Barra recensione 5 stelle -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="5 stelle" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar5"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:max="100"
+                    android:progress="75"
+                    android:progressTint="#FFC107"
+                    android:progressBackgroundTint="#b9b9b9" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- Barra recensione 4 stelle -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="4 stelle" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar4"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:max="100"
+                    android:progress="75"
+                    android:progressTint="#FFC107"
+                    android:progressBackgroundTint="#b9b9b9" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- Barra recensione 3 stelle -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="3 stelle" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar3"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:max="100"
+                    android:progress="75"
+                    android:progressTint="#FFC107"
+                    android:progressBackgroundTint="#b9b9b9" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- Barra recensione 2 stelle -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="2 stelle" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar2"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:max="100"
+                    android:progress="75"
+                    android:progressTint="#FFC107"
+                    android:progressBackgroundTint="#b9b9b9" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- Barra recensione 1 stella -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="1 stella" />
+                <ProgressBar
+                    android:id="@+id/progressBar1"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:max="100"
+                    android:progress="75"
+                    android:progressTint="#FFC107"
+                    android:progressBackgroundTint="#b9b9b9" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Tasto per lasciare una recensione -->
+        <Button
+            android:id="@+id/button_lascia_recensione"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Lascia una recensione"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_rating_bars" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
