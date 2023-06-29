@@ -49,5 +49,13 @@
     <string name="tiramis">Tiramisu</string>
     <string name="vai_al_resoconto">Go to Summary</string>
     <string name="conferma">Confirm</string>
+    <string name="nuova_password">New Password</string>
+    <string name="prenotazioni_effettuate">Bookings Made</string>
+    <string name="nessuna_prenotazione_effettuata">No Booking Made</string>
+    <string name="prenotazioni">Bookings</string>
+    <string name="numero_camera">Room Number:</string>
+    <string name="nessun_servizio_in_camera_richiesto">No Room Service Requested</string>
+    <string name="recensioni">Reviews</string>
+
 
 </resources>
