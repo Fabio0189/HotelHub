@@ -89,4 +89,8 @@
     <string name="button_fatturazione">Go to Billing</string>
     <string name="button_conferma">Confirm</string>
     <string name="priceLabel">Price:</string>
+    <string name="camera_type_1">Single Room</string>
+    <string name="camera_type_2">Double Room</string>
+    <string name="camera_type_3">Family Room</string>
+
 </resources>

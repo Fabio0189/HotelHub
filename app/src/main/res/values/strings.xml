@@ -90,6 +90,11 @@
     <string name="button_fatturazione">Vai alla Fatturazione</string>
     <string name="button_conferma">Conferma</string>
     <string name="priceLabel">Prezzo:</string>
+    <string name="camera_type_1">Camera Singola</string>
+    <string name="camera_type_2">Camera Doppia</string>
+    <string name="camera_type_3">Camera Familiare</string>
+
+
 
 </resources>
 

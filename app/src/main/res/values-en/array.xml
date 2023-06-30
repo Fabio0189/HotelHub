@@ -1,0 +1,8 @@
+<!-- In res/values-en/arrays.xml -->
+<resources>
+    <string-array name="camera_types">
+        <item>Single Room</item>
+        <item>Double Room</item>
+        <item>Family Room</item>
+    </string-array>
+</resources>

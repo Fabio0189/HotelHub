@@ -21,10 +21,8 @@ import retrofit2.Response
 import java.util.*
 import androidx.fragment.app.Fragment
 
-
-
-
 private lateinit var db: DatabaseHelper
+
 class PrenotaFragment : Fragment() {
     private lateinit var binding: FragmentPrenotaBinding
     private lateinit var cameraSelected: String
@@ -36,20 +34,26 @@ class PrenotaFragment : Fragment() {
     private var idStanza: Int = 0
     data class Camera(val tipo: String, val immagini: List<Int>, val prezzo: Double)
 
-    private val camere = listOf(
-        Camera("Camera Singola", listOf(R.drawable.camerasingola1, R.drawable.camerasingola2, R.drawable.camerasingola3, R.drawable.camerasingola4), 50.0),
-        Camera("Camera Doppia", listOf(R.drawable.cameradoppia1, R.drawable.cameradoppia2, R.drawable.cameradoppia3, R.drawable.cameradoppia4), 100.0),
-        Camera("Camera Familiare", listOf(R.drawable.camerafamiliare1, R.drawable.camerafamiliare2, R.drawable.camerafamiliare3, R.drawable.camerafamiliare4), 200.0)
-    )
+    private lateinit var camere: List<Camera>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPrenotaBinding.inflate(inflater, container, false)
-        val view = binding.root
+        return binding.root
+    }
 
-         db = DatabaseHelper(requireContext())
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        db = DatabaseHelper(requireContext())
+
+        camere = listOf(
+            Camera(requireContext().getString(R.string.camera_type_1), listOf(R.drawable.camerasingola1, R.drawable.camerasingola2, R.drawable.camerasingola3, R.drawable.camerasingola4), 50.0),
+            Camera(requireContext().getString(R.string.camera_type_2), listOf(R.drawable.cameradoppia1, R.drawable.cameradoppia2, R.drawable.cameradoppia3, R.drawable.cameradoppia4), 100.0),
+            Camera(requireContext().getString(R.string.camera_type_3), listOf(R.drawable.camerafamiliare1, R.drawable.camerafamiliare2, R.drawable.camerafamiliare3, R.drawable.camerafamiliare4), 200.0)
+        )
 
         camere.forEach { camera ->
             val recyclerView = RecyclerView(requireContext()).apply {
@@ -134,39 +138,36 @@ class PrenotaFragment : Fragment() {
                       )
                   )
                 GROUP BY id_s
-
-                    """).enqueue(object: Callback<JsonObject>  {
-                    override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                        if (response.isSuccessful && response.body() != null) {
-                            val result = response.body()?.get("queryset") as JsonArray
-                            if(result.asJsonArray.size() > 0) {
-                                binding.textViewNome.visibility = View.VISIBLE
-                                binding.editTextNome.visibility = View.VISIBLE
-                                binding.textViewCognome.visibility = View.VISIBLE
-                                binding.editTextCognome.visibility = View.VISIBLE
-                                binding.textViewNumeroCarta.visibility = View.VISIBLE
-                                binding.editTextNumeroCarta.visibility = View.VISIBLE
-                                binding.textViewCvv.visibility = View.VISIBLE
-                                binding.editTextCvv.visibility = View.VISIBLE
-                                binding.buttonConferma.visibility = View.VISIBLE
-                                binding.buttonFatturazione.visibility = View.GONE
-                                binding.buttonFatturazione.isEnabled = false
-                                fatturazionePremuta = true
-                                idStanza=result.asJsonArray[0].asJsonObject.get("id_s").asInt
-                            } else {
-                            }
+            """).enqueue(object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful && response.body() != null) {
+                        val result = response.body()?.get("queryset") as JsonArray
+                        if (result.asJsonArray.size() > 0) {
+                            binding.textViewNome.visibility = View.VISIBLE
+                            binding.editTextNome.visibility = View.VISIBLE
+                            binding.textViewCognome.visibility = View.VISIBLE
+                            binding.editTextCognome.visibility = View.VISIBLE
+                            binding.textViewNumeroCarta.visibility = View.VISIBLE
+                            binding.editTextNumeroCarta.visibility = View.VISIBLE
+                            binding.textViewCvv.visibility = View.VISIBLE
+                            binding.editTextCvv.visibility = View.VISIBLE
+                            binding.buttonConferma.visibility = View.VISIBLE
+                            binding.buttonFatturazione.visibility = View.GONE
+                            binding.buttonFatturazione.isEnabled = false
+                            fatturazionePremuta = true
+                            idStanza = result.asJsonArray[0].asJsonObject.get("id_s").asInt
                         } else {
-
                             Toast.makeText(context, "Questo tipo di camera non è disponibile per le date selezionate", Toast.LENGTH_SHORT).show()
                         }
+                    } else {
+                        Toast.makeText(context, "Errore durante la comunicazione con il server", Toast.LENGTH_SHORT).show()
                     }
+                }
 
-                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-
-                        Toast.makeText(context, "ERRORE di connesione", Toast.LENGTH_SHORT).show()
-                    }
-
-                })
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Toast.makeText(context, "Errore di connessione", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
 
         binding.buttonConferma.setOnClickListener {
@@ -178,15 +179,14 @@ class PrenotaFragment : Fragment() {
             val numeroCarta = binding.editTextNumeroCarta.text.toString()
             val cvv = binding.editTextCvv.text.toString()
             if (nome.isNotBlank() && cognome.isNotBlank() && numeroCarta.length == 16 && cvv.length == 3) {
-                    val idUtente = db.getId()
+                val idUtente = db.getId()
                 effettuaPrenotazione(idUtente, dataCheckIn, dataCheckOut)
             } else {
                 Toast.makeText(context, "Inserisci correttamente i dati del pagamento", Toast.LENGTH_SHORT).show()
             }
         }
-
-        return view
     }
+
     private fun effettuaPrenotazione(idUtente: Int, dataCheckIn: String, dataCheckOut: String) {
         val formattedCheckIn = formatDateForDatabase(dataCheckIn)
         val formattedCheckOut = formatDateForDatabase(dataCheckOut)
@@ -200,17 +200,14 @@ class PrenotaFragment : Fragment() {
                     showToast("Prenotazione effettuata con successo!")
                 } else {
                     showToast("Errore durante la prenotazione. Riprova.")
-
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 showToast("Errore di connessione. Riprova.")
-
             }
         })
     }
-
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
@@ -242,25 +239,28 @@ class PrenotaFragment : Fragment() {
     }
 
     inner class CameraAdapter(private val camera: Camera) : RecyclerView.Adapter<CameraViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            CameraViewHolder(ItemCameraBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CameraViewHolder {
+            val binding = ItemCameraBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            return CameraViewHolder(binding)
+        }
 
         override fun onBindViewHolder(holder: CameraViewHolder, position: Int) {
+            val context = holder.itemView.context
             holder.binding.cameraImage.setImageResource(camera.immagini[position])
-            holder.binding.cameraText.text = "${camera.tipo} ${position + 1}"
+            holder.binding.cameraText.text = camera.tipo
+
         }
 
         override fun getItemCount() = camera.immagini.size
     }
+
     private fun formatDateForDatabase(date: String): String {
         val parts = date.split("-")
         val year = parts[0]
         val month = parts[1].toInt().toString().padStart(2, '0')
         val day = parts[2].toInt().toString().padStart(2, '0')
-
         return "$year-$month-$day"
     }
-
 
     inner class CameraViewHolder(val binding: ItemCameraBinding) : RecyclerView.ViewHolder(binding.root)
 }
