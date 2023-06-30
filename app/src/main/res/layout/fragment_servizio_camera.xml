@@ -1,395 +1,418 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="20dp">
-
-    <TextView
-        android:id="@+id/textViewPrimiPiatti"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/primi_piatti"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:padding="8dp" />
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <CheckBox
-            android:id="@+id/checkBoxCarbonara"
-            android:layout_width="wrap_content"
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/carbonara"
-            android:padding="16dp" />
+            android:layout_margin="8dp"
+            app:cardElevation="30dp"
+            app:cardCornerRadius="30dp">
 
-        <EditText
-            android:id="@+id/editTextCarbonara"
-            android:layout_width="60dp"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/textViewPrimiPiatti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/primi_piatti"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="8dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxCarbonara"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/carbonara"
+                        android:padding="16dp" />
+
+                    <EditText
+                        android:id="@+id/editTextCarbonara"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/qty"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxAmatriciana"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/amatriciana"
+                        android:padding="16dp" />
+
+                    <EditText
+                        android:id="@+id/editTextAmatriciana"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/qty"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxLasagne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lasagne"
+                        android:padding="16dp" />
+
+                    <EditText
+                        android:id="@+id/editTextLasagne"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/qty"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewSecondiPiatti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/secondi_piatti"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="8dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxCarpaccio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/carpaccio_al_pepe_verde"
+                        android:padding="16dp" />
+
+                    <EditText
+                        android:id="@+id/editTextCarpaccio"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/qty"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxCotoletta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cotoletta_alla_milanese"
+                        android:padding="16dp" />
+
+                    <EditText
+                        android:id="@+id/editTextCotoletta"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/qty"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxTagliata"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tagliata_di_carne"
+                        android:padding="16dp" />
+
+                    <EditText
+                        android:id="@+id/editTextTagliata"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/qty"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewContorni"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contorni"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="8dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxInsalata"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/insalata_mista"
+                        android:padding="16dp" />
+
+                    <EditText
+                        android:id="@+id/editTextInsalata"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/qty"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxPatatine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/patatine_fritte"
+                        android:padding="16dp" />
+
+                    <EditText
+                        android:id="@+id/editTextPatatine"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/qty"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxVerdure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/verdure_grigliate"
+                        android:padding="16dp" />
+
+                    <EditText
+                        android:id="@+id/editTextVerdure"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/qty"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewDessert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dessert"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="8dp" />
+
+                <!-- Aggiungi LinearLayout per i dessert -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxTortino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tortino_cuore_caldo_al_cioccolato"
+                        android:padding="16dp" />
+
+                    <EditText
+                        android:id="@+id/editTextTortino"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/qty"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxTiramisu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tiramis"
+                        android:padding="16dp" />
+
+                    <EditText
+                        android:id="@+id/editTextTiramisu"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/qty"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxSfoglia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sfoglia_con_crema_e_frutti_di_bosco"
+                        android:padding="16dp" />
+
+                    <EditText
+                        android:id="@+id/editTextSfoglia"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/qty"
+                        android:inputType="number"
+                        android:minHeight="48dp"
+                        android:padding="8dp" />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textTotale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="Prezzo Totale: "
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:padding="16dp" />
+
+                    <TextView
+                        android:id="@+id/textViewTotale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/textTotale"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textStyle="bold"
+                        android:text="0€"
+                        android:textColor="@color/black"
+                        android:padding="16dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/qty"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:padding="8dp" />
+            android:layout_margin="10dp"
+            android:padding="10dp">
 
+            <Button
+                android:id="@+id/buttonCalcolaTotale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vai_al_resoconto"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/confermaServizio"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <Button
+                android:id="@+id/confermaServizio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/conferma"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/buttonCalcolaTotale"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/checkBoxAmatriciana"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/amatriciana"
-            android:padding="16dp" />
-
-        <EditText
-            android:id="@+id/editTextAmatriciana"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/qty"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:padding="8dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/checkBoxLasagne"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lasagne"
-            android:padding="16dp" />
-
-        <EditText
-            android:id="@+id/editTextLasagne"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/qty"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:padding="8dp" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textViewSecondiPiatti"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/secondi_piatti"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:padding="8dp" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/checkBoxCarpaccio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/carpaccio_al_pepe_verde"
-            android:padding="16dp" />
-
-        <EditText
-            android:id="@+id/editTextCarpaccio"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/qty"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:padding="8dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/checkBoxCotoletta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cotoletta_alla_milanese"
-            android:padding="16dp" />
-
-        <EditText
-            android:id="@+id/editTextCotoletta"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/qty"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:padding="8dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/checkBoxTagliata"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tagliata_di_carne"
-            android:padding="16dp" />
-
-        <EditText
-            android:id="@+id/editTextTagliata"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/qty"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:padding="8dp" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textViewContorni"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/contorni"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:padding="8dp" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/checkBoxInsalata"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/insalata_mista"
-            android:padding="16dp" />
-
-        <EditText
-            android:id="@+id/editTextInsalata"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/qty"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:padding="8dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/checkBoxPatatine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/patatine_fritte"
-            android:padding="16dp" />
-
-        <EditText
-            android:id="@+id/editTextPatatine"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/qty"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:padding="8dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/checkBoxVerdure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/verdure_grigliate"
-            android:padding="16dp" />
-
-        <EditText
-            android:id="@+id/editTextVerdure"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/qty"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:padding="8dp" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textViewDessert"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dessert"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:padding="8dp" />
-
-    <!-- Aggiungi LinearLayout per i dessert -->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/checkBoxTortino"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tortino_cuore_caldo_al_cioccolato"
-            android:padding="16dp" />
-
-        <EditText
-            android:id="@+id/editTextTortino"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/qty"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:padding="8dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/checkBoxTiramisu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tiramis"
-            android:padding="16dp" />
-
-        <EditText
-            android:id="@+id/editTextTiramisu"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/qty"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:padding="8dp" />
-
-    </LinearLayout>
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-            <CheckBox
-            android:id="@+id/checkBoxSfoglia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sfoglia_con_crema_e_frutti_di_bosco"
-            android:padding="16dp" />
-
-            <EditText
-            android:id="@+id/editTextSfoglia"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/qty"
-            android:inputType="number"
-            android:minHeight="48dp"
-            android:padding="8dp" />
-
-    </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/textTotale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="Prezzo Totale: "
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:padding="16dp" />
-
-        <TextView
-            android:id="@+id/textViewTotale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/textTotale"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textStyle="bold"
-            android:text="0€"
-            android:textColor="@color/black"
-            android:padding="16dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp">
-
-        <Button
-            android:id="@+id/buttonCalcolaTotale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/vai_al_resoconto"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/confermaServizio"
-            app:layout_constraintVertical_bias="0.5" />
-
-        <Button
-            android:id="@+id/confermaServizio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/conferma"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/buttonCalcolaTotale"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-</LinearLayout>
 </ScrollView>
+
