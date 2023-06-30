@@ -101,7 +101,7 @@ class PrenotaFragment : Fragment() {
                     if (dataCheckIn.timeInMillis >= dataCheckOut.timeInMillis) {
                         isCheckOutSelected = false
                         binding.editTextDataCheckOut.text.clear()
-                        Toast.makeText(context, "La data di check-in non può essere successiva o uguale alla data di check-out. Si prega di selezionare di nuovo la data di check-out.", Toast.LENGTH_SHORT).show()
+                        showToast(getString(R.string.toast_checkin_cannot_be_after_checkout))
                     }
                 }
                 binding.buttonFatturazione.isEnabled = isCheckInSelected && isCheckOutSelected
@@ -110,7 +110,7 @@ class PrenotaFragment : Fragment() {
 
         binding.editTextDataCheckOut.setOnClickListener {
             if (!isCheckInSelected) {
-                Toast.makeText(context, "Si prega di selezionare prima la data di check-in.", Toast.LENGTH_SHORT).show()
+                showToast(getString(R.string.toast_select_checkin_first))
             } else {
                 showDatePickerDialog(true) { calendar ->
                     dataCheckOut = calendar
@@ -157,15 +157,15 @@ class PrenotaFragment : Fragment() {
                             fatturazionePremuta = true
                             idStanza = result.asJsonArray[0].asJsonObject.get("id_s").asInt
                         } else {
-                            Toast.makeText(context, "Questo tipo di camera non è disponibile per le date selezionate", Toast.LENGTH_SHORT).show()
+                            showToast(getString(R.string.toast_room_unavailable))
                         }
                     } else {
-                        Toast.makeText(context, "Errore durante la comunicazione con il server", Toast.LENGTH_SHORT).show()
+                        showToast(getString(R.string.toast_server_communication_error))
                     }
                 }
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    Toast.makeText(context, "Errore di connessione", Toast.LENGTH_SHORT).show()
+                    showToast(getString(R.string.toast_connection_error))
                 }
             })
         }
@@ -182,7 +182,7 @@ class PrenotaFragment : Fragment() {
                 val idUtente = db.getId()
                 effettuaPrenotazione(idUtente, dataCheckIn, dataCheckOut)
             } else {
-                Toast.makeText(context, "Inserisci correttamente i dati del pagamento", Toast.LENGTH_SHORT).show()
+                showToast(getString(R.string.toast_payment_data_invalid))
             }
         }
     }
@@ -197,14 +197,14 @@ class PrenotaFragment : Fragment() {
         ClientNetwork.retrofit.insert(insertQuery).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    showToast("Prenotazione effettuata con successo!")
+                    showToast(getString(R.string.toast_booking_success))
                 } else {
-                    showToast("Errore durante la prenotazione. Riprova.")
+                    showToast(getString(R.string.toast_booking_error))
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                showToast("Errore di connessione. Riprova.")
+                showToast(getString(R.string.toast_connection_error))
             }
         })
     }

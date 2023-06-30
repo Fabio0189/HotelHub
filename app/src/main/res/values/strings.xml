@@ -3,12 +3,11 @@
     <string name="title_activity_home_ospite">HomeOspiteActivity</string>
     <string name="Profilo">Profilo</string>
     <string name="lingua">Lingua</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hotelhub">HotelHub</string>
     <string name="home">Home</string>
     <string name="prenota">Prenota</string>
-    <!-- Aggiunte nuove stringhe per le immagini -->
+    <!-- nuove stringhw per le immagini -->
     <string name="ristorante">Ristorante</string>
     <string name="loungebar">Lounge Bar</string>
     <string name="sauna">Sauna</string>
@@ -17,6 +16,7 @@
     <string name="arearelax">Area Relax</string>
     <string name="lavanderia">Lavanderia</string>
     <string name="libreria">Libreria</string>
+    <!-- stringhe per le login e registrazione -->
     <string name="info">Info</string>
     <string name="modifica">Modifica</string>
     <string name="nome">Nome:</string>
@@ -26,10 +26,13 @@
     <string name="support_message">Per prenotazione camere e supporto</string>
     <string name="password">Password</string>
     <string name="conferma_password">Conferma Password</string>
+    <string name="mostra_password">Mostra Password</string>
     <string name="salva_modifiche">Salva modifiche</string>
     <string name="accedi">Accedi</string>
     <string name="registrati">Registrati</string>
+    <string name="registrazione">Registrazione</string>
     <string name="hai_dimenticato_la_password">Hai dimenticato la password?</string>
+    <!-- nuove stringhe servizio in camera -->
     <string name="servizio_camera">Servizio in Camera</string>
     <string name="sfoglia_con_crema_e_frutti_di_bosco">Sfoglia con Crema e Frutti di Bosco</string>
     <string name="primi_piatti">Primi Piatti</string>
@@ -64,6 +67,7 @@
     <string name="quinto_piano">Quinto piano</string>
     <string name="seminterrato">Seminterrato</string>
     <string name="ingresso">Ingresso</string>
+    <!-- nuove stringhe per lee descrizioni -->
     <string name="string_ristorante">Ristorante con vista panoramica sull\'incantevole Golfo di Petrosino che offre la possibilità di degustare i piatti della cucina locale, fatta di profumati aromi e golose fragranze e con un\'accurata selezione di pietanze nazionali ed internazionali. \n<b>PICCOLA COLAZIONE</b> La prima colazione è a buffet con un ampia scelta tra dolce e salato, dalle ore 7.00 alle ore 10.00. Su richiesta, ordinare alla reception o in sala ristorante, una piccola colazione al sacco. \n<b>CENA</b> La cena con menu a scelta è servita dalle ore 18.45 alle 21.00. \nMenu personalizzati per clienti con particolari esigenze. \nSi invita i Signori ad indossare pantaloni lunghi. \nTutte le bevande ordinate al ristorante vanno consumate durante la cena.</string>
     <string name="string_lounge_bar">Lounge bar con affaccio sull\'indimenticabile Golfo di Petrosino, proponendo un\'esperienza di degustazione unica tra i sapori distintivi dei cocktail tradizionali e innovativi. Creato con l\'intenzione di risvegliare i sensi e accompagnato da una scelta attenta di bevande nazionali ed internazionali. \n<b>APERITIVO</b> L\'aperitivo viene servito dalle 17.00 alle 19.00, con un\'ampia selezione di stuzzichini sia dolci che salati. Su richiesta, è possibile ordinare al bar o alla reception un aperitivo da asporto. \n<b>ORARIO BAR</b> Il bar è aperto dalle 10.00 alle 24.00, fornendo un servizio continuo di bevande e snack. \nMenù personalizzati disponibili per i clienti con esigenze specifiche. \nTutte le bevande ordinate al bar devono essere consumate durante la permanenza.</string>
     <string name="string_sauna">Sauna panoramica con vista sull\'affascinante Golfo di Petrosino, offrendo un\'esperienza di benessere totale attraverso il calore e gli aromi. L\'ambiente è caratterizzato da un design moderno e da una selezione accurata di programmi benessere, sia tradizionali che internazionali. \n<b>ORARIO SAUNA</b> La sauna è aperta dalle ore 10.00 alle ore 20.00, con la possibilità di prenotare sessioni private. Su richiesta, è possibile ordinare alla reception un pacchetto wellness personalizzato. \n<b>PROGRAMMI PERSONALIZZATI</b> Programmi sauna personalizzati sono disponibili per ospiti con particolari esigenze o preferenze. \nSi invita i Signori a rispettare le regole della sauna. \nTutti i trattamenti e servizi ordinati devono essere consumati durante il soggiorno.</string>
@@ -72,13 +76,11 @@
     <string name="string_area_relax">Area Relax dove il divertimento incontra la nostalgia. Goditi una varietà di videogiochi degli anni \'90, sfida i tuoi amici a un gioco di biliardo, immergiti in una partita di ping pong o rilassati con uno dei nostri numerosi giochi da tavolo. Un luogo ideale per rilassarsi, socializzare e divertirsi. \n<b>DISPONIBILITÀ</b> L\'area relax è aperta 24 ore su 24, per permetterti di goderti il tuo tempo libero quando preferisci durante il tuo soggiorno. \n<b>ATTIVITÀ</b> Sono disponibili una varietà di attività, che includono tavoli da biliardo, ping pong, giochi da tavolo e una selezione di videogiochi vintage. \n<b>PERSONALIZZAZIONI</b> Su richiesta, è possibile organizzare alla reception tornei o eventi di giochi personalizzati. </string>
     <string name="string_lavanderia">Servizio di lavanderia attento e professionale, pronto a soddisfare tutte le tue esigenze di pulizia e cura dei capi. Disponiamo di una vasta gamma di opzioni, dalla lavanderia generale al lavaggio delicato, all\'asciugatura e al servizio di stiratura. \n<b>ORARIO LAVANDERIA</b> Il servizio di lavanderia è disponibile 24 ore su 24, per garantire un supporto continuo durante tutto il soggiorno. \n<b>SERVIZIO LAMPO</b> Su richiesta, offriamo un servizio lampo per inconvenienti dell\'ultimo minuto, garantendo un lavaggio, asciugatura e stiratura rapido per i tuoi capi.</string>
     <string name="string_libreria">La nostra libreria situata nella hall offre un\'ampia gamma di libri per il tuo piacere di lettura. Che tu preferisca romanzi, saggi, thriller o libri per bambini, abbiamo qualcosa per tutti i gusti. \n<b>ORARIO LIBRERIA</b> La libreria è accessibile 24 ore su 24, permettendoti di scegliere un libro in qualsiasi momento durante il tuo soggiorno. \n<b>LETTURA GRATUITA</b> Tutti i libri sono disponibili per la lettura gratuita durante la permanenza, offrendo un modo rilassante per passare il tempo o per immergerti in una nuova avventura. \n<b>SERVIZIO PERSONALIZZATO</b> Su richiesta, il nostro personale può aiutarti a scegliere un libro che corrisponda ai tuoi interessi o esigenze di lettura. \nSi prega di rispettare le regole della libreria per garantire un\'esperienza piacevole per tutti i nostri ospiti. \nTutti i libri presi in prestito devono essere restituiti prima della partenza.</string>
-    <!-- Hints -->
+    <!-- nuove stringhe per le immagini prenota camere -->
     <string name="hint_nome">Inserisci il tuo nome</string>
     <string name="hint_cognome">Inserisci il tuo cognome</string>
     <string name="hint_numero_carta">Inserisci il numero della carta</string>
     <string name="hint_cvv">Inserisci il CVV</string>
-
-    <!-- Texts -->
     <string name="text_nome">Nome:</string>
     <string name="text_cognome">Cognome:</string>
     <string name="text_numero_carta">Numero Carta:</string>
@@ -86,13 +88,54 @@
     <string name="text_data_check_in">Data Check-In</string>
     <string name="text_data_check_out">Data Check-Out</string>
 
-    <!-- Buttons -->
+    <!-- Button prenota camere -->
     <string name="button_fatturazione">Vai alla Fatturazione</string>
     <string name="button_conferma">Conferma</string>
     <string name="priceLabel">Prezzo:</string>
     <string name="camera_type_1">Camera Singola</string>
     <string name="camera_type_2">Camera Doppia</string>
     <string name="camera_type_3">Camera Familiare</string>
+    <!-- tutti i toast -->
+    <string name="exit_confirmation_message">Premi di nuovo indietro per uscire dall\'app</string>
+    <string name="toast_passwords_do_not_match">Le password non corrispondono.</string>
+    <string name="toast_data_updated_successfully">Dati aggiornati correttamente.</string>
+    <string name="toast_data_update_error">Errore durante l\'aggiornamento dei dati online.</string>
+    <string name="toast_connection_error">Errore di connessione. Riprova.</string>
+    <string name="toast_payment_data_invalid">Inserisci correttamente i dati del pagamento.</string>
+    <string name="toast_booking_success">Prenotazione effettuata con successo!</string>
+    <string name="toast_booking_error">Errore durante la prenotazione. Riprova.</string>
+    <string name="toast_room_unavailable">Questo tipo di camera non è disponibile per le date selezionate.</string>
+    <string name="toast_checkin_cannot_be_after_checkout">La data di check-in non può essere successiva o uguale alla data di check-out. Si prega di selezionare di nuovo la data di check-out.</string>
+    <string name="toast_select_checkin_first">Si prega di selezionare prima la data di check-in.</string>
+    <string name="toast_server_communication_error">Errore durante la comunicazione con il server.</string>
+    <string name="average_rating_toast">Recensione media calcolata con successo!</string>
+    <string name="error_calculation_toast">Errore nel calcolo della recensione media</string>
+    <string name="connection_error_toast">Errore di connessione. Riprova.</string>
+    <string name="leave_review_title">Lascia una recensione</string>
+    <string name="send">Invia</string>
+    <string name="go_back">Torna indietro</string>
+    <string name="review_inserted_toast">Recensione inserita con successo!</string>
+    <string name="review_updated_toast">Recensione aggiornata con successo!</string>
+    <string name="error_inserting_review_toast">Errore nell\'inserimento della recensione. Riprova.</string>
+    <string name="error_updating_review_toast">Errore nell\'aggiornamento della recensione. Riprova.</string>
+    <string name="error_retrieving_reviews_toast">Errore nel recupero delle recensioni</string>
+    <string name="error_checking_user_review_toast">Errore nel controllo della recensione dell\'utente</string>
+    <string name="error_selecting_options_toast">Seleziona almeno una opzione</string>
+    <string name="error_saving_data_toast">Errore durante il salvataggio dei dati</string>
+    <string name="network_error_toast">Errore di rete</string>
+    <string name="data_saved_toast">Dati salvati con successo</string>
+    <string name="error_remove_service">Errore durante la rimozione del servizio</string>
+    <!-- stringhe recensioni -->
+    <string name="average_rating">Valutazione Media</string>
+    <string name="ratings">Recensioni</string>
+    <string name="five_stars">5 stelle</string>
+    <string name="four_stars">4 stelle</string>
+    <string name="three_stars">3 stelle</string>
+    <string name="two_stars">2 stelle</string>
+    <string name="one_star">1 stella</string>
+    <string name="leave_review">Lascia una recensione</string>
+
+
 
 
 

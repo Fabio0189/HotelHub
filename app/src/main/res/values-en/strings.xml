@@ -7,7 +7,7 @@
     <string name="hotelhub">HotelHub</string>
     <string name="home">Home</string>
     <string name="prenota">Book</string>
-    <!-- Aggiunte nuove stringhe per le immagini -->
+    <!-- nuove stringhw per le immagini -->
     <string name="ristorante">Restaurant</string>
     <string name="loungebar">Lounge Bar</string>
     <string name="sauna">Sauna</string>
@@ -16,6 +16,7 @@
     <string name="arearelax">Relax Area</string>
     <string name="lavanderia">Laundry</string>
     <string name="libreria">Library</string>
+    <!-- stringhe per le login e registrazione -->
     <string name="info">Info</string>
     <string name="modifica">Edit</string>
     <string name="nome">Name:</string>
@@ -25,10 +26,13 @@
     <string name="support_message">For room reservation and support</string>
     <string name="password">Password</string>
     <string name="conferma_password">Confirm Password</string>
+    <string name="mostra_password">Show Password</string>
     <string name="salva_modifiche">Save Changes</string>
     <string name="accedi">Sign In</string>
     <string name="registrati">Sign Up</string>
+    <string name="registrazione">Registration</string>
     <string name="hai_dimenticato_la_password">Forgot Password?</string>
+    <!-- nuove stringhe servizio in camera -->
     <string name="servizio_camera">Room Service</string>
     <string name="sfoglia_con_crema_e_frutti_di_bosco">Pastry with Cream and Forest Fruits</string>
     <string name="primi_piatti">First Courses</string>
@@ -63,6 +67,7 @@
     <string name="quinto_piano">Fifth floor</string>
     <string name="seminterrato">Basement</string>
     <string name="ingresso">Hall</string>
+    <!-- nuove stringhe per lee descrizioni -->
     <string name="string_ristorante">Restaurant with panoramic view on the enchanting Gulf of Petrosino offering the possibility to taste the dishes of Neapolitan cuisine, made of fragrant aromas and delicious fragrances, and with a careful selection of national and international dishes. \n<b>SMALL BREAKFAST</b> Breakfast is <b>BUFFET STYLE</b> with a wide choice between sweet and savory, from 7:00 to 10:00. On request, order at the reception or in the restaurant, a small breakfast bag. \n<b>DINNER</b> Dinner with a choice menu is served from 6:45 pm to 9:00 pm. \nCustom menus for customers with special needs. \nGentlemen are invited to wear <b>LONG PANTS</b>. \n<b>ALL DRINKS</b> ordered at the restaurant must be consumed during dinner.</string>
     <string name="string_lounge_bar">Lounge bar overlooking the unforgettable Gulf of Petrosino, proposing a unique tasting experience among the distinctive flavors of traditional and innovative cocktails. Created with the intention of awakening the senses and accompanied by a careful selection of national and international drinks. \n<b>APERITIF</b> The aperitif is served from 5:00 pm to 7:00 pm, with a wide selection of sweet and savory snacks. On request, it is possible to order a takeaway aperitif at the bar or at the reception. \n<b>BAR HOURS</b> The bar is open from 10:00 am to 12:00 am, providing a continuous beverage and snack service. \nCustom menus available for customers with specific needs. \n<b>ALL DRINKS</b> ordered at the bar must be consumed during the stay.</string>
     <string name="string_sauna">Panoramic sauna overlooking the fascinating Gulf of Petrosino, offering a total wellness experience through heat and aromas. The environment is characterized by a modern design and a careful selection of wellness programs, both traditional and international. \n<b>SAUNA HOURS</b> The sauna is open from 10:00 am to 8:00 pm, with the possibility of booking private sessions. On request, you can order a personalized wellness package at the reception. \n<b>CUSTOM PROGRAMS</b> Personalized sauna programs are available for guests with special needs or preferences. \nGentlemen are invited to respect the <b>SAUNA RULES</b>. \n<b>ALL TREATMENTS AND SERVICES</b> ordered must be consumed during the stay.</string>
@@ -71,13 +76,11 @@
     <string name="string_area_relax">Relaxation area where fun meets nostalgia. Enjoy a variety of 90s video games, challenge your friends to a pool game, immerse yourself in a ping pong match or relax with one of our many board games. An ideal place to relax, socialize and have fun. \n<b>AVAILABILITY</b> The relaxation area is open 24 hours a day, allowing you to enjoy your free time whenever you prefer during your stay. \n<b>ACTIVITIES</b> A variety of activities are available, including pool tables, ping pong, board games and a selection of vintage video games. \n<b>CUSTOMIZATIONS</b> On request, you can organize personalized game tournaments or events at the reception.</string>
     <string name="string_lavanderia">Attentive and professional laundry service, ready to meet all your cleaning and garment care needs. We have a wide range of options, from general laundry to delicate washing, drying and ironing service. \n<b>LAUNDRY HOURS</b> The laundry service is available 24 hours a day, to ensure continuous support throughout the stay. \n<b>EXPRESS SERVICE</b> On request, we offer an express service for last minute inconveniences, guaranteeing a quick washing, drying and ironing for your garments.</string>
     <string name="string_libreria">Our library located in the lobby offers a wide range of books for your reading pleasure. Whether you prefer novels, essays, thrillers or children’s books, we have something for all tastes. \n<b>LIBRARY HOURS</b> The library is accessible 24 hours a day, allowing you to choose a book at any time during your stay. \n<b>FREE READING</b> All books are available for free reading during the stay, offering a relaxing way to pass the time or immerse yourself in a new adventure. \n<b>PERSONALIZED SERVICE</b> On request, our staff can help you choose a book that matches your interests or reading needs. \nPlease respect the <b>LIBRARY RULES</b> to ensure a pleasant experience for all our guests. \n<b>ALL BORROWED BOOKS</b> must be returned before departure.</string>
-    <!-- Hints -->
+    <!-- nuove stringhe per le prenota camere -->
     <string name="hint_nome">Enter your name</string>
     <string name="hint_cognome">Enter your surname</string>
     <string name="hint_numero_carta">Enter your card number</string>
     <string name="hint_cvv">Enter the CVV</string>
-
-    <!-- Texts -->
     <string name="text_nome">Name:</string>
     <string name="text_cognome">Surname:</string>
     <string name="text_numero_carta">Card Number:</string>
@@ -85,12 +88,52 @@
     <string name="text_data_check_in">Check-In Date</string>
     <string name="text_data_check_out">Check-Out Date</string>
 
-    <!-- Buttons -->
+    <!-- Button prenota camere -->
     <string name="button_fatturazione">Go to Billing</string>
     <string name="button_conferma">Confirm</string>
     <string name="priceLabel">Price:</string>
     <string name="camera_type_1">Single Room</string>
     <string name="camera_type_2">Double Room</string>
     <string name="camera_type_3">Family Room</string>
+    <!-- tutti i toast -->
+    <string name="exit_confirmation_message">Press back again to exit the app</string>
+    <string name="toast_passwords_do_not_match">Passwords do not match.</string>
+    <string name="toast_data_updated_successfully">Data updated successfully.</string>
+    <string name="toast_data_update_error">Error updating data online.</string>
+    <string name="toast_connection_error">Connection error. Please retry.</string>
+    <string name="toast_payment_data_invalid">Please enter valid payment information.</string>
+    <string name="toast_booking_success">Booking successful!</string>
+    <string name="toast_booking_error">Error during booking. Please retry.</string>
+    <string name="toast_room_unavailable">This room type is not available for the selected dates.</string>
+    <string name="toast_checkin_cannot_be_after_checkout">Check-in date cannot be later than or equal to the check-out date. Please select a different check-out date.</string>
+    <string name="toast_select_checkin_first">Please select a check-in date first.</string>
+    <string name="toast_server_communication_error">Error communicating with the server.</string>
+    <string name="average_rating_toast">Average rating calculated successfully!</string>
+    <string name="error_calculation_toast">Error calculating average rating.</string>
+    <string name="connection_error_toast">Connection error. Please retry.</string>
+    <string name="leave_review_title">Leave a review</string>
+    <string name="send">Send</string>
+    <string name="go_back">Go back</string>
+    <string name="review_inserted_toast">Review inserted successfully!</string>
+    <string name="review_updated_toast">Review updated successfully!</string>
+    <string name="error_inserting_review_toast">Error inserting review. Please retry.</string>
+    <string name="error_updating_review_toast">Error updating review. Please retry.</string>
+    <string name="error_retrieving_reviews_toast">Error retrieving reviews.</string>
+    <string name="error_checking_user_review_toast">Error checking user review.</string>
+    <string name="error_selecting_options_toast">Please select at least one option</string>
+    <string name="error_saving_data_toast">Error saving data</string>
+    <string name="network_error_toast">Network error</string>
+    <string name="data_saved_toast">Data saved successfully</string>
+    <string name="error_remove_service">Error removing service</string>
+    <!-- stringhe recensioni -->
+    <string name="average_rating">Average Rating</string>
+    <string name="ratings">Ratings</string>
+    <string name="five_stars">5 stars</string>
+    <string name="four_stars">4 stars</string>
+    <string name="three_stars">3 stars</string>
+    <string name="two_stars">2 stars</string>
+    <string name="one_star">1 star</string>
+    <string name="leave_review">Leave a review</string>
+
 
 </resources>

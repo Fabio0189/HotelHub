@@ -26,14 +26,14 @@ class HomeOspiteActivity : AppCompatActivity() {
     private var isExitConfirmationVisible = false
     private lateinit var itemServizioCamera: MenuItem
     private var currentFragment: Fragment? = null
-
+    private lateinit var currentLanguage: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        db= DatabaseHelper(this)
+        db = DatabaseHelper(this)
 
-        val currentLanguage = getLanguageFromPreferences()
+        currentLanguage = getLanguageFromPreferences()
         val locale = Locale(currentLanguage)
         Locale.setDefault(locale)
         val config = android.content.res.Configuration()
@@ -46,7 +46,6 @@ class HomeOspiteActivity : AppCompatActivity() {
         binding.imageMenu.setOnClickListener {
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
-
 
         itemServizioCamera = binding.navigationView.menu.findItem(R.id.menuServizioCamera)
         itemServizioCamera.isVisible = false
@@ -70,18 +69,9 @@ class HomeOspiteActivity : AppCompatActivity() {
                 }
                 R.id.menuLanguage -> {
                     val newLanguage = if (currentLanguage == "en") "it" else "en"
-                    val locale = Locale(newLanguage)
-                    Locale.setDefault(locale)
-
-                    val config = android.content.res.Configuration()
-                    config.setLocale(locale)
-
-                    baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
-
+                    setLanguage(newLanguage)
                     saveLanguageToPreferences(newLanguage)
-
                     recreate()
-
                     return@setNavigationItemSelectedListener true
                 }
                 R.id.menuServizioCamera -> {
@@ -99,7 +89,6 @@ class HomeOspiteActivity : AppCompatActivity() {
                     binding.drawerLayout.closeDrawers()
                     return@setNavigationItemSelectedListener true
                 }
-
                 R.id.menuInfo -> {
                     openFragment(InfoFragment())
                     binding.drawerLayout.closeDrawers()
@@ -129,7 +118,7 @@ class HomeOspiteActivity : AppCompatActivity() {
                 finishAffinity() // Chiude completamente l'app
             } else {
                 isExitConfirmationVisible = true
-                Toast.makeText(this, "Per uscire dall'app premi indietro un'altra volta", Toast.LENGTH_SHORT).show()
+                showToast(getString(R.string.exit_confirmation_message))
                 binding.drawerLayout.postDelayed({
                     isExitConfirmationVisible = false
                 }, 2000)
@@ -143,12 +132,6 @@ class HomeOspiteActivity : AppCompatActivity() {
             openFragment(currentFragment!!)
         }
     }
-
-
-
-
-
-
 
     public fun openFragment(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
@@ -164,7 +147,14 @@ class HomeOspiteActivity : AppCompatActivity() {
         currentFragment = fragment
     }
 
-
+    private fun setLanguage(language: String) {
+        currentLanguage = language
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = android.content.res.Configuration()
+        config.setLocale(locale)
+        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+    }
 
     private fun saveLanguageToPreferences(language: String) {
         val preferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
@@ -204,4 +194,7 @@ class HomeOspiteActivity : AppCompatActivity() {
         })
     }
 
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 }

@@ -47,16 +47,19 @@ class ModificaFragment : Fragment() {
             val updatedPassword = if (newPassword.isNotEmpty()) newPassword else db.getPassword()
 
             if (newPassword.isNotEmpty() && newPassword != confirmPassword) {
-                Toast.makeText(requireContext(), "Le password non corrispondono.", Toast.LENGTH_SHORT).show()
+                val toastMessage = getString(R.string.toast_passwords_do_not_match)
+                Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             updateUserDataOnline(idUtente, updatedName, updatedCognome, updatedEmail, updatedPassword) { success ->
                 if (success) {
                     db.updateUserData(idUtente, updatedName, updatedCognome, updatedEmail, updatedPassword)
-                    Toast.makeText(requireContext(), "Dati aggiornati correttamente.", Toast.LENGTH_SHORT).show()
+                    val toastMessage = getString(R.string.toast_data_updated_successfully)
+                    Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(requireContext(), "Errore durante l'aggiornamento dei dati online.", Toast.LENGTH_SHORT).show()
+                    val toastMessage = getString(R.string.toast_data_update_error)
+                    Toast.makeText(requireContext(), toastMessage, Toast.LENGTH_SHORT).show()
                 }
             }
         }

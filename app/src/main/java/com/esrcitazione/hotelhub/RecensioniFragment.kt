@@ -19,23 +19,34 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class RecensioniFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
     private lateinit var db: DatabaseHelper
     private lateinit var binding: FragmentRecensioniBinding
     private lateinit var adapter: RecensioniAdapter
 
+    private lateinit var toastMessageAverageRating: String
+    private lateinit var toastMessageCalculationError: String
+    private lateinit var toastMessageConnectionError: String
+    private lateinit var toastMessageReviewInserted: String
+    private lateinit var toastMessageReviewUpdated: String
+    private lateinit var toastMessageErrorInsertingReview: String
+    private lateinit var toastMessageErrorUpdatingReview: String
+    private lateinit var toastMessageErrorRetrievingReviews: String
+    private lateinit var toastMessageErrorCheckingUserReview: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+        // Inizializza le stringhe per i Toast
+        toastMessageAverageRating = getString(R.string.average_rating_toast)
+        toastMessageCalculationError = getString(R.string.error_calculation_toast)
+        toastMessageConnectionError = getString(R.string.connection_error_toast)
+        toastMessageReviewInserted = getString(R.string.review_inserted_toast)
+        toastMessageReviewUpdated = getString(R.string.review_updated_toast)
+        toastMessageErrorInsertingReview = getString(R.string.error_inserting_review_toast)
+        toastMessageErrorUpdatingReview = getString(R.string.error_updating_review_toast)
+        toastMessageErrorRetrievingReviews = getString(R.string.error_retrieving_reviews_toast)
+        toastMessageErrorCheckingUserReview = getString(R.string.error_checking_user_review_toast)
     }
 
     override fun onCreateView(
@@ -53,16 +64,16 @@ class RecensioniFragment : Fragment() {
         buttonLeaveReview.setOnClickListener {
             showLeaveReviewPopup()
         }
-// Inizializza la RecyclerView
+
+        // Inizializza la RecyclerView
         val recyclerView = view.findViewById<RecyclerView>(R.id.recensioni_db)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-// Crea un'istanza dell'adapter e assegnalo alla RecyclerView
+        // Crea un'istanza dell'adapter e assegnalo alla RecyclerView
         adapter = RecensioniAdapter(emptyList()) // Passa una lista vuota per ora
         recyclerView.adapter = adapter
 
-
-// Recupera le recensioni dal database e aggiornale nell'adapter
+        // Recupera le recensioni dal database e aggiornale nell'adapter
         getRecensioniFromDatabase(adapter)
 
         calcolaMediaRecensioni()
@@ -75,8 +86,8 @@ class RecensioniFragment : Fragment() {
 
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
             .setView(dialogView)
-            .setTitle("Lascia una recensione")
-            .setPositiveButton("Invia") { dialog, which ->
+            .setTitle(getString(R.string.leave_review_title))
+            .setPositiveButton(getString(R.string.send)) { dialog, which ->
                 val ratingBar = dialogView.findViewById<RatingBar>(R.id.dialog_rating_bar)
                 val commentEditText = dialogView.findViewById<EditText>(R.id.dialog_comment)
 
@@ -88,7 +99,7 @@ class RecensioniFragment : Fragment() {
 
                 dialog.dismiss()
             }
-            .setNegativeButton("Torna indietro") { dialog, which ->
+            .setNegativeButton(getString(R.string.go_back)) { dialog, which ->
                 dialog.dismiss()
             }
 
@@ -106,12 +117,9 @@ class RecensioniFragment : Fragment() {
         }
     }
 
-
-
-
     private fun calcolaMediaRecensioni() {
-        val ratingBarAverage = view?.findViewById<RatingBar>(R.id.rating_bar_average)
-        val mediaTextView = view?.findViewById<TextView>(R.id.text_average_rating_value)
+        val ratingBarAverage = binding.ratingBarAverage
+        val mediaTextView = binding.textAverageRatingValue
         val query = "SELECT AVG(punteggio) AS average_rating FROM recensioni"
 
         ClientNetwork.retrofit.select(query).enqueue(object : Callback<JsonObject> {
@@ -120,20 +128,19 @@ class RecensioniFragment : Fragment() {
                     val result = response.body()?.getAsJsonArray("queryset")
                     if (result != null && result.size() > 0) {
                         val averageRating = result[0].asJsonObject["average_rating"].asFloat
-                        ratingBarAverage?.rating = averageRating
-                        mediaTextView?.text = averageRating.toString()
+                        ratingBarAverage.rating = averageRating
+                        mediaTextView.text = averageRating.toString()
                     }
                 } else {
-                    showToast("Errore nel calcolo della media delle recensioni")
+                    showToast(toastMessageCalculationError)
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                showToast("Errore di connessione. Riprova.")
+                showToast(toastMessageConnectionError)
             }
         })
     }
-
 
     private fun calcolaPercentualiRecensioni() {
         val query = "SELECT " +
@@ -162,31 +169,20 @@ class RecensioniFragment : Fragment() {
                         binding.progressBar1.progress = percentualeUnaStella.toInt()
                     }
                 } else {
-                    showToast("Errore nel calcolo delle percentuali.")
+                    showToast(toastMessageCalculationError)
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                showToast("Errore di connessione. Riprova.")
+                showToast(toastMessageConnectionError)
             }
         })
     }
-
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RecensioniFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
     private fun getRecensioniFromDatabase(adapter: RecensioniAdapter) {
         val query = "SELECT recensioni.*, utenti.nome, utenti.cognome " +
                 "FROM recensioni, utenti " +
@@ -215,12 +211,12 @@ class RecensioniFragment : Fragment() {
                         adapter.updateRecensioniList(recensioniList)
                     }
                 } else {
-                    showToast("Errore nel recupero delle recensioni")
+                    showToast(toastMessageErrorRetrievingReviews)
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                showToast("Errore di connessione. Riprova.")
+                showToast(toastMessageConnectionError)
             }
         })
     }
@@ -239,13 +235,13 @@ class RecensioniFragment : Fragment() {
                         callback(recensionePresente)
                     }
                 } else {
-                    showToast("Errore nel controllo della recensione dell'utente.")
+                    showToast(toastMessageErrorCheckingUserReview)
                     callback(false) // Chiamata fallita, restituisci false
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                showToast("Errore di connessione. Riprova.")
+                showToast(toastMessageConnectionError)
                 callback(false) // Chiamata fallita, restituisci false
             }
         })
@@ -257,42 +253,41 @@ class RecensioniFragment : Fragment() {
         ClientNetwork.retrofit.update(updateQuery).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    showToast("Recensione aggiornata con successo!")
+                    showToast(toastMessageReviewUpdated)
 
                     getRecensioniFromDatabase(adapter)
                     calcolaMediaRecensioni()
                     calcolaPercentualiRecensioni()
                 } else {
-                    showToast("Errore nell'aggiornamento della recensione. Riprova.")
+                    showToast(toastMessageErrorUpdatingReview)
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                showToast("Errore di connessione. Riprova.")
+                showToast(toastMessageConnectionError)
             }
         })
     }
+
     private fun inserisciNuovaRecensione(id: Int, rating: Double, commento: String) {
         val insertQuery = "INSERT INTO recensioni (id_utente_recensione, punteggio, commento) VALUES ('$id', '$rating', '$commento')"
 
         ClientNetwork.retrofit.insert(insertQuery).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    showToast("Recensione inserita con successo!")
+                    showToast(toastMessageReviewInserted)
 
                     getRecensioniFromDatabase(adapter)
                     calcolaMediaRecensioni()
                     calcolaPercentualiRecensioni()
                 } else {
-                    showToast("Errore nell'inserimento della recensione. Riprova.")
+                    showToast(toastMessageErrorInsertingReview)
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                showToast("Errore di connessione. Riprova.")
+                showToast(toastMessageConnectionError)
             }
         })
     }
-
-
 }

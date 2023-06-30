@@ -20,6 +20,20 @@ class ServizioCameraFragment : Fragment() {
     private lateinit var binding: FragmentServizioCameraBinding
     private lateinit var db: DatabaseHelper
 
+    private var toastMessageErrorSelectingOptions: String? = null
+    private var toastMessageErrorSavingData: String? = null
+    private var toastMessageNetworkError: String? = null
+    private var toastMessageDataSaved: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Initialize toast messages
+        toastMessageErrorSelectingOptions = getString(R.string.error_selecting_options_toast)
+        toastMessageErrorSavingData = getString(R.string.error_saving_data_toast)
+        toastMessageNetworkError = getString(R.string.network_error_toast)
+        toastMessageDataSaved = getString(R.string.data_saved_toast)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,7 +41,6 @@ class ServizioCameraFragment : Fragment() {
         binding = FragmentServizioCameraBinding.inflate(inflater, container, false)
         db= DatabaseHelper(requireContext())
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -115,7 +128,7 @@ class ServizioCameraFragment : Fragment() {
     }
 
     private fun setupTotalButton() {
-        binding.buttonCalcolaTotale.isEnabled = false // Disabilita il pulsante all'inizio
+        binding.buttonCalcolaTotale.isEnabled = false // Disable the button at the beginning
 
         binding.buttonCalcolaTotale.setOnClickListener {
             if (isAtLeastOneCheckBoxSelected()) {
@@ -125,8 +138,8 @@ class ServizioCameraFragment : Fragment() {
 
 
             } else {
-                // Nessuna checkbox selezionata, mostra un messaggio di errore
-                Toast.makeText(requireContext(), "Seleziona almeno una opzione", Toast.LENGTH_SHORT).show()
+                // No checkbox selected, show an error message
+                showToast(toastMessageErrorSelectingOptions)
             }
         }
         binding.confermaServizio.setOnClickListener {
@@ -135,7 +148,7 @@ class ServizioCameraFragment : Fragment() {
                 val id= db.getId()
                 getNumeroCameraFromDatabase(id,selectedData)
             } else {
-                Toast.makeText(requireContext(), "Seleziona almeno una opzione", Toast.LENGTH_SHORT).show()
+                showToast(toastMessageErrorSelectingOptions)
             }
         }
     }
@@ -215,11 +228,11 @@ class ServizioCameraFragment : Fragment() {
     }
 
     private fun isAtLeastOneCheckBoxSelected(): Boolean {
-        // Controlla se almeno una checkbox è selezionata
+        // Check if at least one checkbox is selected
         return binding.checkBoxCarbonara.isChecked ||
                 binding.checkBoxAmatriciana.isChecked ||
                 binding.checkBoxLasagne.isChecked ||
-                // Aggiungi gli altri controlli per le checkbox
+                // Add the other checkbox checks
                 // Secondi Piatti
                 binding.checkBoxCarpaccio.isChecked ||
                 binding.checkBoxCotoletta.isChecked ||
@@ -235,9 +248,10 @@ class ServizioCameraFragment : Fragment() {
     }
 
     private fun checkIfAtLeastOneCheckBoxSelected() {
-        // Verifica se almeno una checkbox è selezionata
+        // Check if at least one checkbox is selected
         binding.buttonCalcolaTotale.isEnabled = isAtLeastOneCheckBoxSelected()
     }
+
     private fun getSelectedData(): String {
         val stringBuilder = StringBuilder()
 
@@ -307,6 +321,7 @@ class ServizioCameraFragment : Fragment() {
 
         return stringBuilder.toString()
     }
+
     private fun saveDataToServer(data: String, numero_camera: Int, id: Int, idPrenotazione: Int) {
         val apiService = ClientNetwork.retrofit
         val query = "INSERT INTO servizio_in_camera (id_p_sc, id_u_sc, numero_camera, servizio ) VALUES ('$idPrenotazione','$id','$numero_camera','$data')"
@@ -314,20 +329,21 @@ class ServizioCameraFragment : Fragment() {
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(requireContext(), "Dati salvati con successo", Toast.LENGTH_SHORT).show()
+                    showToast(toastMessageDataSaved)
                 } else {
-                    Toast.makeText(requireContext(), "Errore durante il salvataggio dei dati", Toast.LENGTH_SHORT).show()
+                    showToast(toastMessageErrorSavingData)
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                Toast.makeText(requireContext(), "Errore di rete", Toast.LENGTH_SHORT).show()
+                showToast(toastMessageNetworkError)
             }
         })
     }
+
     private fun getNumeroCameraFromDatabase(userId: Int, selectedData: String) {
         val apiService = ClientNetwork.retrofit
-        val currentDate = LocalDate.now().toString() // Ottieni la data odierna
+        val currentDate = LocalDate.now().toString() // Get the current date
         val query =
             "SELECT numero_stanza, id_p " +
                     "FROM stanze, prenotazioni " +
@@ -351,20 +367,21 @@ class ServizioCameraFragment : Fragment() {
                             saveDataToServer(selectedData, numeroCamera, userId, idPrenotazione)
                         }
                     } else {
-                        // Nessun risultato trovato
+                        // No results found
                     }
                 } else {
-                    // Errore nella risposta del server
+                    // Error in server response
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                // Errore di rete o di comunicazione con il server
+                // Network error or communication with the server failed
             }
         })
     }
 
-
-
+    private fun showToast(message: String?) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
 
 }

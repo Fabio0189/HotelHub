@@ -63,12 +63,12 @@ class ServizioInCameraAdapter(
                     servizioInCameraList.remove(servizioInCamera)
                     notifyDataSetChanged()
                 } else {
-                    showToast("Errore durante la rimozione del servizio")
+                    showToast(context.getString(R.string.error_remove_service))
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                showToast("Errore durante la rimozione del servizio")
+                showToast(context.getString(R.string.error_remove_service))
             }
         })
     }
