@@ -5,48 +5,50 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.esrcitazione.hotelhub.databinding.FragmentHomeBinding
+
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
-
+        val homeOspiteActivity = activity as HomeOspiteActivity
         // Aggiungi il listener di click a ciascuna immagine
         binding.image1.setOnClickListener {
-            openFragment(RistoranteFragment())
+            homeOspiteActivity.openFragment(RistoranteFragment())
         }
 
         binding.image2.setOnClickListener {
-            openFragment(LoungeBarFragment())
+            homeOspiteActivity.openFragment(LoungeBarFragment())
         }
 
         binding.image3.setOnClickListener {
-            openFragment(SaunaFragment())
+            homeOspiteActivity.openFragment(SaunaFragment())
         }
 
         binding.image4.setOnClickListener {
-            openFragment(PiscinaFragment())
+            homeOspiteActivity.openFragment(PiscinaFragment())
         }
 
         binding.image5.setOnClickListener {
-            openFragment(DogCareFragment())
+            homeOspiteActivity.openFragment(DogCareFragment())
         }
 
         binding.image6.setOnClickListener {
-            openFragment(AreaRelaxFragment())
+            homeOspiteActivity.openFragment(AreaRelaxFragment())
         }
 
         binding.image7.setOnClickListener {
-            openFragment(LavanderiaFragment())
+            homeOspiteActivity.openFragment(LavanderiaFragment())
         }
 
         binding.image8.setOnClickListener {
-            openFragment(LibreriaFragment())
+            homeOspiteActivity.openFragment(LibreriaFragment())
         }
 
         return view
@@ -57,10 +59,8 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun openFragment(fragment: Fragment) {
-        val fragmentManager = requireActivity().supportFragmentManager
-        val transaction = fragmentManager.beginTransaction()
-        transaction.replace(R.id.frameLayout, fragment)
-        transaction.commit()
-    }
+
+
+
+
 }

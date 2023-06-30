@@ -25,6 +25,8 @@ class HomeOspiteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeOspiteBinding
     private var isExitConfirmationVisible = false
     private lateinit var itemServizioCamera: MenuItem
+    private var currentFragment: Fragment? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,23 +124,47 @@ class HomeOspiteActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (isExitConfirmationVisible) {
-            finish()
+        if (currentFragment is HomeFragment) {
+            if (isExitConfirmationVisible) {
+                finishAffinity() // Chiude completamente l'app
+            } else {
+                isExitConfirmationVisible = true
+                Toast.makeText(this, "Per uscire dall'app premi indietro un'altra volta", Toast.LENGTH_SHORT).show()
+                binding.drawerLayout.postDelayed({
+                    isExitConfirmationVisible = false
+                }, 2000)
+            }
         } else {
-            isExitConfirmationVisible = true
-            Toast.makeText(this, "Per uscire dall'app premi indietro un altra volta", Toast.LENGTH_SHORT).show()
-            binding.drawerLayout.postDelayed({
-                isExitConfirmationVisible = false
-            }, 2000)
+            supportFragmentManager.popBackStackImmediate(
+                "HomeFragment",
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
+            currentFragment = HomeFragment()
+            openFragment(currentFragment!!)
         }
     }
 
-    private fun openFragment(fragment: Fragment) {
+
+
+
+
+
+
+    public fun openFragment(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+
+        if (fragment !is HomeFragment) {
+            fragmentTransaction.addToBackStack(null)
+        }
+
         fragmentTransaction.replace(R.id.frameLayout, fragment)
         fragmentTransaction.commit()
+
+        currentFragment = fragment
     }
+
+
 
     private fun saveLanguageToPreferences(language: String) {
         val preferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
@@ -177,4 +203,5 @@ class HomeOspiteActivity : AppCompatActivity() {
             }
         })
     }
+
 }
