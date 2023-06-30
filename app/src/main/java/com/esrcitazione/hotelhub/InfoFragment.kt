@@ -22,50 +22,50 @@ class InfoFragment : Fragment() {
     ): View? {
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
 
-        // Sottolineatura dei TextViews
+        // per la sottolineatura dei TextViews
         binding.phoneNumber.paintFlags = binding.phoneNumber.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         binding.email1.paintFlags = binding.email1.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         binding.email2.paintFlags = binding.email2.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         binding.phoneNumber.setOnClickListener {
             AlertDialog.Builder(requireContext())
-                .setTitle("Attenzione")
-                .setMessage("Vuoi uscire da HotelHub?")
-                .setPositiveButton("Sì") { _, _ ->
+                .setTitle(getString(R.string.dialog_title))
+                .setMessage(getString(R.string.dialog_message))
+                .setPositiveButton(getString(R.string.dialog_positive_button)) { _, _ ->
                     val dialIntent = Intent(Intent.ACTION_DIAL).apply {
                         data = Uri.parse("tel:${binding.phoneNumber.text}")
                     }
                     startActivity(dialIntent)
                 }
-                .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                .setNegativeButton(getString(R.string.dialog_negative_button)) { dialog, _ -> dialog.dismiss() }
                 .show()
         }
 
         binding.email1.setOnClickListener {
             AlertDialog.Builder(requireContext())
-                .setTitle("Attenzione")
-                .setMessage("Vuoi uscire da HotelHub?")
-                .setPositiveButton("Sì") { _, _ ->
+                .setTitle(getString(R.string.dialog_title))
+                .setMessage(getString(R.string.dialog_message))
+                .setPositiveButton(getString(R.string.dialog_positive_button)) { _, _ ->
                     val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
                         data = Uri.parse("mailto:${binding.email1.text}")
                     }
-                    startActivity(Intent.createChooser(emailIntent, "Invia email tramite"))
+                    startActivity(Intent.createChooser(emailIntent, getString(R.string.email_chooser_title)))
                 }
-                .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                .setNegativeButton(getString(R.string.dialog_negative_button)) { dialog, _ -> dialog.dismiss() }
                 .show()
         }
 
         binding.email2.setOnClickListener {
             AlertDialog.Builder(requireContext())
-                .setTitle("Attenzione")
-                .setMessage("Vuoi uscire da HotelHub?")
-                .setPositiveButton("Sì") { _, _ ->
+                .setTitle(getString(R.string.dialog_title))
+                .setMessage(getString(R.string.dialog_message))
+                .setPositiveButton(getString(R.string.dialog_positive_button)) { _, _ ->
                     val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
                         data = Uri.parse("mailto:${binding.email2.text}")
                     }
-                    startActivity(Intent.createChooser(emailIntent, "Invia email tramite"))
+                    startActivity(Intent.createChooser(emailIntent, getString(R.string.email_chooser_title)))
                 }
-                .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                .setNegativeButton(getString(R.string.dialog_negative_button)) { dialog, _ -> dialog.dismiss() }
                 .show()
         }
 

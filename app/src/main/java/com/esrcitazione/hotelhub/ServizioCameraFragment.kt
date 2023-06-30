@@ -27,7 +27,7 @@ class ServizioCameraFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Initialize toast messages
+        // Inizializzare messaggi toast
         toastMessageErrorSelectingOptions = getString(R.string.error_selecting_options_toast)
         toastMessageErrorSavingData = getString(R.string.error_saving_data_toast)
         toastMessageNetworkError = getString(R.string.network_error_toast)
@@ -128,7 +128,8 @@ class ServizioCameraFragment : Fragment() {
     }
 
     private fun setupTotalButton() {
-        binding.buttonCalcolaTotale.isEnabled = false // Disable the button at the beginning
+        //per disabilitare il bottone all'inizio
+        binding.buttonCalcolaTotale.isEnabled = false
 
         binding.buttonCalcolaTotale.setOnClickListener {
             if (isAtLeastOneCheckBoxSelected()) {
@@ -138,7 +139,7 @@ class ServizioCameraFragment : Fragment() {
 
 
             } else {
-                // No checkbox selected, show an error message
+                // toast in caso di nessuna selezione
                 showToast(toastMessageErrorSelectingOptions)
             }
         }
@@ -228,11 +229,10 @@ class ServizioCameraFragment : Fragment() {
     }
 
     private fun isAtLeastOneCheckBoxSelected(): Boolean {
-        // Check if at least one checkbox is selected
+
         return binding.checkBoxCarbonara.isChecked ||
                 binding.checkBoxAmatriciana.isChecked ||
                 binding.checkBoxLasagne.isChecked ||
-                // Add the other checkbox checks
                 // Secondi Piatti
                 binding.checkBoxCarpaccio.isChecked ||
                 binding.checkBoxCotoletta.isChecked ||
@@ -248,7 +248,6 @@ class ServizioCameraFragment : Fragment() {
     }
 
     private fun checkIfAtLeastOneCheckBoxSelected() {
-        // Check if at least one checkbox is selected
         binding.buttonCalcolaTotale.isEnabled = isAtLeastOneCheckBoxSelected()
     }
 
@@ -343,7 +342,7 @@ class ServizioCameraFragment : Fragment() {
 
     private fun getNumeroCameraFromDatabase(userId: Int, selectedData: String) {
         val apiService = ClientNetwork.retrofit
-        val currentDate = LocalDate.now().toString() // Get the current date
+        val currentDate = LocalDate.now().toString() // prende la data del giorno
         val query =
             "SELECT numero_stanza, id_p " +
                     "FROM stanze, prenotazioni " +
@@ -373,9 +372,9 @@ class ServizioCameraFragment : Fragment() {
                     // Error in server response
                 }
             }
-
+            // Errore di network o di com. col server
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                // Network error or communication with the server failed
+
             }
         })
     }

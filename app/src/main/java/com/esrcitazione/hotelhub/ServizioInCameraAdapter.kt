@@ -55,7 +55,7 @@ class ServizioInCameraAdapter(
         // Crea la query per rimuovere il servizio dal database
         val query = "DELETE FROM servizio_in_camera WHERE id_sc = $servizioId"
 
-        // Effettua la chiamata Retrofit per rimuovere il servizio dal database
+        // si effettua la chiaamata Retrofit per rimuovere l'ondinazione dal database
         ClientNetwork.retrofit.remove(query).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {

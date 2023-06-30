@@ -21,7 +21,7 @@ class activity_registrazione : AppCompatActivity() {
 
     private val specialCharacters = "!\"#\$%&'()*+,-./:;"
 
-    // Modificato l'espressione regolare per escludere i caratteri speciali non desiderati
+    // per escludere i caratteri speciali non desiderati
     private val passwordPattern = Pattern.compile("^(?=.*[0-9])(?=.*[$specialCharacters])[a-zA-Z0-9$specialCharacters]{8,}\$")
 
     override fun onCreate(savedInstanceState: Bundle?) {

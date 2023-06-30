@@ -58,9 +58,4 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
-
-
-
 }

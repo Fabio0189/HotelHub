@@ -32,7 +32,7 @@ class HomeOspiteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         db = DatabaseHelper(this)
-
+        //serve per tenere traccia della lingua corrente dell'app
         currentLanguage = getLanguageFromPreferences()
         val locale = Locale(currentLanguage)
         Locale.setDefault(locale)
@@ -46,9 +46,9 @@ class HomeOspiteActivity : AppCompatActivity() {
         binding.imageMenu.setOnClickListener {
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
-
+        //per nascondere inizialmente il Servizio in camera per permettere poi in seguito di renderlo visibile solo a chi è prenotato in quei giorni
         itemServizioCamera = binding.navigationView.menu.findItem(R.id.menuServizioCamera)
-        itemServizioCamera.isVisible = false
+            itemServizioCamera.isVisible = false
 
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -106,7 +106,7 @@ class HomeOspiteActivity : AppCompatActivity() {
                 else -> return@setNavigationItemSelectedListener false
             }
         }
-
+        //con l'id dell'utente loggato, si verifica l'esistenza della prenotazione
         verificaPrenotazioneOdierna(db.getId())
 
         openFragment(HomeFragment())
@@ -146,7 +146,7 @@ class HomeOspiteActivity : AppCompatActivity() {
 
         currentFragment = fragment
     }
-
+    //per cambiare lingua
     private fun setLanguage(language: String) {
         currentLanguage = language
         val locale = Locale(language)
@@ -155,7 +155,7 @@ class HomeOspiteActivity : AppCompatActivity() {
         config.setLocale(locale)
         baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
     }
-
+    //salva la preferenza della lingua
     private fun saveLanguageToPreferences(language: String) {
         val preferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
         val editor = preferences.edit()
@@ -189,7 +189,6 @@ class HomeOspiteActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                // Gestisci l'errore di rete o del server qui
             }
         })
     }

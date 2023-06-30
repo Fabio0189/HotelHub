@@ -122,7 +122,7 @@ class prenotazioniAdminFragment : Fragment() {
                     if (response.isSuccessful) {
                         showToast("Check-in confermato")
 
-                        // Rimuovi l'elemento dalla lista dopo aver completato la richiesta di check-in
+                        // Rimuovie l'elemento dalla lista dopo il check-in, ma non dal database
                         bookingAdapter.bookings.remove(booking)
                         bookingAdapter.selectedBookings.remove(booking)
                         bookingAdapter.notifyDataSetChanged()
@@ -137,10 +137,8 @@ class prenotazioniAdminFragment : Fragment() {
             })
         }
 
-        // Dopo aver completato il check-in, puoi pulire la lista delle prenotazioni selezionate
         bookingAdapter.selectedBookings.clear()
 
-        // Aggiorna l'aspetto visivo degli elementi selezionati nel RecyclerView
         bookingAdapter.notifyDataSetChanged()
     }
 
@@ -155,7 +153,7 @@ class prenotazioniAdminFragment : Fragment() {
                     if (response.isSuccessful) {
                         showToast("Prenotazioni selezionate eliminate")
 
-                        // Rimuovi l'elemento dalla lista dopo aver completato la richiesta di eliminazione
+                        // Rimuove l'elemento
                         bookingAdapter.bookings.remove(booking)
                         bookingAdapter.selectedBookings.remove(booking)
                         bookingAdapter.notifyDataSetChanged()
@@ -170,10 +168,8 @@ class prenotazioniAdminFragment : Fragment() {
             })
         }
 
-        // Dopo aver completato l'eliminazione delle prenotazioni, puoi pulire la lista delle prenotazioni selezionate
         bookingAdapter.selectedBookings.clear()
 
-        // Aggiorna l'aspetto visivo degli elementi selezionati nel RecyclerView
         bookingAdapter.notifyDataSetChanged()
     }
 }
