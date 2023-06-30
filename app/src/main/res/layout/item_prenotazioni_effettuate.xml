@@ -47,7 +47,7 @@
                 android:id="@+id/textNumeroStanzaInd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Numero Stanza: " />
+                android:text="@string/room_number_label" />
 
             <TextView
                 android:id="@+id/textNumeroStanza"
@@ -67,7 +67,7 @@
                 android:id="@+id/textCheckInDateInd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data checkIn: " />
+                android:text="@string/checkin_date_label" />
 
             <TextView
                 android:id="@+id/textCheckInDate"
@@ -86,7 +86,7 @@
                 android:id="@+id/textCheckOutDateInd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data checkOut: " />
+                android:text="@string/checkout_date_label" />
 
             <TextView
                 android:id="@+id/textCheckOutDate"

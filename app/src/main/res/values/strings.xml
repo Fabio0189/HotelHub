@@ -134,10 +134,9 @@
     <string name="two_stars">2 stelle</string>
     <string name="one_star">1 stella</string>
     <string name="leave_review">Lascia una recensione</string>
-
-
-
-
-
+    <!-- stringhe prenotazioni effettuate -->
+    <string name="room_number_label">Numero Stanza:</string>
+    <string name="checkin_date_label">Data Check-in:</string>
+    <string name="checkout_date_label">Data Check-out:</string>
 </resources>
 
