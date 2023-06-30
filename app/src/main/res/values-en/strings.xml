@@ -71,4 +71,22 @@
     <string name="string_area_relax">Relaxation area where fun meets nostalgia. Enjoy a variety of 90s video games, challenge your friends to a pool game, immerse yourself in a ping pong match or relax with one of our many board games. An ideal place to relax, socialize and have fun. \n<b>AVAILABILITY</b> The relaxation area is open 24 hours a day, allowing you to enjoy your free time whenever you prefer during your stay. \n<b>ACTIVITIES</b> A variety of activities are available, including pool tables, ping pong, board games and a selection of vintage video games. \n<b>CUSTOMIZATIONS</b> On request, you can organize personalized game tournaments or events at the reception.</string>
     <string name="string_lavanderia">Attentive and professional laundry service, ready to meet all your cleaning and garment care needs. We have a wide range of options, from general laundry to delicate washing, drying and ironing service. \n<b>LAUNDRY HOURS</b> The laundry service is available 24 hours a day, to ensure continuous support throughout the stay. \n<b>EXPRESS SERVICE</b> On request, we offer an express service for last minute inconveniences, guaranteeing a quick washing, drying and ironing for your garments.</string>
     <string name="string_libreria">Our library located in the lobby offers a wide range of books for your reading pleasure. Whether you prefer novels, essays, thrillers or children’s books, we have something for all tastes. \n<b>LIBRARY HOURS</b> The library is accessible 24 hours a day, allowing you to choose a book at any time during your stay. \n<b>FREE READING</b> All books are available for free reading during the stay, offering a relaxing way to pass the time or immerse yourself in a new adventure. \n<b>PERSONALIZED SERVICE</b> On request, our staff can help you choose a book that matches your interests or reading needs. \nPlease respect the <b>LIBRARY RULES</b> to ensure a pleasant experience for all our guests. \n<b>ALL BORROWED BOOKS</b> must be returned before departure.</string>
+    <!-- Hints -->
+    <string name="hint_nome">Enter your name</string>
+    <string name="hint_cognome">Enter your surname</string>
+    <string name="hint_numero_carta">Enter your card number</string>
+    <string name="hint_cvv">Enter the CVV</string>
+
+    <!-- Texts -->
+    <string name="text_nome">Name:</string>
+    <string name="text_cognome">Surname:</string>
+    <string name="text_numero_carta">Card Number:</string>
+    <string name="text_cvv">CVV:</string>
+    <string name="text_data_check_in">Check-In Date</string>
+    <string name="text_data_check_out">Check-Out Date</string>
+
+    <!-- Buttons -->
+    <string name="button_fatturazione">Go to Billing</string>
+    <string name="button_conferma">Confirm</string>
+    <string name="priceLabel">Price:</string>
 </resources>

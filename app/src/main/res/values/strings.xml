@@ -72,5 +72,24 @@
     <string name="string_area_relax">Area Relax dove il divertimento incontra la nostalgia. Goditi una varietà di videogiochi degli anni \'90, sfida i tuoi amici a un gioco di biliardo, immergiti in una partita di ping pong o rilassati con uno dei nostri numerosi giochi da tavolo. Un luogo ideale per rilassarsi, socializzare e divertirsi. \n<b>DISPONIBILITÀ</b> L\'area relax è aperta 24 ore su 24, per permetterti di goderti il tuo tempo libero quando preferisci durante il tuo soggiorno. \n<b>ATTIVITÀ</b> Sono disponibili una varietà di attività, che includono tavoli da biliardo, ping pong, giochi da tavolo e una selezione di videogiochi vintage. \n<b>PERSONALIZZAZIONI</b> Su richiesta, è possibile organizzare alla reception tornei o eventi di giochi personalizzati. </string>
     <string name="string_lavanderia">Servizio di lavanderia attento e professionale, pronto a soddisfare tutte le tue esigenze di pulizia e cura dei capi. Disponiamo di una vasta gamma di opzioni, dalla lavanderia generale al lavaggio delicato, all\'asciugatura e al servizio di stiratura. \n<b>ORARIO LAVANDERIA</b> Il servizio di lavanderia è disponibile 24 ore su 24, per garantire un supporto continuo durante tutto il soggiorno. \n<b>SERVIZIO LAMPO</b> Su richiesta, offriamo un servizio lampo per inconvenienti dell\'ultimo minuto, garantendo un lavaggio, asciugatura e stiratura rapido per i tuoi capi.</string>
     <string name="string_libreria">La nostra libreria situata nella hall offre un\'ampia gamma di libri per il tuo piacere di lettura. Che tu preferisca romanzi, saggi, thriller o libri per bambini, abbiamo qualcosa per tutti i gusti. \n<b>ORARIO LIBRERIA</b> La libreria è accessibile 24 ore su 24, permettendoti di scegliere un libro in qualsiasi momento durante il tuo soggiorno. \n<b>LETTURA GRATUITA</b> Tutti i libri sono disponibili per la lettura gratuita durante la permanenza, offrendo un modo rilassante per passare il tempo o per immergerti in una nuova avventura. \n<b>SERVIZIO PERSONALIZZATO</b> Su richiesta, il nostro personale può aiutarti a scegliere un libro che corrisponda ai tuoi interessi o esigenze di lettura. \nSi prega di rispettare le regole della libreria per garantire un\'esperienza piacevole per tutti i nostri ospiti. \nTutti i libri presi in prestito devono essere restituiti prima della partenza.</string>
+    <!-- Hints -->
+    <string name="hint_nome">Inserisci il tuo nome</string>
+    <string name="hint_cognome">Inserisci il tuo cognome</string>
+    <string name="hint_numero_carta">Inserisci il numero della carta</string>
+    <string name="hint_cvv">Inserisci il CVV</string>
+
+    <!-- Texts -->
+    <string name="text_nome">Nome:</string>
+    <string name="text_cognome">Cognome:</string>
+    <string name="text_numero_carta">Numero Carta:</string>
+    <string name="text_cvv">CVV:</string>
+    <string name="text_data_check_in">Data Check-In</string>
+    <string name="text_data_check_out">Data Check-Out</string>
+
+    <!-- Buttons -->
+    <string name="button_fatturazione">Vai alla Fatturazione</string>
+    <string name="button_conferma">Conferma</string>
+    <string name="priceLabel">Prezzo:</string>
+
 </resources>
 

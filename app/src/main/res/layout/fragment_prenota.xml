@@ -17,13 +17,13 @@
             android:orientation="vertical"
             tools:context=".PrenotaFragment">
 
-            <!-- Contenitore per RecyclerViews -->
+
             <LinearLayout
                 android:id="@+id/layoutRecyclerViews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <!-- RecyclerViews vengono aggiunti qui nel codice -->
+
             </LinearLayout>
 
             <Spinner
@@ -40,12 +40,11 @@
                 android:textStyle="bold"
                 android:visibility="gone" />
 
-            <!-- Existing layout -->
             <TextView
                 android:id="@+id/textViewNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nome:"
+                android:text="@string/text_nome"
                 android:textSize="18sp"
                 android:visibility="gone" />
 
@@ -55,14 +54,14 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:hint="Inserisci il tuo nome"
+                android:hint="@string/hint_nome"
                 android:visibility="gone" />
 
             <TextView
                 android:id="@+id/textViewCognome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cognome:"
+                android:text="@string/text_cognome"
                 android:textSize="18sp"
                 android:visibility="gone" />
 
@@ -72,14 +71,14 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:hint="Inserisci il tuo cognome"
+                android:hint="@string/hint_cognome"
                 android:visibility="gone" />
 
             <TextView
                 android:id="@+id/textViewNumeroCarta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Numero Carta:"
+                android:text="@string/text_numero_carta"
                 android:textSize="18sp"
                 android:visibility="gone" />
 
@@ -90,14 +89,14 @@
                 android:inputType="number"
                 android:maxLength="16"
                 android:minHeight="48dp"
-                android:hint="Inserisci il numero della carta"
+                android:hint="@string/hint_numero_carta"
                 android:visibility="gone" />
 
             <TextView
                 android:id="@+id/textViewCvv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CVV:"
+                android:text="@string/text_cvv"
                 android:textSize="18sp"
                 android:visibility="gone" />
 
@@ -108,14 +107,13 @@
                 android:inputType="numberPassword"
                 android:maxLength="3"
                 android:minHeight="48dp"
-                android:hint="Inserisci il CVV"
+                android:hint="@string/hint_cvv"
                 android:visibility="gone" />
 
-            <!-- Aggiunta dei campi per le date di check-in e check-out -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data Check-In"
+                android:text="@string/text_data_check_in"
                 android:textSize="18sp" />
 
             <EditText
@@ -129,7 +127,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data Check-Out"
+                android:text="@string/text_data_check_out"
                 android:textSize="18sp" />
 
             <EditText
@@ -140,19 +138,18 @@
                 android:onClick="onDataCheckOutClicked"
                 android:focusable="false" />
 
-            <!-- Aggiunta dei pulsanti -->
             <Button
                 android:id="@+id/buttonFatturazione"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vai alla Fatturazione"
+                android:text="@string/button_fatturazione"
                 android:visibility="gone" />
 
             <Button
                 android:id="@+id/buttonConferma"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Conferma"
+                android:text="@string/button_conferma"
                 android:visibility="gone" />
 
         </LinearLayout>

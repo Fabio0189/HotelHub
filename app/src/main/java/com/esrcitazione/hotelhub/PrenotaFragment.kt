@@ -77,7 +77,8 @@ class PrenotaFragment : Fragment() {
                 binding.buttonFatturazione.visibility = if (!fatturazionePremuta) View.VISIBLE else View.GONE
 
                 val prezzoCamera = camere[position].prezzo
-                binding.textViewPrezzo.text = "Prezzo: $prezzoCamera €"
+                val priceLabel = getString(R.string.priceLabel)
+                binding.textViewPrezzo.text = "$priceLabel $prezzoCamera €"
                 binding.textViewPrezzo.visibility = View.VISIBLE
                 binding.buttonFatturazione.isEnabled = isCheckInSelected && isCheckOutSelected
                 if (fatturazionePremuta) {
