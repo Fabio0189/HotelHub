@@ -18,6 +18,7 @@ import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.roundToInt
 
 class RecensioniFragment : Fragment() {
     private lateinit var db: DatabaseHelper
@@ -128,8 +129,10 @@ class RecensioniFragment : Fragment() {
                     val result = response.body()?.getAsJsonArray("queryset")
                     if (result != null && result.size() > 0) {
                         val averageRating = result[0].asJsonObject["average_rating"].asFloat
-                        ratingBarAverage.rating = averageRating
-                        mediaTextView.text = averageRating.toString()
+                        val roundedRating = (averageRating * 10).roundToInt() / 10.0f
+
+                        ratingBarAverage.rating = roundedRating
+                        mediaTextView.text = roundedRating.toString()
                     }
                 } else {
                     showToast(toastMessageCalculationError)
@@ -141,6 +144,8 @@ class RecensioniFragment : Fragment() {
             }
         })
     }
+
+
 
     private fun calcolaPercentualiRecensioni() {
         val query = "SELECT " +
