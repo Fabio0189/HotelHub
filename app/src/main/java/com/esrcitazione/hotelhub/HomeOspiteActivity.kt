@@ -45,6 +45,7 @@ class HomeOspiteActivity : AppCompatActivity() {
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
 
+
         itemServizioCamera = binding.navigationView.menu.findItem(R.id.menuServizioCamera)
         itemServizioCamera.isVisible = false
 
@@ -121,15 +122,6 @@ class HomeOspiteActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (isExitConfirmationVisible) {
-            finish()
-        } else {
-            isExitConfirmationVisible = true
-            Toast.makeText(this, "Per uscire dall'app premi indietro un altra volta", Toast.LENGTH_SHORT).show()
-            binding.drawerLayout.postDelayed({
-                isExitConfirmationVisible = false
-            }, 2000)
-        }
     }
 
     private fun openFragment(fragment: Fragment) {

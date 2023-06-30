@@ -61,7 +61,6 @@ class HomeFragment : Fragment() {
         val fragmentManager = requireActivity().supportFragmentManager
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.frameLayout, fragment)
-        transaction.addToBackStack(null)
         transaction.commit()
     }
 }
