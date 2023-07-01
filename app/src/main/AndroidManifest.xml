@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Material3.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".activity.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait">
         <intent-filter>
@@ -26,19 +26,19 @@
         </activity>
 
         <activity
-            android:name=".HomeOspiteActivity"
+            android:name=".activity.HomeOspiteActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".HomeAdminActivity"
+            android:name=".activity.HomeAdminActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity_registrazione"
+            android:name=".activity.Activity_registrazione"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
 
